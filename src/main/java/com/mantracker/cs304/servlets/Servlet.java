@@ -1,0 +1,50 @@
+/*
+ * ScrollDataServlet.java
+ *
+ */
+package com.mantracker.cs304.servlets;
+
+import com.mantracker.cs304.storage.DataStorage;
+import java.io.IOException;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+ * @author Martin Liu <martinliu1993@hotmail.com>
+ * @version $Revision$ on $Date$ by $Author$
+ */
+@WebServlet(name = "Servlet", urlPatterns =
+{
+    "", "/"
+})
+
+public class Servlet extends HttpServlet
+{
+    @Override
+    public void doGet(HttpServletRequest request,
+                      HttpServletResponse response) throws IOException, ServletException
+    {
+        request.setAttribute("test", "test");
+        request.setAttribute("recipeId", DataStorage.getTestData());
+
+        RequestDispatcher requestDispather = request.getRequestDispatcher("/WEB-INF/index.jsp");
+        requestDispather.forward(request, response);
+
+    }
+
+    @Override
+    public void doPost(HttpServletRequest request,
+                       HttpServletResponse response) throws IOException, ServletException
+    {
+        
+        String stuff = (String) request.getParameter("name");
+        String stuff1 = (String) request.getParameter("group");
+        String stuff2 = (String) request.getParameter("pass");
+        response.sendRedirect("/cs304");
+    }
+
+}
