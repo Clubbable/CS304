@@ -4,17 +4,16 @@
 
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <meta http-equiv="content-script-type" content="text/javascript">
+        <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
         <!-- Optional theme -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css" integrity="sha384-aUGj/X2zp5rLCbBxumKTCw2Z50WgIr1vs/PFN4praOTvYXWlVyh2UtNUU0KAUhAX" crossorigin="anonymous">
         <title>Online Shopping System</title>
-        <link rel="stylesheet" type="text/css" href="css/index.css">
     </head>
-    <base href="/">
     <body>
+        <img src="http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/sign-check-icon.png" alt="Mountain View" style="width:304px;height:228px;">
+        
         <div class = "container-fluid">
             <div class = "header">
                 <div class = "header-container">
@@ -34,7 +33,9 @@
                         </div>
                         <div class = "col-xs-2 col-sm-3">
                             <div class = "header-login">
-                                <button type="button" class="btn btn-primary">Sign in</button>
+                                <form method="post">
+                                    <input  class="btn btn-primary" type="submit" value="sign in" >            
+                                </form>
                             </div>
                         </div>
                     </div>

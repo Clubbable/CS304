@@ -44,7 +44,9 @@ public class Servlet extends HttpServlet
         String stuff = (String) request.getParameter("name");
         String stuff1 = (String) request.getParameter("group");
         String stuff2 = (String) request.getParameter("pass");
-        response.sendRedirect("/cs304");
+        RequestDispatcher requestDispather = request.getRequestDispatcher("/WEB-INF/orderHistory.jsp");
+        requestDispather.forward(request, response);
+
     }
 
 }
