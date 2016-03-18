@@ -5,19 +5,21 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css" integrity="sha384-aUGj/X2zp5rLCbBxumKTCw2Z50WgIr1vs/PFN4praOTvYXWlVyh2UtNUU0KAUhAX" crossorigin="anonymous">
+        <meta http-equiv="content-script-type" content="text/javascript">
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css" integrity="sha384-aUGj/X2zp5rLCbBxumKTCw2Z50WgIr1vs/PFN4praOTvYXWlVyh2UtNUU0KAUhAX" crossorigin="anonymous">
         <title>Online Shopping System</title>
+        <link rel="stylesheet" type="text/css" href="css/index.css">
     </head>
+    <base href="/">
     <body>
         <div class = "container-fluid">
             <div class = "header">
                 <div class = "header-container">
                     <div class= "row">
-                        <div class = "col-sm-1"></div>
-                        <div class = "col-xs-4 col-sm-3">
+                        <div class = "col-xs-4 col-sm-4">
                             <div class = "item" onClick={this._handleClick.bind(this, 'home')}>
                                 <Link class="header-buttons-text" to={'/'}>Shopping system</Link>
                             </div>
@@ -30,20 +32,28 @@
                                 </span>
                             </div>
                         </div>
-                        <div class = "col-xs-2 col-sm-2">
+                        <div class = "col-xs-2 col-sm-3">
                             <div class = "header-login">
-                                <button type="button" class="btn btn-primary">Log in</button>
+                                <button type="button" class="btn btn-primary">Sign in</button>
                             </div>
                         </div>
-                        <div class= "col-sm-1"></div>
                     </div>
                 </div>
             </div>
             <div class="body">
-                <div class = "body-popularProduct">Most popular</div>
-                <div class = "body-typeA">Type1</div>
-                <div class = "body-typeB">Type2</div>
-                <div class = "body-typeC">Type3</div>
+                <div class= "row">
+                    <div class= "col-sm-1"></div>
+                    <div class= "col-sm-10">
+                        <div class = "popularProduct">
+                            Most popular
+                            See more
+                        </div>
+                        <div class = "body-typeA">Type1</div>
+                        <div class = "body-typeB">Type2</div>
+                        <div class = "body-typeC">Type3</div>
+                    </div>
+                    <div class= "col-sm-1"></div>
+                </div>
             </div>
         </div>
     </body>
