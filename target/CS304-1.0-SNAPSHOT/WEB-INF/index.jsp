@@ -12,16 +12,17 @@
         <title>Online Shopping System</title>
     </head>
     <body>
-        <img src="http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/sign-check-icon.png" alt="Mountain View" style="width:304px;height:228px;">
-        
         <div class = "container-fluid">
             <div class = "header">
                 <div class = "header-container">
                     <div class= "row">
                         <div class = "col-xs-4 col-sm-4">
-                            <div class = "item" onClick={this._handleClick.bind(this, 'home')}>
-                                <Link class="header-buttons-text" to={'/'}>Shopping system</Link>
-                            </div>
+                            <form method="post">
+                                <!--<div name="type" value ="redirect"></div>-->
+                                <input type="text" name="type" value="redirect"/>
+                                <input type="text" name="address" value="home"/>
+                                <input  type="submit" value="Shopping system" />            
+                            </form>
                         </div>
                         <div class = "col-xs-6 col-sm-5">
                             <div class="input-group">
