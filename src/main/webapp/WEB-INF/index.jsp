@@ -18,10 +18,11 @@
                     <div class= "row">
                         <div class = "col-xs-4 col-sm-4">
                             <form method="post">
-                                <!--<div name="type" value ="redirect"></div>-->
-                                <input type="text" name="type" value="redirect"/>
-                                <input type="text" name="address" value="home"/>
-                                <input  type="submit" value="Shopping system" />            
+                                <div style="display:none">
+                                    <input type="text" name="type" value="redirect"/>
+                                    <input type="text" name="address" value="home"/>
+                                </div>
+                                <input  type="submit" value="Shopping system" style="border:none; background:none;"/>            
                             </form>
                         </div>
                         <div class = "col-xs-6 col-sm-5">
@@ -35,7 +36,11 @@
                         <div class = "col-xs-2 col-sm-3">
                             <div class = "header-login">
                                 <form method="post">
-                                    <input  class="btn btn-primary" type="submit" value="sign in" >            
+                                    <div style="display:none">
+                                        <input type="text" name="type" value="redirect"/>
+                                        <input type="text" name="address" value="orderHistory"/>
+                                    </div>
+                                    <input  class="btn btn-primary" type="submit" value="sign in" >             
                                 </form>
                             </div>
                         </div>
