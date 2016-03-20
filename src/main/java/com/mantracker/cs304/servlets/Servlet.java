@@ -4,8 +4,10 @@
  */
 package com.mantracker.cs304.servlets;
 
+import com.mantracker.cs304.models.PurchaseCount;
 import com.mantracker.cs304.storage.DataStorage;
 import java.io.IOException;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -28,9 +30,8 @@ public class Servlet extends HttpServlet
     public void doGet(HttpServletRequest request,
                       HttpServletResponse response) throws IOException, ServletException
     {
-        request.setAttribute("test", "test");
-        request.setAttribute("recipeId", "recipe");
-
+        request.setAttribute("PurchaseCounts", DataStorage.getPurchaseCounts());
+        
         RequestDispatcher requestDispather = request.getRequestDispatcher("/WEB-INF/index.jsp");
         requestDispather.forward(request, response);
 

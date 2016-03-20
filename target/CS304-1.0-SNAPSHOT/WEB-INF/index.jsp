@@ -1,4 +1,8 @@
- <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="java.util.List" %>
+<%@page import="javax.servlet.*" %>
+<%@page import="com.mantracker.cs304.models.PurchaseCount" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
    "http://www.w3.org/TR/html4/loose.dtd">
 
@@ -63,5 +67,22 @@
                 </div>
             </div>
         </div>
+
+        <table class="pure-table pure-table-striped">
+            <thead>
+                <th>Title</th>
+                <th>UserName</th>
+                <th>Purchase Amount</th>
+            </thead>
+            <tbody>
+                <c:forEach items="${PurchaseCounts}" var="PurchaseCount" varStatus="counter">
+                    <tr>
+                       <td>${PurchaseCount.getTitle()}</td>
+                       <td>${PurchaseCount.getUserName()}</td>
+                       <td>${PurchaseCount.getPurchaseAmount()}</td>
+                    </tr>
+                </c:forEach>
+            </tbody>
+        </table>
     </body>
 </html>
