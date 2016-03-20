@@ -15,7 +15,7 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css" integrity="sha384-aUGj/X2zp5rLCbBxumKTCw2Z50WgIr1vs/PFN4praOTvYXWlVyh2UtNUU0KAUhAX" crossorigin="anonymous">
         <title>Online Shopping System</title>
     </head>
-    <body>
+    <body stlye ="overflow-x:hidden">
         <div class = "container-fluid" style="padding: 0;">
             <div class = "header" style = "height: 80px; background: #19193B; display:list-item">
                 <div class = "header-container">
@@ -56,12 +56,112 @@
                     <div class= "col-sm-1"></div>
                     <div class= "col-sm-10">
                         <div class = "popularProduct" style="height:50px;">
-                            Most popular
-                            See more
+                            <div class="title">
+                             <div class = "popularProduct-title" style="display:inline; font-size:xx-large">Most Popular</div>
+                             <div class ="btn btn-link" style="display:inline; flex:1; float:right; padding-top:20px; font-size:larger">See more >></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6 col-md-4">
+                                    <div class="caption"></div>
+                                    <h3>Product title</h3>
+                                    <p>Description.....</p>
+                                    <p><a href="#" class="btn btn-primary" role="button">Button</a></p>
+                                </div>
+                                <div class="col-sm-6 col-md-4">
+                                    <div class="caption"></div>
+                                    <h3>Product title</h3>
+                                    <p>Description.....</p>
+                                    <p><a href="#" class="btn btn-primary" role="button">Button</a></p>
+                                </div>
+                                <div class="col-sm-6 col-md-4">
+                                    <div class="caption"></div>
+                                    <h3>Product title</h3>
+                                    <p>Description.....</p>
+                                    <p><a href="#" class="btn btn-primary" role="button">Button</a></p>
+                                </div>
+                            </div>
                         </div>
-                        <div class = "body-typeA">Type1</div>
-                        <div class = "body-typeB">Type2</div>
-                        <div class = "body-typeC">Type3</div>
+                        <hr style="width:100%; height:2px; background:#507786">
+                        <div class = "body-typeA">
+                            <div class="title">
+                             <div class = "typeA-title" style="display:inline; font-size:xx-large">Type A</div>
+                             <div class ="btn btn-link" style="display:inline; flex:1; float:right; padding-top:20px; font-size:larger">See more >></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6 col-md-4">
+                                    <div class="caption"></div>
+                                    <h3>Product title</h3>
+                                    <p>Description.....</p>
+                                    <p><a href="#" class="btn btn-primary" role="button">Button</a></p>
+                                </div>
+                                <div class="col-sm-6 col-md-4">
+                                    <div class="caption"></div>
+                                    <h3>Product title</h3>
+                                    <p>Description.....</p>
+                                    <p><a href="#" class="btn btn-primary" role="button">Button</a></p>
+                                </div>
+                                <div class="col-sm-6 col-md-4">
+                                    <div class="caption"></div>
+                                    <h3>Product title</h3>
+                                    <p>Description.....</p>
+                                    <p><a href="#" class="btn btn-primary" role="button">Button</a></p>
+                                </div>
+                            </div>
+                        </div>
+                        <hr style="width:100%; height:2px; background:#507786">
+                        <div class = "body-typeB">
+                            <div class="title">
+                             <div class = "typeB-title" style="display:inline; font-size:xx-large">Type B</div>
+                             <div class ="btn btn-link" style="display:inline; flex:1; float:right; padding-top:20px; font-size:larger">See more >></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6 col-md-4">
+                                    <div class="caption"></div>
+                                    <h3>Product title</h3>
+                                    <p>Description.....</p>
+                                    <p><a href="#" class="btn btn-primary" role="button">Button</a></p>
+                                </div>
+                                <div class="col-sm-6 col-md-4">
+                                    <div class="caption"></div>
+                                    <h3>Product title</h3>
+                                    <p>Description.....</p>
+                                    <p><a href="#" class="btn btn-primary" role="button">Button</a></p>
+                                </div>
+                                <div class="col-sm-6 col-md-4">
+                                    <div class="caption"></div>
+                                    <h3>Product title</h3>
+                                    <p>Description.....</p>
+                                    <p><a href="#" class="btn btn-primary" role="button">Button</a></p>
+                                </div>
+                            </div>
+                        </div>
+                        <hr style="width:100%; height:2px; background:#507786">
+                        <div class = "body-typeC">
+                            <div class="title">
+                             <div class = "typeC-title" style="display:inline; font-size:xx-large">Type C</div>
+                             <div class ="btn btn-link" style="display:inline; flex:1; float:right; padding-top:20px; font-size:larger">See more >></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6 col-md-4">
+                                    <div class="caption"></div>
+                                    <h3>Product title</h3>
+                                    <p>Description.....</p>
+                                    <p><a href="#" class="btn btn-primary" role="button">Button</a></p>
+                                </div>
+                                <div class="col-sm-6 col-md-4">
+                                    <div class="caption"></div>
+                                    <h3>Product title</h3>
+                                    <p>Description.....</p>
+                                    <p><a href="#" class="btn btn-primary" role="button">Button</a></p>
+                                </div>
+                                <div class="col-sm-6 col-md-4">
+                                    <div class="caption"></div>
+                                    <h3>Product title</h3>
+                                    <p>Description.....</p>
+                                    <p><a href="#" class="btn btn-primary" role="button">Button</a></p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class= "col-sm-1"></div>
                 </div>
