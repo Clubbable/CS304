@@ -16,8 +16,8 @@
         <title>Online Shopping System</title>
     </head>
     <body>
-        <div class = "container-fluid">
-            <div class = "header">
+        <div class = "container-fluid" style="padding: 0;">
+            <div class = "header" style = "height: 80px; background: #19193B; display:list-item">
                 <div class = "header-container">
                     <div class= "row">
                         <div class = "col-xs-4 col-sm-4">
@@ -26,16 +26,16 @@
                                     <input type="text" name="type" value="redirect"/>
                                     <input type="text" name="address" value="home"/>
                                 </div>
-                                <input  type="submit" value="Shopping system" style="border:none; background:none;"/>            
+                                <input  type="submit" value="Shopping system" style="border:none; background:none; color:white; font-weight:bolder; font-size: x-large"/>            
                             </form>
                         </div>
                         <div class = "col-xs-6 col-sm-5">
-                            <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Search for...">
-                                <span class="input-group-btn">
-                                    <button class="btn btn-default" type="button">Go!</button>
-                                </span>
-                            </div>
+                            <form class="navbar-form navbar-left" role="search">
+                              <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Search">
+                              </div>
+                              <button type="submit" class="btn btn-default">Submit</button>
+                            </form>
                         </div>
                         <div class = "col-xs-2 col-sm-3">
                             <div class = "header-login">
@@ -55,7 +55,7 @@
                 <div class= "row">
                     <div class= "col-sm-1"></div>
                     <div class= "col-sm-10">
-                        <div class = "popularProduct">
+                        <div class = "popularProduct" style="height:50px;">
                             Most popular
                             See more
                         </div>
