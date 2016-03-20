@@ -20,52 +20,7 @@ import org.apache.logging.log4j.LogManager;
  */
 public class DataStorage extends DatabaseStorage
 {
-    public static int getTestData()
-    {
-        int ans = 0;
-        
-        // Define database variables
-        Connection connection = null;
-        PreparedStatement statement = null;
-        ResultSet resultSet = null;
-
-        try
-        {
-            // Create StringBuilder for the query
-            StringBuilder sb = new StringBuilder();
-
-            // Build the query
-            sb.append("SELECT recipe_id FROM recipes");
-
-            // Get a connection
-            connection = getConnection();
-
-            // Prepare statement
-            statement = connection.prepareStatement(sb.toString());
-
-            // Execute the query
-            resultSet = statement.executeQuery();
-
-            // Get the result
-            while (resultSet.next())
-            {
-                ans = resultSet.getInt("recipe_id");
-            }
-        }
-        catch (Exception ex)
-        {
-            // Log
-            LogManager.getLogger(DataStorage.class).fatal("getTestData error", ex);
-        }
-        finally
-        {
-            safeClose(resultSet);
-            safeClose(statement);
-            safeClose(connection);
-        }
-
-        return ans;
-    }
+   
 
     
 }

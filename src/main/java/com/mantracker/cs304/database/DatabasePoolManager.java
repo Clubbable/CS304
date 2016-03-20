@@ -43,9 +43,9 @@ public class DatabasePoolManager
             BoneCPConfig config = new BoneCPConfig();
 
             // Setup the configuration
-            config.setJdbcUrl("jdbc:mysql://127.0.0.1/cs304"); // jdbc url specific to your database, eg jdbc:mysql://127.0.0.1/yourdb
-            config.setUsername("root");
-            config.setPassword("");
+            config.setJdbcUrl("jdbc:mysql://cs304.c0mk5mvcjljr.us-west-2.rds.amazonaws.com/cs304"); // jdbc url specific to your database, eg jdbc:mysql://127.0.0.1/yourdb
+            config.setUsername("cs304");
+            config.setPassword("ubccs304");
             config.setConnectionTestStatement("SELECT 1");
             config.setConnectionTimeout(10, TimeUnit.SECONDS);
             config.setMinConnectionsPerPartition(5);

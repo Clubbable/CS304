@@ -29,7 +29,7 @@ public class Servlet extends HttpServlet
                       HttpServletResponse response) throws IOException, ServletException
     {
         request.setAttribute("test", "test");
-        request.setAttribute("recipeId", DataStorage.getTestData());
+        request.setAttribute("recipeId", "recipe");
 
         RequestDispatcher requestDispather = request.getRequestDispatcher("/WEB-INF/index.jsp");
         requestDispather.forward(request, response);
