@@ -39,13 +39,22 @@
                         </div>
                         <div class = "col-xs-2 col-sm-3">
                             <div class = "header-login">
-                                <form method="post">
-                                    <div style="display:none">
-                                        <input type="text" name="type" value="redirect"/>
-                                        <input type="text" name="address" value="orderHistory"/>
-                                    </div>
-                                    <input  class="btn btn-primary" type="submit" value="sign in" >             
-                                </form>
+                                <div class="btn-group" style="display:flex">
+                                    <form method="post">
+                                        <div style="display:none">
+                                            <input type="text" name="type" value="redirect"/>
+                                            <input type="text" name="address" value="login"/>
+                                        </div>
+                                        <input  class="btn btn-primary" type="submit" value="Sign in">
+                                    </form>
+                                    <form method="post">
+                                        <div style="display:none">
+                                            <input type="text" name="type" value="redirect"/>
+                                            <input type="text" name="address" value="create"/>
+                                        </div>
+                                        <input  class="btn btn-primary" type="submit" value="Create account" >
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -184,5 +193,6 @@
                 </c:forEach>
             </tbody>
         </table>
+        
     </body>
 </html>

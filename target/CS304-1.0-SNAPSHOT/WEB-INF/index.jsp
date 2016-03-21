@@ -15,9 +15,9 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css" integrity="sha384-aUGj/X2zp5rLCbBxumKTCw2Z50WgIr1vs/PFN4praOTvYXWlVyh2UtNUU0KAUhAX" crossorigin="anonymous">
         <title>Online Shopping System</title>
     </head>
-    <body>
-        <div class = "container-fluid">
-            <div class = "header">
+    <body stlye ="overflow-x:hidden">
+        <div class = "container-fluid" style="padding: 0;">
+            <div class = "header" style = "height: 80px; background: #19193B; display:list-item">
                 <div class = "header-container">
                     <div class= "row">
                         <div class = "col-xs-4 col-sm-4">
@@ -26,26 +26,35 @@
                                     <input type="text" name="type" value="redirect"/>
                                     <input type="text" name="address" value="home"/>
                                 </div>
-                                <input  type="submit" value="Shopping system" style="border:none; background:none;"/>            
+                                <input  type="submit" value="Shopping system" style="border:none; background:none; color:white; font-weight:bolder; font-size: x-large"/>            
                             </form>
                         </div>
                         <div class = "col-xs-6 col-sm-5">
-                            <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Search for...">
-                                <span class="input-group-btn">
-                                    <button class="btn btn-default" type="button">Go!</button>
-                                </span>
-                            </div>
+                            <form class="navbar-form navbar-left" role="search">
+                              <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Search">
+                              </div>
+                              <button type="submit" class="btn btn-default">Submit</button>
+                            </form>
                         </div>
                         <div class = "col-xs-2 col-sm-3">
                             <div class = "header-login">
-                                <form method="post">
-                                    <div style="display:none">
-                                        <input type="text" name="type" value="redirect"/>
-                                        <input type="text" name="address" value="orderHistory"/>
-                                    </div>
-                                    <input  class="btn btn-primary" type="submit" value="sign in" >             
-                                </form>
+                                <div class="btn-group" style="display:flex">
+                                    <form method="post">
+                                        <div style="display:none">
+                                            <input type="text" name="type" value="redirect"/>
+                                            <input type="text" name="address" value="login"/>
+                                        </div>
+                                        <input  class="btn btn-primary" type="submit" value="Sign in">
+                                    </form>
+                                    <form method="post">
+                                        <div style="display:none">
+                                            <input type="text" name="type" value="redirect"/>
+                                            <input type="text" name="address" value="create"/>
+                                        </div>
+                                        <input  class="btn btn-primary" type="submit" value="Create account" >
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -55,13 +64,113 @@
                 <div class= "row">
                     <div class= "col-sm-1"></div>
                     <div class= "col-sm-10">
-                        <div class = "popularProduct">
-                            Most popular
-                            See more
+                        <div class = "popularProduct" style="height:50px;">
+                            <div class="title">
+                             <div class = "popularProduct-title" style="display:inline; font-size:xx-large">Most Popular</div>
+                             <div class ="btn btn-link" style="display:inline; flex:1; float:right; padding-top:20px; font-size:larger">See more >></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6 col-md-4">
+                                    <div class="caption"></div>
+                                    <h3>Product title</h3>
+                                    <p>Description.....</p>
+                                    <p><a href="#" class="btn btn-primary" role="button">Button</a></p>
+                                </div>
+                                <div class="col-sm-6 col-md-4">
+                                    <div class="caption"></div>
+                                    <h3>Product title</h3>
+                                    <p>Description.....</p>
+                                    <p><a href="#" class="btn btn-primary" role="button">Button</a></p>
+                                </div>
+                                <div class="col-sm-6 col-md-4">
+                                    <div class="caption"></div>
+                                    <h3>Product title</h3>
+                                    <p>Description.....</p>
+                                    <p><a href="#" class="btn btn-primary" role="button">Button</a></p>
+                                </div>
+                            </div>
                         </div>
-                        <div class = "body-typeA">Type1</div>
-                        <div class = "body-typeB">Type2</div>
-                        <div class = "body-typeC">Type3</div>
+                        <hr style="width:100%; height:2px; background:#507786">
+                        <div class = "body-typeA">
+                            <div class="title">
+                             <div class = "typeA-title" style="display:inline; font-size:xx-large">Type A</div>
+                             <div class ="btn btn-link" style="display:inline; flex:1; float:right; padding-top:20px; font-size:larger">See more >></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6 col-md-4">
+                                    <div class="caption"></div>
+                                    <h3>Product title</h3>
+                                    <p>Description.....</p>
+                                    <p><a href="#" class="btn btn-primary" role="button">Button</a></p>
+                                </div>
+                                <div class="col-sm-6 col-md-4">
+                                    <div class="caption"></div>
+                                    <h3>Product title</h3>
+                                    <p>Description.....</p>
+                                    <p><a href="#" class="btn btn-primary" role="button">Button</a></p>
+                                </div>
+                                <div class="col-sm-6 col-md-4">
+                                    <div class="caption"></div>
+                                    <h3>Product title</h3>
+                                    <p>Description.....</p>
+                                    <p><a href="#" class="btn btn-primary" role="button">Button</a></p>
+                                </div>
+                            </div>
+                        </div>
+                        <hr style="width:100%; height:2px; background:#507786">
+                        <div class = "body-typeB">
+                            <div class="title">
+                             <div class = "typeB-title" style="display:inline; font-size:xx-large">Type B</div>
+                             <div class ="btn btn-link" style="display:inline; flex:1; float:right; padding-top:20px; font-size:larger">See more >></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6 col-md-4">
+                                    <div class="caption"></div>
+                                    <h3>Product title</h3>
+                                    <p>Description.....</p>
+                                    <p><a href="#" class="btn btn-primary" role="button">Button</a></p>
+                                </div>
+                                <div class="col-sm-6 col-md-4">
+                                    <div class="caption"></div>
+                                    <h3>Product title</h3>
+                                    <p>Description.....</p>
+                                    <p><a href="#" class="btn btn-primary" role="button">Button</a></p>
+                                </div>
+                                <div class="col-sm-6 col-md-4">
+                                    <div class="caption"></div>
+                                    <h3>Product title</h3>
+                                    <p>Description.....</p>
+                                    <p><a href="#" class="btn btn-primary" role="button">Button</a></p>
+                                </div>
+                            </div>
+                        </div>
+                        <hr style="width:100%; height:2px; background:#507786">
+                        <div class = "body-typeC">
+                            <div class="title">
+                             <div class = "typeC-title" style="display:inline; font-size:xx-large">Type C</div>
+                             <div class ="btn btn-link" style="display:inline; flex:1; float:right; padding-top:20px; font-size:larger">See more >></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6 col-md-4">
+                                    <div class="caption"></div>
+                                    <h3>Product title</h3>
+                                    <p>Description.....</p>
+                                    <p><a href="#" class="btn btn-primary" role="button">Button</a></p>
+                                </div>
+                                <div class="col-sm-6 col-md-4">
+                                    <div class="caption"></div>
+                                    <h3>Product title</h3>
+                                    <p>Description.....</p>
+                                    <p><a href="#" class="btn btn-primary" role="button">Button</a></p>
+                                </div>
+                                <div class="col-sm-6 col-md-4">
+                                    <div class="caption"></div>
+                                    <h3>Product title</h3>
+                                    <p>Description.....</p>
+                                    <p><a href="#" class="btn btn-primary" role="button">Button</a></p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class= "col-sm-1"></div>
                 </div>
@@ -84,5 +193,6 @@
                 </c:forEach>
             </tbody>
         </table>
+        
     </body>
 </html>
