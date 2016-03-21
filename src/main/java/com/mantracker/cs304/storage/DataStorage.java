@@ -36,8 +36,8 @@ public class DataStorage extends DatabaseStorage
             StringBuilder sb = new StringBuilder();
 
             // Build the query
-            sb.append("SELECT title, userName, COUNT(*) AS purchaseAmount FROM Customer, Product, Purchase ");
-            sb.append("WHERE Customer.userID = Purchase.CustomerUserID ");
+            sb.append("SELECT title, userName, COUNT(*) AS purchaseAmount FROM User, Product, Purchase ");
+            sb.append("WHERE User.userID = Purchase.CustomerUserID ");
             sb.append("AND Product.productID = Purchase.productID ");
             sb.append("GROUP BY title, userName ");
 
