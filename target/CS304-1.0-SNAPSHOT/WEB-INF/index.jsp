@@ -26,7 +26,7 @@
                                     <input type="text" name="type" value="redirect"/>
                                     <input type="text" name="address" value="home"/>
                                 </div>
-                                <input  type="submit" value="Shopping system" style="border:none; background:none; color:white; font-weight:bolder; font-size: x-large"/>            
+                                <input  type="submit" value="Shopping system" style="border:none; background:none; color:white; font-weight:bolder; font-size: x-large; padding-left:40px;"/>            
                             </form>
                         </div>
                         <div class = "col-xs-6 col-sm-5">
