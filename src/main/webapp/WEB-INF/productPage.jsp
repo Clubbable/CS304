@@ -36,9 +36,24 @@
         .description {
             margin: 50px 0;
         }
-        .feedbacks{
+        .feedbacksLabel{
             font-weight:700;
             font-size:large;
+        }
+        .feedbackAuthorWrapper{
+            display: flex;
+        }
+        .feedbackTitleWrapper{
+            display: flex;
+            margin-Top: 30px;
+        }
+        .feedbackTitle {
+            font-weight:700;
+            font-size:medium;
+            padding-left: 10px;
+        }
+        .feedbackBody{
+            margin: 30px;
         }
     </style>
     <body>
@@ -101,11 +116,23 @@
                             <div>number</div>
                             <div> CAD</div>
                         </div>
+                        <button type="button" class="btn btn-primary active">Buy it now</button>
                         <hr>
                         <div class="description">Description</div>
                         <hr>
                     </div>
-                    <div class="feedbacks">Customer Reviews</div>
+                    <div class="feedbacks">
+                        <div class="feedbacksLabel">Customer Reviews</div>
+                        <div class="feedbackTitleWrapper">
+                            <div class="feedbackRate">Rate:5 star</div>
+                            <div class="feedbackTitle">Feedback Title</div>
+                        </div>
+                        <div class="feedbackAuthorWrapper">
+                            <div class="feedbackAuthor">Created by name</div>
+                            <div class="feedbackDate">on Date</div>
+                        </div>
+                        <div class="feedbackBody">Feedback Body</div>
+                    </div>
                 </div>
                 <div class= "col-sm-1"></div>
             </div>
