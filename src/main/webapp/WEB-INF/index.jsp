@@ -193,6 +193,12 @@
                 </c:forEach>
             </tbody>
         </table>
-        
+        <form method="post">
+            <div style="display:none">
+                <input type="text" name="type" value="redirect"/>
+                <input type="text" name="address" value="productPage"/>
+            </div>
+            <input  class="btn btn-primary" type="submit" value="Link to product page" >
+        </form>
     </body>
 </html>
