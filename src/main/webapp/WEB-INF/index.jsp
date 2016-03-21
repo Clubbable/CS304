@@ -74,19 +74,19 @@
                                     <div class="caption"></div>
                                     <h3>Product title</h3>
                                     <p>Description.....</p>
-                                    <p><a href="#" class="btn btn-primary" role="button">Button</a></p>
+                                    <p><a href="#" class="btn btn-primary" role="button">See Details</a></p>
                                 </div>
                                 <div class="col-sm-6 col-md-4">
                                     <div class="caption"></div>
                                     <h3>Product title</h3>
                                     <p>Description.....</p>
-                                    <p><a href="#" class="btn btn-primary" role="button">Button</a></p>
+                                    <p><a href="#" class="btn btn-primary" role="button">See Details</a></p>
                                 </div>
                                 <div class="col-sm-6 col-md-4">
                                     <div class="caption"></div>
                                     <h3>Product title</h3>
                                     <p>Description.....</p>
-                                    <p><a href="#" class="btn btn-primary" role="button">Button</a></p>
+                                    <p><a href="#" class="btn btn-primary" role="button">See Details</a></p>
                                 </div>
                             </div>
                         </div>
@@ -101,19 +101,19 @@
                                     <div class="caption"></div>
                                     <h3>Product title</h3>
                                     <p>Description.....</p>
-                                    <p><a href="#" class="btn btn-primary" role="button">Button</a></p>
+                                    <p><a href="#" class="btn btn-primary" role="button">See Details</a></p>
                                 </div>
                                 <div class="col-sm-6 col-md-4">
                                     <div class="caption"></div>
                                     <h3>Product title</h3>
                                     <p>Description.....</p>
-                                    <p><a href="#" class="btn btn-primary" role="button">Button</a></p>
+                                    <p><a href="#" class="btn btn-primary" role="button">See Details</a></p>
                                 </div>
                                 <div class="col-sm-6 col-md-4">
                                     <div class="caption"></div>
                                     <h3>Product title</h3>
                                     <p>Description.....</p>
-                                    <p><a href="#" class="btn btn-primary" role="button">Button</a></p>
+                                    <p><a href="#" class="btn btn-primary" role="button">See Details</a></p>
                                 </div>
                             </div>
                         </div>
@@ -128,19 +128,19 @@
                                     <div class="caption"></div>
                                     <h3>Product title</h3>
                                     <p>Description.....</p>
-                                    <p><a href="#" class="btn btn-primary" role="button">Button</a></p>
+                                    <p><a href="#" class="btn btn-primary" role="button">See Details</a></p>
                                 </div>
                                 <div class="col-sm-6 col-md-4">
                                     <div class="caption"></div>
                                     <h3>Product title</h3>
                                     <p>Description.....</p>
-                                    <p><a href="#" class="btn btn-primary" role="button">Button</a></p>
+                                    <p><a href="#" class="btn btn-primary" role="button">See Details</a></p>
                                 </div>
                                 <div class="col-sm-6 col-md-4">
                                     <div class="caption"></div>
                                     <h3>Product title</h3>
                                     <p>Description.....</p>
-                                    <p><a href="#" class="btn btn-primary" role="button">Button</a></p>
+                                    <p><a href="#" class="btn btn-primary" role="button">See Details</a></p>
                                 </div>
                             </div>
                         </div>
@@ -155,19 +155,19 @@
                                     <div class="caption"></div>
                                     <h3>Product title</h3>
                                     <p>Description.....</p>
-                                    <p><a href="#" class="btn btn-primary" role="button">Button</a></p>
+                                    <p><a href="#" class="btn btn-primary" role="button">See Details</a></p>
                                 </div>
                                 <div class="col-sm-6 col-md-4">
                                     <div class="caption"></div>
                                     <h3>Product title</h3>
                                     <p>Description.....</p>
-                                    <p><a href="#" class="btn btn-primary" role="button">Button</a></p>
+                                    <p><a href="#" class="btn btn-primary" role="button">See Details</a></p>
                                 </div>
                                 <div class="col-sm-6 col-md-4">
                                     <div class="caption"></div>
                                     <h3>Product title</h3>
                                     <p>Description.....</p>
-                                    <p><a href="#" class="btn btn-primary" role="button">Button</a></p>
+                                    <p><a href="#" class="btn btn-primary" role="button">See Details</a></p>
                                 </div>
                             </div>
                         </div>
