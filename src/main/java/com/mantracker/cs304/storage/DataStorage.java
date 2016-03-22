@@ -21,6 +21,7 @@ import org.apache.logging.log4j.LogManager;
  */
 public class DataStorage extends DatabaseStorage
 {
+
     public static List<PurchaseCount> getPurchaseCounts()
     {
         List<PurchaseCount> counts = new ArrayList();
@@ -73,5 +74,46 @@ public class DataStorage extends DatabaseStorage
         return counts;
     }
 
+    public static boolean verifyUser(String username, String password) {
+        // Define database variables
+        Connection connection = null;
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+
+        try
+        {
+            // Create StringBuilder for the query
+            StringBuilder sb = new StringBuilder();
+
+            // Build the query
+            sb.append("SELECT name");
+            sb.append("FROM User");
+            sb.append("WHERE User.userName = " + username);
+            sb.append("AND User.password = " + password);
+
+            // Get a connection
+            connection = getConnection();
+
+            // Prepare statement
+            statement = connection.prepareStatement(sb.toString());
+
+            // Execute the query
+            resultSet = statement.executeQuery();
+        }
+        catch (Exception ex)
+        {
+            // Log
+            LogManager.getLogger(DataStorage.class).fatal("getPurchaseCounts error", ex);
+        }
+        finally
+        {
+            safeClose(resultSet);
+            safeClose(statement);
+            safeClose(connection);
+        }
+        boolean status = resultSet != null;
+
+        return status;
+    }
    
 }

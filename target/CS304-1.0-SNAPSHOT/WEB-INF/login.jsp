@@ -5,7 +5,7 @@
     This signin template is from a git open source project from
     https://gist.github.com/bMinaise/7329874#file-bs3-login-form-html-L12
 --%>
-
+<%@page import="javax.servlet.*" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -100,11 +100,15 @@
                     <div class="account-wall">
                         <img class="profile-img" src="https://s.yimg.com/dh/ap/social/profile/profile_b96.png"
                             alt="">
-                        <form class="form-signin">
-                        <input type="text" class="form-control" placeholder="Username" required autofocus>
-                        <input type="password" class="form-control" placeholder="Password" required>
-                        <button class="btn btn-lg btn-primary btn-block" type="submit">
-                            Sign in</button>
+                        <form class="form-signin" method="post">
+                            <div style="display:none">
+                                <input type="text" name="type" value="login"/>
+                            </div>
+                            <input type="text" name="username" class="form-control" placeholder="Username" required autofocus>
+                            <input type="password" name="password" class="form-control" placeholder="Password" required>
+                            <button class="btn btn-lg btn-primary btn-block" type="submit">
+                                Sign in
+                            </button>
                         </form>
                     </div>
                     <form method="post">
