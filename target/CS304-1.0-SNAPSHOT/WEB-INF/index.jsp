@@ -14,6 +14,18 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css" integrity="sha384-aUGj/X2zp5rLCbBxumKTCw2Z50WgIr1vs/PFN4praOTvYXWlVyh2UtNUU0KAUhAX" crossorigin="anonymous">
         <title>Online Shopping System</title>
     </head>
+    <script>
+        sessionStorage.loginStatus = false;
+        if (${loginStatus} == true) {
+            sessionStorage.loginStatus = ${loginStatus};
+            sessionStorage.username = "${username}";
+            sessionStorage.password = "${password}";
+            sessionStorage.lastname = "${lastname}";
+            sessionStorage.firstname = "${firstname}";
+        } else {
+            sessionStorage.loginStatus = false;
+        }
+    </script>
     <body stlye ="overflow-x:hidden">
         <div class = "container-fluid" style="padding: 0;">
             <div class = "header" style = "height: 80px; background: #19193B; display:list-item">
@@ -42,16 +54,16 @@
                                     <form method="post">
                                         <div style="display:none">
                                             <input type="text" name="type" value="redirect"/>
-                                            <input type="text" name="address" value="login"/>
+                                            <input id = "signInValue" type="text" name="address" value="login"/>
                                         </div>
-                                        <input  class="btn btn-primary" type="submit" value="Sign in">
+                                        <input id="signInBtn" class="btn btn-primary" type="submit" value="Sign In">
                                     </form>
                                     <form method="post">
                                         <div style="display:none">
                                             <input type="text" name="type" value="redirect"/>
                                             <input type="text" name="address" value="create"/>
                                         </div>
-                                        <input  class="btn btn-primary" type="submit" value="Create account" >
+                                        <input  id="createAccBtn" class="btn btn-primary" type="submit" value="Create account" >
                                     </form>
                                 </div>
                             </div>
@@ -185,7 +197,7 @@
             <tbody>
                 <c:forEach items="${PurchaseCounts}" var="PurchaseCount" varStatus="counter">
                     <tr>
-                       <td>${PurchaseCount.getTitle()}</td>
+                       <td>${PurchaseCount.getTitle()} ${loginStatus}</td>
                        <td>${PurchaseCount.getUserName()}</td>
                        <td>${PurchaseCount.getPurchaseAmount()}</td>
                     </tr>
@@ -200,4 +212,15 @@
             <input  class="btn btn-primary" type="submit" value="Link to product page" >
         </form>
     </body>
+    <script>
+        if (sessionStorage.loginStatus == "true") {
+            document.getElementById("signInBtn").setAttribute("value", "Sign Out");
+            document.getElementById("signInValue").setAttribute("value", "logout");
+            document.getElementById("createAccBtn").setAttribute("style", "display:none");
+        } else if (sessionStorage.loginStatus == "false") {
+            document.getElementById("signInBtn").setAttribute("value", "Sign In");
+            document.getElementById("signInValue").setAttribute("value", "login");
+            document.getElementById("createAccBtn").setAttribute("style", "display:inline-block");
+        }
+    </script>
 </html>

@@ -7,6 +7,7 @@ package com.mantracker.cs304.storage;
 
 import com.mantracker.cs304.database.DatabaseStorage;
 import com.mantracker.cs304.models.PurchaseCount;
+import com.mantracker.cs304.models.loginInfo;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -74,22 +75,22 @@ public class DataStorage extends DatabaseStorage
         return counts;
     }
 
-    public static boolean verifyUser(String username, String password) {
+    public static List<loginInfo> verifySignin(String username, String password) {
         // Define database variables
+        List<loginInfo> login = new ArrayList();
         Connection connection = null;
         PreparedStatement statement = null;
         ResultSet resultSet = null;
-
         try
         {
             // Create StringBuilder for the query
             StringBuilder sb = new StringBuilder();
 
             // Build the query
-            sb.append("SELECT name");
-            sb.append("FROM User");
-            sb.append("WHERE User.userName = " + username);
-            sb.append("AND User.password = " + password);
+            sb.append("SELECT userName, password, firstName, lastName ");
+            sb.append("FROM User ");
+            sb.append("WHERE userName = '" + username + "' ");
+            sb.append("AND password = '" + password + "' ");
 
             // Get a connection
             connection = getConnection();
@@ -99,11 +100,18 @@ public class DataStorage extends DatabaseStorage
 
             // Execute the query
             resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                String userN = resultSet.getString("username");
+                String pw = resultSet.getString("password");
+                String firstName = resultSet.getString("firstname");
+                String lastName = resultSet.getString("lastname");
+                login.add(new loginInfo(userN, pw, true, firstName, lastName));
+            }
         }
         catch (Exception ex)
         {
             // Log
-            LogManager.getLogger(DataStorage.class).fatal("getPurchaseCounts error", ex);
+            LogManager.getLogger(DataStorage.class).fatal("verifySignin error", ex);
         }
         finally
         {
@@ -111,9 +119,8 @@ public class DataStorage extends DatabaseStorage
             safeClose(statement);
             safeClose(connection);
         }
-        boolean status = resultSet != null;
 
-        return status;
+        return login;
     }
    
 }
