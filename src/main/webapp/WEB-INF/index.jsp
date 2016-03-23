@@ -14,6 +14,14 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css" integrity="sha384-aUGj/X2zp5rLCbBxumKTCw2Z50WgIr1vs/PFN4praOTvYXWlVyh2UtNUU0KAUhAX" crossorigin="anonymous">
         <title>Online Shopping System</title>
     </head>
+    <style>
+        #userActivities {
+            background-color: #E0FFFF;
+        }
+        .userActBtn {
+            margin-right: 30px;
+        }
+    </style>
     <script>
         sessionStorage.loginStatus = false;
         if (${loginStatus} == true) {
@@ -69,9 +77,46 @@
                             </div>
                         </div>
                     </div>
+                    </div>
                 </div>
             </div>
             <div class="body">
+                <div class= "row" id="userActivities">
+                    <div class= "col-sm-1"></div>
+                    <div class= "col-sm-10">
+                        <div style="display:flex">
+                            <form method="post">
+                                <div style="display:none">
+                                    <input type="text" name="type" value="redirect"/>
+                                    <input type="text" name="address" value="createProduct"/>
+                                </div>
+                                <input  id="123" class="btn btn-default navbar-btn userActBtn" type="submit" value="Create a Sale"></input>
+                            </form>
+                            <form method="post">
+                                <div style="display:none">
+                                    <input type="text" name="type" value="redirect"/>
+                                    <input type="text" name="address" value="sellList"/>
+                                </div>
+                                <input  id="123" class="btn btn-default navbar-btn userActBtn" type="submit" value="Your Selling List"></input>
+                            </form>
+                            <form method="post">
+                                <div style="display:none">
+                                    <input type="text" name="type" value="redirect"/>
+                                    <input type="text" name="address" value="orderHistory"/>
+                                </div>
+                                <input  id="123" class="btn btn-default navbar-btn userActBtn" type="submit" value="Order History"></input>
+                            </form>
+                            <form method="post">
+                                <div style="display:none">
+                                    <input type="text" name="type" value="redirect"/>
+                                    <input type="text" name="address" value="feedbackHistory"/>
+                                </div>
+                                <input  id="123" class="btn btn-default navbar-btn userActBtn" type="submit" value="Your Feedbacks"></input>
+                            </form>
+                        </div>
+                    </div>
+                    <div class= "col-sm-1"></div>
+                </div>
                 <div class= "row">
                     <div class= "col-sm-1"></div>
                     <div class= "col-sm-10">
@@ -213,14 +258,16 @@
         </form>
     </body>
     <script>
-        if (sessionStorage.loginStatus == "true") {
+        if (sessionStorage.loginStatus === "true") {
             document.getElementById("signInBtn").setAttribute("value", "Sign Out");
             document.getElementById("signInValue").setAttribute("value", "logout");
             document.getElementById("createAccBtn").setAttribute("style", "display:none");
-        } else if (sessionStorage.loginStatus == "false") {
+            document.getElementById("userActivities").setAttribute("style", "display:block");
+        } else if (sessionStorage.loginStatus === "false") {
             document.getElementById("signInBtn").setAttribute("value", "Sign In");
             document.getElementById("signInValue").setAttribute("value", "login");
             document.getElementById("createAccBtn").setAttribute("style", "display:inline-block");
+            document.getElementById("userActivities").setAttribute("style", "display:none");
         }
     </script>
 </html>
