@@ -54,6 +54,12 @@ public class Servlet extends HttpServlet
                 requestDispather = request.getRequestDispatcher("/WEB-INF/create.jsp");
             } else if (requestRedirAddress.equals("productPage")) {
                 requestDispather = request.getRequestDispatcher("/WEB-INF/productPage.jsp");
+            } else if (requestRedirAddress.equals("createProduct")) {
+                requestDispather = request.getRequestDispatcher("/WEB-INF/productCreate.jsp");
+            } else if (requestRedirAddress.equals("sellList")) {
+                requestDispather = request.getRequestDispatcher("/WEB-INF/productSellingList.jsp");
+            } else if (requestRedirAddress.equals("feedbackHistory")) {
+                requestDispather = request.getRequestDispatcher("/WEB-INF/feedbackHistory.jsp");
             } else {
                 requestDispather = request.getRequestDispatcher("/WEB-INF/index.jsp");
             }
