@@ -12,6 +12,7 @@
         <title>Create Account Page</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
         <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+        <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
     </head>
     <style>
         .form-signin
@@ -97,9 +98,6 @@
         .form-subField {
             margin-bottom: 8px !important;
         }
-        .inputSubtitle {
-            
-        }
     </style>
     <body>
         <div class="container">
@@ -107,27 +105,21 @@
                 <div class="col-sm-6 col-md-4 col-md-offset-4">
                     <h1 class="text-center login-title">Create an account</h1>
                     <div class="account-wall">
-                        <form class="form-signin">
+                        <form id="createForm" class="form-signin" method="post">
+                            <div style="display:none">
+                                <input type="text" name="type" value="createAcc"/>
+                            </div>
                             <div class=" inputTitle">Username</div>
-                            <input type="text" class="form-control" placeholder="Username" required autofocus>
+                            <input type="text" class="form-control" name="username" placeholder="Username" required autofocus>
                             <div class=" inputTitle">Password</div>
-                            <input type="password" class="form-control" placeholder="Password" required>
+                            <input id="password" type="password" class="form-control" name="password" placeholder="Password" required>
                             <div class=" inputTitle">Password again</div>
-                            <input type="password" class="form-control" placeholder="Confirm Password" required>
-                            <div class=" inputTitle">Your Name</div>
-                            <input type="text" class="form-control" placeholder="Name" required>
-                            <div class=" inputTitle">Address</div>
-                            <div class="inputSubtitle">Street Address</div>
-                            <input type="text" class="form-control form-subField" placeholder="Street Address" required>
-                            <div class="inputSubtitle">City</div>
-                            <input type="text" class="form-control form-subField" placeholder="City">
-                            <div class="inputSubtitle">Province</div>
-                            <input type="text" class="form-control form-subField" placeholder="Province">
-                            <div class="inputSubtitle">Postal code</div>
-                            <input type="text" class="form-control form-subField" placeholder="Postal code">
-                            <div class="inputSubtitle">Country</div>
-                            <input type="text" class="form-control form-subField" placeholder="Country">
-                            <button class="btn btn-lg btn-primary btn-block" type="submit">
+                            <input id="passwordConfirm" type="password" class="form-control" name="passwordConfirm" placeholder="Confirm Password" required>
+                            <div class=" inputTitle">Last Name</div>
+                            <input type="text" class="form-control" name="lastname" placeholder="LastName" required>
+                            <div class=" inputTitle">First Name</div>
+                            <input type="text" class="form-control" name="firstname" placeholder="FirstName" required>
+                            <button id="submitBtn" class="btn btn-lg btn-primary btn-block" type="submit" onclick="verifyPW(event);">
                                 Submit
                             </button>
                         </form>
@@ -135,5 +127,15 @@
                 </div>
             </div>
         </div>
+        <script>
+            $("#createForm").submit(function (event) {
+                var pw = document.getElementById("password").value;
+                var pwConfirm = document.getElementById("passwordConfirm").value;
+                if(pw !== pwConfirm) {
+                    alert( "Your password does not match, please double check and try again" );
+                    event.preventDefault();
+                }
+            });
+        </script>
     </body>
 </html>

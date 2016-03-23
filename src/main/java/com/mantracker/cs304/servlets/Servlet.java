@@ -89,6 +89,20 @@ public class Servlet extends HttpServlet
             request.setAttribute("loginStatus", false);
             RequestDispatcher requestDispather = request.getRequestDispatcher("/WEB-INF/index.jsp");
             requestDispather.forward(request, response);
+        } else if (requestType.equals("createAcc")) {
+            try {
+                String usernameNewAcc = (String) request.getParameter("username");
+                String passwordNewAcc = (String) request.getParameter("password");
+                String lastName = (String) request.getParameter("lastname");
+                String firstName = (String) request.getParameter("firstname");
+                request.setAttribute("createStatus", DataStorage.createAccount(usernameNewAcc, passwordNewAcc, lastName, firstName));
+                request.setAttribute("loginStatus", false);
+            } catch (Exception e){
+                request.setAttribute("createStatus", false);
+                request.setAttribute("loginStatus", false);
+            }
+            RequestDispatcher requestDispather = request.getRequestDispatcher("/WEB-INF/index.jsp");
+            requestDispather.forward(request, response);
         }
     }
 
