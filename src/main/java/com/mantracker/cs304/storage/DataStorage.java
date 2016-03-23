@@ -129,18 +129,16 @@ public class DataStorage extends DatabaseStorage
         ResultSet resultSet = null;
         boolean createSuccessful = false;
         boolean noDuplicate = true;
-        
+        int result = 0;
         // Check if the user exists
         try
         {
             // Create StringBuilder for the query
             StringBuilder sb = new StringBuilder();
-
             // Build the query
             sb.append("SELECT userName ");
             sb.append("FROM User ");
-            sb.append("WHERE userName = '" + username + "' ");
-
+            sb.append("WHERE userName = '" + username + "';");
             // Get a connection
             connection = getConnection();
 
@@ -161,7 +159,6 @@ public class DataStorage extends DatabaseStorage
             // Log
             LogManager.getLogger(DataStorage.class).fatal("Verify User exist error", ex);
         }
-
         if (noDuplicate) {
             try
             {
@@ -169,35 +166,33 @@ public class DataStorage extends DatabaseStorage
                 // Create StringBuilder for the query
                 StringBuilder sb = new StringBuilder();
                 // Build the query
-                sb.append("SELECT COUNT(*) AS count");
+                sb.append("SELECT COUNT(*) AS countNum ");
                 sb.append("FROM User ");
+                sb.append("WHERE userID >= 0 ;");
                 connection = getConnection();
                 statement = connection.prepareStatement(sb.toString());
                 resultSet = statement.executeQuery();
                 int id = 0;
                 if (resultSet.next()) {
-                    id = resultSet.getInt("count");
+                    id = resultSet.getInt("countNum");
                 }
                 
                 // Create new user
-                // Create StringBuilder for the query
-                sb = new StringBuilder();
-
                 // Build the query
-                sb.append("INSERT INTO User ");
-                sb.append("(userID, userName, password, firstName, lastName) ");
-                sb.append("VALUES ");
-                sb.append(Integer.toString(id) + ",‘" + username + "','" + password + "','" + firstName + "','" + lastName + "' ");
-
+                String commend  = "INSERT INTO User" + 
+                "(userID, userName, password, firstName, lastName) VALUES" +
+                "(?, ?, ?, ?, ?);";
                 // Get a connection
                 connection = getConnection();
-
-                // Prepare statement
-                statement = connection.prepareStatement(sb.toString());
-
+                statement = connection.prepareStatement(commend);
+                statement.setInt(1, id);
+                statement.setString(2, username);
+                statement.setString(3, password);
+                statement.setString(4, firstName);
+                statement.setString(5, lastName);
                 // Execute the query
-                resultSet = statement.executeQuery();
-                if (resultSet.next()) {
+                result = statement.executeUpdate();
+                if (result == 1) {
                     createSuccessful = true;
                 }
             }
