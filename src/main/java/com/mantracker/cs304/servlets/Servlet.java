@@ -57,7 +57,6 @@ public class Servlet extends HttpServlet
             } else {
                 requestDispather = request.getRequestDispatcher("/WEB-INF/index.jsp");
             }
-            request.setAttribute("loginStatus", false);
             requestDispather.forward(request, response);
         } else if (requestType.equals("login")) {
             try {
