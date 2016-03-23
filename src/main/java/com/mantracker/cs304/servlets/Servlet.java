@@ -43,9 +43,13 @@ public class Servlet extends HttpServlet
         
         String requestType = (String) request.getParameter("type");
         String requestRedirAddress = (String) request.getParameter("address");
-        
+        String username = (String) request.getParameter("username");
+        String password = (String) request.getParameter("password");
         if (requestType.equals("redirect")) {
             RequestDispatcher requestDispather;
+            request.setAttribute("loginStatus", request.getParameter("loginStatus"));
+            request.setAttribute("username", request.getParameter("username"));
+            request.setAttribute("password", request.getParameter("password"));
             if (requestRedirAddress.equals("orderHistory")) {
                 requestDispather = request.getRequestDispatcher("/WEB-INF/orderHistory.jsp");
             } else if (requestRedirAddress.equals("login")) {
@@ -66,8 +70,6 @@ public class Servlet extends HttpServlet
             requestDispather.forward(request, response);
         } else if (requestType.equals("login")) {
             try {
-                String username = (String) request.getParameter("username");
-                String password = (String) request.getParameter("password");
                 request.setAttribute("PurchaseCounts", DataStorage.getPurchaseCounts());
                 List<loginInfo> login = DataStorage.verifySignin(username, password);
                 request.setAttribute("loginStatus", false);

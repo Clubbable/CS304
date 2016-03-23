@@ -24,7 +24,7 @@
     </style>
     <script>
         sessionStorage.loginStatus = false;
-        if (${loginStatus} == true) {
+        if (${loginStatus} === true) {
             sessionStorage.loginStatus = ${loginStatus};
             sessionStorage.username = "${username}";
             sessionStorage.password = "${password}";
@@ -32,6 +32,10 @@
             sessionStorage.firstname = "${firstname}";
         } else {
             sessionStorage.loginStatus = false;
+            sessionStorage.username = "";
+            sessionStorage.password = "";
+            sessionStorage.lastname = "";
+            sessionStorage.firstname = "";
         }
     </script>
     <body stlye ="overflow-x:hidden">
@@ -42,6 +46,9 @@
                         <div class = "col-xs-4 col-sm-4">
                             <form method="post">
                                 <div style="display:none">
+                                    <input class="username" type="text" name="username" value=""/>
+                                    <input class="password" type="text" name="password" value=""/>
+                                    <input class="loginStatus" type="text" name="loginStatus" value=""/>
                                     <input type="text" name="type" value="redirect"/>
                                     <input type="text" name="address" value="home"/>
                                 </div>
@@ -61,13 +68,19 @@
                                 <div class="btn-group" style="display:flex">
                                     <form method="post">
                                         <div style="display:none">
-                                            <input type="text" name="type" value="redirect"/>
+                                            <input class="username" type="text" name="username" value=""/>
+                                            <input class="password" type="text" name="password" value=""/>
+                                            <input class="loginStatus" type="text" name="loginStatus" value=""/>
+                                            <input id = "signInType" type="text" name="type" value="redirect"/>
                                             <input id = "signInValue" type="text" name="address" value="login"/>
                                         </div>
                                         <input id="signInBtn" class="btn btn-primary" type="submit" value="Sign In">
                                     </form>
                                     <form method="post">
                                         <div style="display:none">
+                                            <input class="username" type="text" name="username" value=""/>
+                                            <input class="password" type="text" name="password" value=""/>
+                                            <input class="loginStatus" type="text" name="loginStatus" value=""/>
                                             <input type="text" name="type" value="redirect"/>
                                             <input type="text" name="address" value="create"/>
                                         </div>
@@ -87,6 +100,9 @@
                         <div style="display:flex">
                             <form method="post">
                                 <div style="display:none">
+                                    <input class="username" type="text" name="username" value=""/>
+                                    <input class="password" type="text" name="password" value=""/>
+                                    <input class="loginStatus" type="text" name="loginStatus" value=""/>
                                     <input type="text" name="type" value="redirect"/>
                                     <input type="text" name="address" value="createProduct"/>
                                 </div>
@@ -94,6 +110,9 @@
                             </form>
                             <form method="post">
                                 <div style="display:none">
+                                    <input class="username" type="text" name="username" value=""/>
+                                    <input class="password" type="text" name="password" value=""/>
+                                    <input class="loginStatus" type="text" name="loginStatus" value=""/>
                                     <input type="text" name="type" value="redirect"/>
                                     <input type="text" name="address" value="sellList"/>
                                 </div>
@@ -101,6 +120,9 @@
                             </form>
                             <form method="post">
                                 <div style="display:none">
+                                    <input class="username" type="text" name="username" value=""/>
+                                    <input class="password" type="text" name="password" value=""/>
+                                    <input class="loginStatus" type="text" name="loginStatus" value=""/>
                                     <input type="text" name="type" value="redirect"/>
                                     <input type="text" name="address" value="orderHistory"/>
                                 </div>
@@ -108,6 +130,9 @@
                             </form>
                             <form method="post">
                                 <div style="display:none">
+                                    <input class="username" type="text" name="username" value=""/>
+                                    <input class="password" type="text" name="password" value=""/>
+                                    <input class="loginStatus" type="text" name="loginStatus" value=""/>
                                     <input type="text" name="type" value="redirect"/>
                                     <input type="text" name="address" value="feedbackHistory"/>
                                 </div>
@@ -251,6 +276,9 @@
         </table>
         <form method="post">
             <div style="display:none">
+                <input class="username" type="text" name="username" value=""/>
+                <input class="password" type="text" name="password" value=""/>
+                <input class="loginStatus" type="text" name="loginStatus" value=""/>
                 <input type="text" name="type" value="redirect"/>
                 <input type="text" name="address" value="productPage"/>
             </div>
@@ -261,13 +289,29 @@
         if (sessionStorage.loginStatus === "true") {
             document.getElementById("signInBtn").setAttribute("value", "Sign Out");
             document.getElementById("signInValue").setAttribute("value", "logout");
+            document.getElementById("signInType").setAttribute("value", "logout");
             document.getElementById("createAccBtn").setAttribute("style", "display:none");
             document.getElementById("userActivities").setAttribute("style", "display:block");
         } else if (sessionStorage.loginStatus === "false") {
             document.getElementById("signInBtn").setAttribute("value", "Sign In");
             document.getElementById("signInValue").setAttribute("value", "login");
+            document.getElementById("signInType").setAttribute("value", "redirect");
             document.getElementById("createAccBtn").setAttribute("style", "display:inline-block");
             document.getElementById("userActivities").setAttribute("style", "display:none");
+            
+        }
+        
+        var unArrays = document.getElementsByClassName("username");
+        for(var i = 0; i < unArrays.length; i++) {
+            unArrays[i].setAttribute("value", sessionStorage.username);
+        }
+        var pwArrays = document.getElementsByClassName("password");
+        for(var i = 0; i < pwArrays.length; i++) {
+            pwArrays[i].setAttribute("value", sessionStorage.password);
+        }
+        var loginArrays = document.getElementsByClassName("loginStatus");
+        for(var i = 0; i < loginArrays.length; i++) {
+            loginArrays[i].setAttribute("value", sessionStorage.loginStatus);
         }
     </script>
 </html>
