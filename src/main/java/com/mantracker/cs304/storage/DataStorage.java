@@ -129,6 +129,7 @@ public class DataStorage extends DatabaseStorage
         ResultSet resultSet = null;
         boolean createSuccessful = false;
         boolean noDuplicate = true;
+        int id = 0;
         int result = 0;
         // Check if the user exists
         try
@@ -172,24 +173,42 @@ public class DataStorage extends DatabaseStorage
                 connection = getConnection();
                 statement = connection.prepareStatement(sb.toString());
                 resultSet = statement.executeQuery();
-                int id = 0;
                 if (resultSet.next()) {
                     id = resultSet.getInt("countNum");
                 }
-                
+            }
+           catch (Exception ex)
+                {
+                    // Log
+                    LogManager.getLogger(DataStorage.class).fatal("Creat Account error", ex);
+                }
+                finally
+                {
+                    safeClose(resultSet);
+                    safeClose(statement);
+                    safeClose(connection);
+                }
+                try
+                {
                 // Create new user
                 // Build the query
-                String commend  = "INSERT INTO User" + 
-                "(userID, userName, password, firstName, lastName) VALUES" +
-                "(?, ?, ?, ?, ?);";
+                StringBuilder sb = new StringBuilder();
+                // Build the query
+                sb.append("INSERT INTO User (userID, userName, password, firstName, lastName)");
+                sb.append("VALUES (");
+                sb.append(Integer.toString(id) + ",");
+                sb.append("'" + username+ "',");
+                sb.append("'" + password+ "',");
+                sb.append("'" + firstName+ "',");
+                sb.append("'" + lastName+ "')");
                 // Get a connection
                 connection = getConnection();
-                statement = connection.prepareStatement(commend);
-                statement.setInt(1, id);
-                statement.setString(2, username);
-                statement.setString(3, password);
-                statement.setString(4, firstName);
-                statement.setString(5, lastName);
+                statement = connection.prepareStatement(sb.toString());
+//                statement.setInt(1, id);
+//                statement.setString(2, username);
+//                statement.setString(3, password);
+//                statement.setString(4, firstName);
+//                statement.setString(5, lastName);
                 // Execute the query
                 result = statement.executeUpdate();
                 if (result == 1) {
