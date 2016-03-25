@@ -240,7 +240,7 @@ public class DataStorage extends DatabaseStorage
         sb.append(Integer.toString(id) + ",");
         sb.append("'" + description+ "',");
         sb.append("'" + title+ "',");
-        sb.append("'" + price+ "',");
+        sb.append(price+ ",");
         sb.append("'" + username+ "',");
         sb.append("'" + type+ "')");
         // Get a connection
