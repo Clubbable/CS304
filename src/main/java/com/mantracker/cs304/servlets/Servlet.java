@@ -103,6 +103,22 @@ public class Servlet extends HttpServlet
             }
             RequestDispatcher requestDispather = request.getRequestDispatcher("/WEB-INF/index.jsp");
             requestDispather.forward(request, response);
+        } else if (requestType.equals("createProduct")) {
+            String loginStatus = (String) request.getParameter("loginStatus");
+            try {
+                String title = (String) request.getParameter("title");
+                String type = (String) request.getParameter("ProductType");
+                String price = (String) request.getParameter("price");
+                String description = (String) request.getParameter("description");
+                
+                request.setAttribute("createStatus", DataStorage.createProduct(username, title, type, price, description));
+                request.setAttribute("loginStatus", loginStatus);
+            } catch (Exception e){
+                request.setAttribute("createProductStatus", false);
+                request.setAttribute("loginStatus", loginStatus);
+            }
+            RequestDispatcher requestDispather = request.getRequestDispatcher("/WEB-INF/index.jsp");
+            requestDispather.forward(request, response);
         }
     }
 

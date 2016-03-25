@@ -114,6 +114,7 @@
                     <form id="productForm" class="form-signin" method="post">
                         <div style="display:none">
                             <input type="text" name="type" value="createProduct"/>
+                            <input class="loginStatus" type="text" name="loginStatus" value=""/>
                         </div>
                         <div class=" inputTitle">Product Title</div>
                         <input class="form-control input-lg" type="text" name="title" placeholder="Title" required autofocus>
@@ -125,7 +126,7 @@
                                   <option>Furniture</option>
                                   <option>Book</option>
                                 </select>
-                                <input id="product-type" type="text" style="display:none" class="form-control" name="type">
+                                <input id="product-type" type="text" style="display:none" class="form-control" name="productType">
                             </div>
                             <div class="col-sm-6 categoryPriceWrapper">
                                 <div class=" inputTitle">Price</div>
@@ -176,7 +177,6 @@
     <script>
         $("#productForm").submit(function (event) {
             document.getElementById("product-type").value = document.getElementById("type-select").value;
-            event.preventDefault();
         });
     </script>
 </html>

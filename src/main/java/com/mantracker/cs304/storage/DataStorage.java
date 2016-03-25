@@ -39,9 +39,9 @@ public class DataStorage extends DatabaseStorage
 
             // Build the query
             sb.append("SELECT title, userName, COUNT(*) AS purchaseAmount FROM User, Product, Purchase ");
-            sb.append("WHERE User.userID = Purchase.CustomerUserID ");
+            sb.append("WHERE User.userName = Purchase.CustomerUserID ");
             sb.append("AND Product.productID = Purchase.productID ");
-            sb.append("GROUP BY title, userName ");
+            sb.append("GROUP BY title");
 
             // Get a connection
             connection = getConnection();
@@ -129,7 +129,6 @@ public class DataStorage extends DatabaseStorage
         ResultSet resultSet = null;
         boolean createSuccessful = false;
         boolean noDuplicate = true;
-        int id = 0;
         int result = 0;
         // Check if the user exists
         try
@@ -151,8 +150,6 @@ public class DataStorage extends DatabaseStorage
             if (resultSet.next()) {
                 noDuplicate = false;
             }
-            
-            
         }
         catch (Exception ex)
         {
@@ -161,42 +158,13 @@ public class DataStorage extends DatabaseStorage
             LogManager.getLogger(DataStorage.class).fatal("Verify User exist error", ex);
         }
         if (noDuplicate) {
-            try
-            {
-                // Get the total count of the amount of user, and set it as the new ID of the newly created user
-                // Create StringBuilder for the query
-                StringBuilder sb = new StringBuilder();
-                // Build the query
-                sb.append("SELECT COUNT(*) AS countNum ");
-                sb.append("FROM User ");
-                sb.append("WHERE userID >= 0 ;");
-                connection = getConnection();
-                statement = connection.prepareStatement(sb.toString());
-                resultSet = statement.executeQuery();
-                if (resultSet.next()) {
-                    id = resultSet.getInt("countNum");
-                }
-            }
-           catch (Exception ex)
-                {
-                    // Log
-                    LogManager.getLogger(DataStorage.class).fatal("Creat Account error", ex);
-                }
-                finally
-                {
-                    safeClose(resultSet);
-                    safeClose(statement);
-                    safeClose(connection);
-                }
-                try
-                {
+            try {
                 // Create new user
                 // Build the query
                 StringBuilder sb = new StringBuilder();
                 // Build the query
-                sb.append("INSERT INTO User (userID, userName, password, firstName, lastName)");
+                sb.append("INSERT INTO User (userName, password, firstName, lastName)");
                 sb.append("VALUES (");
-                sb.append(Integer.toString(id) + ",");
                 sb.append("'" + username+ "',");
                 sb.append("'" + password+ "',");
                 sb.append("'" + firstName+ "',");
@@ -204,11 +172,6 @@ public class DataStorage extends DatabaseStorage
                 // Get a connection
                 connection = getConnection();
                 statement = connection.prepareStatement(sb.toString());
-//                statement.setInt(1, id);
-//                statement.setString(2, username);
-//                statement.setString(3, password);
-//                statement.setString(4, firstName);
-//                statement.setString(5, lastName);
                 // Execute the query
                 result = statement.executeUpdate();
                 if (result == 1) {
@@ -227,6 +190,80 @@ public class DataStorage extends DatabaseStorage
                 safeClose(connection);
             }
         }
+        return createSuccessful;
+    }
+    
+    public static boolean createProduct(String username, String title, String type, String price, String description) {
+        Connection connection = null;
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+        boolean createSuccessful = false;
+        int id = 1;
+        int result = 0;
+        
+        try
+        {
+            // Get the total count of the amount of user, and set it as the new ID of the newly created user
+            // Create StringBuilder for the query
+            StringBuilder sb = new StringBuilder();
+            // Build the query
+            sb.append("SELECT COUNT(*) AS countNum ");
+            sb.append("FROM Product ");
+            sb.append("WHERE productID >= 0 ;");
+            connection = getConnection();
+            statement = connection.prepareStatement(sb.toString());
+            resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                id = resultSet.getInt("countNum") + 1;
+            }
+        }
+       catch (Exception ex)
+        {
+            // Log
+            LogManager.getLogger(DataStorage.class).fatal("Get product count error", ex);
+        }
+        finally
+        {
+            safeClose(resultSet);
+            safeClose(statement);
+            safeClose(connection);
+        }
+        
+        try
+        {
+        // Create new user
+        // Build the query
+        StringBuilder sb = new StringBuilder();
+        // Build the query
+        sb.append("INSERT INTO Product (productID, description, title, price, supplierUserID, type)");
+        sb.append("VALUES (");
+        sb.append(Integer.toString(id) + ",");
+        sb.append("'" + description+ "',");
+        sb.append("'" + title+ "',");
+        sb.append("'" + price+ "',");
+        sb.append("'" + username+ "',");
+        sb.append("'" + type+ "')");
+        // Get a connection
+        connection = getConnection();
+        statement = connection.prepareStatement(sb.toString());
+        // Execute the query
+        result = statement.executeUpdate();
+        if (result == 1) {
+            createSuccessful = true;
+        }
+        }
+        catch (Exception ex)
+        {
+            // Log
+            LogManager.getLogger(DataStorage.class).fatal("Creat Product error", ex);
+        }
+        finally
+        {
+            safeClose(resultSet);
+            safeClose(statement);
+            safeClose(connection);
+        }
+        
         return createSuccessful;
     }
 }
