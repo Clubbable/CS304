@@ -117,8 +117,8 @@
                             </thead>
                         </table>
                     </div>
-                    <c:forEach items="${ProductLists}" var="Product" varStatus="counter">
-                        <script>console.log(${Product.getTitle()})</script>
+                    <c:forEach var="i" begin="0" end="${ProductListsSize}">
+                        ${ProductListsSize}
                         <div class="productItem">
                             <div class="productItemWrapper">
                                 <table class="table">
@@ -137,7 +137,7 @@
                                                 <input  type="submit" value="${Product.getSupplierUserId()}" style="border:none; background:none; text-decoration: underline;"/>            
                                             </form>
                                         </th>
-                                        <th class="productColumns">${Product.getPrice()}</th>
+                                        <th class="productColumns"><c:out value="${ProductLists.get(i).getSupplierUserId()}"/></th>
                                         <th class="productColumns">${Product.getType()}</th>
                                         <th class="productColumns" style="width:21%">
                                             <form method="post">
