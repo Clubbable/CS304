@@ -65,7 +65,7 @@ public class Servlet extends HttpServlet
                 requestDispather = request.getRequestDispatcher("/WEB-INF/productCreate.jsp");
             } else if (requestRedirAddress.equals("sellList")) {
                 List<Product> products =  DataStorage.getProductLists(username);
-                request.setAttribute("ProductListsSize", products.size());
+                request.setAttribute("ProductListsLastItemIndex", products.size() - 1);
                 request.setAttribute("ProductLists", products);
                 requestDispather = request.getRequestDispatcher("/WEB-INF/productSellingList.jsp");
             } else if (requestRedirAddress.equals("feedbackHistory")) {

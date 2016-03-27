@@ -4,6 +4,7 @@
     Author     : syltaxue
 --%>
 <%@page import="com.mantracker.cs304.models.Product" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -109,22 +110,22 @@
                         <table class="table">
                             <thead>
                               <tr>
-                                <th style="width:30%">Title</th>
-                                <th>Price</th>
-                                <th>Category</th>
-                                <th>Delete</th>
+                                <th style="width:35%">Title</th>
+                                <th style="width:15%">Price</th>
+                                <th style="width:29%">Category</th>
+                                <th style="width:21%">Delete</th>
                               </tr>
                             </thead>
                         </table>
                     </div>
-                    <c:forEach var="i" begin="0" end="${ProductListsSize}">
-                        ${ProductListsSize}
+
+                    <c:forEach var="i" begin="0" end="${ProductListsLastItemIndex}">
                         <div class="productItem">
                             <div class="productItemWrapper">
                                 <table class="table">
                                     <tbody>
                                       <tr>
-                                        <th class="productColumns productItem-title" style="width:30%">
+                                        <th class="productColumns productItem-title" style="width:35%">
                                             <form method="post">
                                                 <div style="display:none">
                                                     <input class="username" type="text" name="username" value=""/>
@@ -134,11 +135,11 @@
                                                     <input type="text" name="address" value="productPage"/>
                                                     <input type="text" name="productID" value="${ProductLists.get(i).getSupplierUserId()}"/>
                                                 </div>
-                                                <input  type="submit" value="${ProductLists.get(i).getSupplierUserId()}" style="border:none; background:none; text-decoration: underline;"/>            
+                                                <input  type="submit" value="${ProductLists.get(i).getTitle()}" style="border:none; background:none; text-decoration: underline;"/>            
                                             </form>
                                         </th>
-                                        <th class="productColumns">${ProductLists.get(i).getPrice()}</th>
-                                        <th class="productColumns">${ProductLists.get(i).getType()}</th>
+                                        <th class="productColumns" style="width:15%">${ProductLists.get(i).getPrice()}</th>
+                                        <th class="productColumns" style="width:29%">${ProductLists.get(i).getType()}</th>
                                         <th class="productColumns" style="width:21%">
                                             <form method="post">
                                                 <div style="display:none">
@@ -153,7 +154,7 @@
                                         </th>
                                       </tr>
                                     </tbody>
-                                </div>
+                                </table>
                             </div>
                         </div>
                     </c:forEach>
