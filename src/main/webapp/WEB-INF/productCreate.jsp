@@ -124,11 +124,11 @@
                             <div class="col-sm-6 categoryPriceWrapper">
                                 <div class=" inputTitle">Category</div>
                                 <select id="type-select" class="form-control">
-                                  <option>Electronics</option>
-                                  <option>Furniture</option>
-                                  <option>Book</option>
+                                  <option>electronics</option>
+                                  <option>furniture</option>
+                                  <option>book</option>
                                 </select>
-                                <input id="product-type" type="text" style="display:none" class="form-control" name="productType">
+                                <input id="product-type" type="text" style="display:none" class="form-control" name="productType" value="electronics">
                             </div>
                             <div class="col-sm-6 categoryPriceWrapper">
                                 <div class=" inputTitle">Price</div>
@@ -176,7 +176,7 @@
         }
     </script>
     <script>
-        $("#productForm").submit(function (event) {
+        $("#type-select").on("change", function (event) {
             document.getElementById("product-type").value = document.getElementById("type-select").value ? document.getElementById("type-select").value : "electronics";
         });
     </script>

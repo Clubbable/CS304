@@ -113,7 +113,7 @@ public class Servlet extends HttpServlet
             String loginStatus = (String) request.getParameter("loginStatus");
             try {
                 String title = (String) request.getParameter("title");
-                String type = (String) request.getParameter("ProductType");
+                String type = (String) request.getParameter("productType");
                 String price = (String) request.getParameter("price");
                 String description = (String) request.getParameter("description");
                 
