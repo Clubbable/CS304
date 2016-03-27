@@ -45,6 +45,8 @@ public class Servlet extends HttpServlet
         String requestRedirAddress = (String) request.getParameter("address");
         String username = (String) request.getParameter("username");
         String password = (String) request.getParameter("password");
+        request.setAttribute("username", request.getParameter("username"));
+        request.setAttribute("password", request.getParameter("password"));
         if (requestType.equals("redirect")) {
             RequestDispatcher requestDispather;
             request.setAttribute("loginStatus", request.getParameter("loginStatus"));
@@ -55,12 +57,13 @@ public class Servlet extends HttpServlet
             } else if (requestRedirAddress.equals("login")) {
                 requestDispather = request.getRequestDispatcher("/WEB-INF/login.jsp");
             } else if (requestRedirAddress.equals("create")) {
-                requestDispather = request.getRequestDispatcher("/WEB-INF/create.jsp");
+                requestDispather = request.getRequestDispatcher("/WEB-INF/accountCreate.jsp");
             } else if (requestRedirAddress.equals("productPage")) {
                 requestDispather = request.getRequestDispatcher("/WEB-INF/productPage.jsp");
             } else if (requestRedirAddress.equals("createProduct")) {
                 requestDispather = request.getRequestDispatcher("/WEB-INF/productCreate.jsp");
             } else if (requestRedirAddress.equals("sellList")) {
+                request.setAttribute("ProductLists", DataStorage.getProductLists(username));
                 requestDispather = request.getRequestDispatcher("/WEB-INF/productSellingList.jsp");
             } else if (requestRedirAddress.equals("feedbackHistory")) {
                 requestDispather = request.getRequestDispatcher("/WEB-INF/feedbackHistory.jsp");

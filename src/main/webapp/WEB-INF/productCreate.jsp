@@ -113,6 +113,8 @@
                     <div class="createLable">Create a new product</div>
                     <form id="productForm" class="form-signin" method="post">
                         <div style="display:none">
+                            <input class="username" type="text" name="username" value=""/>
+                            <input class="password" type="text" name="password" value=""/>
                             <input type="text" name="type" value="createProduct"/>
                             <input class="loginStatus" type="text" name="loginStatus" value=""/>
                         </div>
@@ -137,8 +139,7 @@
                             </div>
                         </div>
                         <div class=" inputTitle">Description</div>
-                        <textArea type="text" class="form-control description" name="description" required>
-                        </textarea>
+                        <textArea type="text" class="form-control description" value = "" name="description" required></textarea>
                         <button id="submitBtn" class="btn btn-lg btn-primary btn-block" type="submit">
                             Create
                         </button>
@@ -176,7 +177,7 @@
     </script>
     <script>
         $("#productForm").submit(function (event) {
-            document.getElementById("product-type").value = document.getElementById("type-select").value;
+            document.getElementById("product-type").value = document.getElementById("type-select").value ? document.getElementById("type-select").value : "electronics";
         });
     </script>
 </html>
