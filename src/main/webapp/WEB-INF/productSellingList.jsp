@@ -132,13 +132,13 @@
                                                     <input class="loginStatus" type="text" name="loginStatus" value=""/>
                                                     <input type="text" name="type" value="redirect"/>
                                                     <input type="text" name="address" value="productPage"/>
-                                                    <input type="text" name="productID" value="${Product.getSupplierUserId()}"/>
+                                                    <input type="text" name="productID" value="${ProductLists.get(i).getSupplierUserId()}"/>
                                                 </div>
-                                                <input  type="submit" value="${Product.getSupplierUserId()}" style="border:none; background:none; text-decoration: underline;"/>            
+                                                <input  type="submit" value="${ProductLists.get(i).getSupplierUserId()}" style="border:none; background:none; text-decoration: underline;"/>            
                                             </form>
                                         </th>
-                                        <th class="productColumns"><c:out value="${ProductLists.get(i).getSupplierUserId()}"/></th>
-                                        <th class="productColumns">${Product.getType()}</th>
+                                        <th class="productColumns">${ProductLists.get(i).getPrice()}</th>
+                                        <th class="productColumns">${ProductLists.get(i).getType()}</th>
                                         <th class="productColumns" style="width:21%">
                                             <form method="post">
                                                 <div style="display:none">
@@ -146,7 +146,7 @@
                                                     <input class="password" type="text" name="password" value=""/>
                                                     <input class="loginStatus" type="text" name="loginStatus" value=""/>
                                                     <input id = "signInType" type="text" name="type" value="deleteProduct"/>
-                                                    <input id = "signInValue" type="text" name="productID" value="${Product.getSupplierUserId()}"/>
+                                                    <input id = "signInValue" type="text" name="productID" value="${ProductLists.get(i).getSupplierUserId()}"/>
                                                 </div>
                                                 <input id="signInBtn" class="btn btn-primary" type="submit" value="Delete">
                                             </form>
