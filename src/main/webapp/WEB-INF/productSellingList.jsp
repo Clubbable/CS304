@@ -117,11 +117,6 @@
                             </thead>
                         </table>
                     </div>
-                <c:forEach items="${ProductLists}" var="PurchaseCount" varStatus="counter">
-                    <tr>
-                       <td>${PurchaseCount.getSupplierUserId()} ${loginStatus}</td>
-                    </tr>
-                </c:forEach>
                     <c:forEach items="${ProductLists}" var="Product" varStatus="counter">
                         <script>console.log(${Product.getTitle()})</script>
                         <div class="productItem">
