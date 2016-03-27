@@ -101,23 +101,23 @@
                 </div>
             </div>
             <div class="body">
-                <div class="body-type">Category</div>
+                <div class="body-type">${ProductInfo.getType()}</div>
                 <div class= "col-sm-1"></div>
                 <div class= "col-sm-10">
                     <div class="body-description">
-                        <div class="title">Title</div>
+                        <div class="title">${ProductInfo.getTitle()}</div>
                         <div class="Wrapper" style="display:flex">
-                            <div class="seller">seller name</div>
-                            <div class="date">Created at: Date</div>
+                            <div class="seller">Seller: ${ProductInfo.getFirstName()} ${ProductInfo.getLastName()}</div>
                         </div>
                         <div class="price-wrapper">
                             <div>Price:</div>
-                            <div>number</div>
+                            <div>${ProductInfo.getPrice()}</div>
                             <div> CAD</div>
                         </div>
                         <button type="button" class="btn btn-primary active">Buy it now</button>
                         <hr>
-                        <div class="description">Description</div>
+                        
+                        <div class="description"><div>Description:</div>${ProductInfo.getDescription()}</div>
                         <hr>
                     </div>
                     <div class="feedbacks">

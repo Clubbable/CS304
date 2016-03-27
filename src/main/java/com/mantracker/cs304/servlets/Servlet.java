@@ -60,12 +60,19 @@ public class Servlet extends HttpServlet
             } else if (requestRedirAddress.equals("create")) {
                 requestDispather = request.getRequestDispatcher("/WEB-INF/accountCreate.jsp");
             } else if (requestRedirAddress.equals("productPage")) {
+                String productID = (String) request.getParameter("productID");
+                Product product = DataStorage.getProduct(productID);
+                request.setAttribute("ProductInfo", product);
                 requestDispather = request.getRequestDispatcher("/WEB-INF/productPage.jsp");
             } else if (requestRedirAddress.equals("createProduct")) {
                 requestDispather = request.getRequestDispatcher("/WEB-INF/productCreate.jsp");
             } else if (requestRedirAddress.equals("sellList")) {
                 List<Product> products =  DataStorage.getProductLists(username);
-                request.setAttribute("ProductListsLastItemIndex", products.size() - 1);
+                if (products.size() > 0) {
+                    request.setAttribute("ProductListsLastItemIndex", products.size() - 1);
+                } else {
+                    request.setAttribute("ProductListsLastItemIndex", 0);
+                }
                 request.setAttribute("ProductLists", products);
                 requestDispather = request.getRequestDispatcher("/WEB-INF/productSellingList.jsp");
             } else if (requestRedirAddress.equals("feedbackHistory")) {
@@ -124,6 +131,26 @@ public class Servlet extends HttpServlet
                 request.setAttribute("loginStatus", loginStatus);
             }
             RequestDispatcher requestDispather = request.getRequestDispatcher("/WEB-INF/index.jsp");
+            requestDispather.forward(request, response);
+        } else if (requestType.equals("deleteProduct")) {
+            String loginStatus = (String) request.getParameter("loginStatus");
+            try {
+                String productID = (String) request.getParameter("productID");
+                
+                request.setAttribute("deleteProductStatus", DataStorage.deleteProduct(productID));
+                request.setAttribute("deleteProductStatus", loginStatus);
+                List<Product> products =  DataStorage.getProductLists(username);
+                if (products.size() > 0) {
+                    request.setAttribute("ProductListsLastItemIndex", products.size() - 1);
+                } else {
+                    request.setAttribute("ProductListsLastItemIndex", 0);
+                }
+                request.setAttribute("ProductLists", products);
+            } catch (Exception e){
+                request.setAttribute("deleteProductStatus", false);
+                request.setAttribute("deleteProductStatus", loginStatus);
+            }
+            RequestDispatcher requestDispather = request.getRequestDispatcher("/WEB-INF/productSellingList.jsp");
             requestDispather.forward(request, response);
         }
     }

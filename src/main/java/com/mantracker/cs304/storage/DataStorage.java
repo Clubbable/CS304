@@ -305,7 +305,7 @@ public class DataStorage extends DatabaseStorage
                 String supplierUserID = resultSet.getString("supplierUserID");
                 int productID = resultSet.getInt("productID");
                 
-                productList.add(new Product(productID, description, title, price, type, supplierUserID));
+                productList.add(new Product(productID, description, title, price, type, supplierUserID, null, null));
             }
         }
         catch (Exception ex)
@@ -320,5 +320,95 @@ public class DataStorage extends DatabaseStorage
             safeClose(connection);
         }
         return productList;
+    }
+
+    public static boolean deleteProduct(String productID) {
+        // Define database variables
+        Connection connection = null;
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+        boolean deleteStatus = false;
+        int result = 0;
+        try
+        {
+            // Create StringBuilder for the query
+            StringBuilder sb = new StringBuilder();
+
+            // Build the query
+            sb.append("DELETE FROM Product ");
+            sb.append("WHERE productID = '" + productID + "' ");
+
+            // Get a connection
+            connection = getConnection();
+
+            // Prepare statement
+            statement = connection.prepareStatement(sb.toString());
+
+            result = statement.executeUpdate();
+            if (result == 1) {
+                deleteStatus = true;
+            }
+        }
+        catch (Exception ex)
+        {
+            // Log
+            LogManager.getLogger(DataStorage.class).fatal("Delete Product error", ex);
+        }
+        finally
+        {
+            safeClose(resultSet);
+            safeClose(statement);
+            safeClose(connection);
+        }
+        return deleteStatus;
+    }
+    
+    public static Product getProduct(String productID) {
+        // Define database variables
+        Connection connection = null;
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+        Product product = null;
+        try
+        {
+            // Create StringBuilder for the query
+            StringBuilder sb = new StringBuilder();
+
+            // Build the query
+            sb.append("SELECT title, description, price, type, supplierUserID, productID, lastName, firstName ");
+            sb.append("FROM Product, User ");
+            sb.append("Where ProductID = '" + productID + "' ");
+            sb.append("AND userName = supplierUserID ");
+            // Get a connection
+            connection = getConnection();
+
+            // Prepare statement
+            statement = connection.prepareStatement(sb.toString());
+
+            resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                String title = resultSet.getString("title");
+                String description = resultSet.getString("description");
+                float price = resultSet.getFloat("price");
+                String type = resultSet.getString("type");
+                String supplierUserID = resultSet.getString("supplierUserID");
+                int productNumber = resultSet.getInt("productID");
+                String lastName = resultSet.getString("lastName");
+                String firstName = resultSet.getString("firstName");
+                product = new Product(productNumber, description, title, price, type, supplierUserID, lastName, firstName);
+            }
+        }
+        catch (Exception ex)
+        {
+            // Log
+            LogManager.getLogger(DataStorage.class).fatal("Get Product error", ex);
+        }
+        finally
+        {
+            safeClose(resultSet);
+            safeClose(statement);
+            safeClose(connection);
+        }
+        return product;
     }
 }

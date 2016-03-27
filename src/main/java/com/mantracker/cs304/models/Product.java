@@ -16,14 +16,18 @@ public class Product {
     String type;
     Float price;
     String supplierUserId;
+    String firstName;
+    String lastName;
 
-    public Product(int productId, String description, String title, Float price, String type, String supplierUserId) {
+    public Product(int productId, String description, String title, Float price, String type, String supplierUserId, String lastName, String firstName) {
         this.productId = productId;
         this.description = description;
         this.title = title;
         this.price = price;
         this.type = type;
         this.supplierUserId = supplierUserId;
+        this.lastName = lastName;
+        this.firstName = firstName;
     }
 
     public int getProductId() {
@@ -48,5 +52,13 @@ public class Product {
    
     public String getType() {
         return type;
+    }
+    
+    public String getLastName () {
+        return lastName;
+    }
+    
+    public String getFirstName () {
+        return firstName;
     }
 }

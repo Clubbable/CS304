@@ -133,7 +133,7 @@
                                                     <input class="loginStatus" type="text" name="loginStatus" value=""/>
                                                     <input type="text" name="type" value="redirect"/>
                                                     <input type="text" name="address" value="productPage"/>
-                                                    <input type="text" name="productID" value="${ProductLists.get(i).getSupplierUserId()}"/>
+                                                    <input type="text" name="productID" value="${ProductLists.get(i).getProductId()}"/>
                                                 </div>
                                                 <input  type="submit" value="${ProductLists.get(i).getTitle()}" style="border:none; background:none; text-decoration: underline;"/>            
                                             </form>
@@ -147,7 +147,7 @@
                                                     <input class="password" type="text" name="password" value=""/>
                                                     <input class="loginStatus" type="text" name="loginStatus" value=""/>
                                                     <input id = "signInType" type="text" name="type" value="deleteProduct"/>
-                                                    <input id = "signInValue" type="text" name="productID" value="${ProductLists.get(i).getSupplierUserId()}"/>
+                                                    <input id = "signInValue" type="text" name="productID" value="${ProductLists.get(i).getProductId()}"/>
                                                 </div>
                                                 <input id="signInBtn" class="btn btn-primary" type="submit" value="Delete">
                                             </form>
