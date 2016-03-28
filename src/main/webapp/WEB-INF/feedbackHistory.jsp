@@ -66,6 +66,9 @@
                         <div class = "col-xs-4 col-sm-4">
                             <form method="post">
                                 <div style="display:none">
+                                    <input class="username" type="text" name="username" value=""/>
+                                    <input class="password" type="text" name="password" value=""/>
+                                    <input class="loginStatus" type="text" name="loginStatus" value=""/>
                                     <input type="text" name="type" value="redirect"/>
                                     <input type="text" name="address" value="home"/>
                                 </div>
@@ -85,17 +88,23 @@
                                 <div class="btn-group" style="display:flex">
                                     <form method="post">
                                         <div style="display:none">
-                                            <input type="text" name="type" value="redirect"/>
-                                            <input type="text" name="address" value="login"/>
+                                            <input class="username" type="text" name="username" value=""/>
+                                            <input class="password" type="text" name="password" value=""/>
+                                            <input class="loginStatus" type="text" name="loginStatus" value=""/>
+                                            <input id = "signInType" type="text" name="type" value="redirect"/>
+                                            <input id = "signInValue" type="text" name="address" value="login"/>
                                         </div>
-                                        <input  class="btn btn-primary" type="submit" value="Sign in">
+                                        <input id="signInBtn" class="btn btn-primary" type="submit" value="Sign In">
                                     </form>
                                     <form method="post">
                                         <div style="display:none">
+                                            <input class="username" type="text" name="username" value=""/>
+                                            <input class="password" type="text" name="password" value=""/>
+                                            <input class="loginStatus" type="text" name="loginStatus" value=""/>
                                             <input type="text" name="type" value="redirect"/>
                                             <input type="text" name="address" value="create"/>
                                         </div>
-                                        <input  class="btn btn-primary" type="submit" value="Create account" >
+                                        <input  id="createAccBtn" class="btn btn-primary" type="submit" value="Create account" >
                                     </form>
                                 </div>
                             </div>
