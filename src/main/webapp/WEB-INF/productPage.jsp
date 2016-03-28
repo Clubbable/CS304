@@ -40,11 +40,13 @@
             font-size:large;
         }
         .feedbackAuthorWrapper{
+            margin-left:30px;
             display: flex;
         }
         .feedbackTitleWrapper{
             display: flex;
-            margin-Top: 30px;
+            margin-top: 30px;
+            margin-left:30px;
         }
         .feedbackTitle {
             font-weight:700;
@@ -53,6 +55,11 @@
         }
         .feedbackBody{
             margin: 30px;
+        }
+        .feedbackWrapper{
+            border-style: double;
+            border-width: thin;
+            margin: 20px 0;
         }
     </style>
     <body>
@@ -122,15 +129,21 @@
                     </div>
                     <div class="feedbacks">
                         <div class="feedbacksLabel">Customer Reviews</div>
-                        <div class="feedbackTitleWrapper">
-                            <div class="feedbackRate">Rate:5 star</div>
-                            <div class="feedbackTitle">Feedback Title</div>
-                        </div>
-                        <div class="feedbackAuthorWrapper">
-                            <div class="feedbackAuthor">Created by name</div>
-                            <div class="feedbackDate">on Date</div>
-                        </div>
-                        <div class="feedbackBody">Feedback Body</div>
+                        <c:if test="${FeedbackListsLastItemIndex ge 1}">
+                            <c:forEach var="i" begin="0" end="${FeedbackListsLastItemIndex}">
+                                <div class="feedbackWrapper">
+                                    <div class="feedbackTitleWrapper">
+                                        <div class="feedbackRate">Rate:${FeedbackList.get(i).getRateStar()}</div>
+                                        <div class="feedbackTitle">Feedback Title: ${FeedbackList.get(i).getFeedbackTitle()}</div>
+                                    </div>
+                                    <div class="feedbackAuthorWrapper">
+                                        <div class="feedbackAuthor">Created by ${FeedbackList.get(i).getFirstName()} ${FeedbackList.get(i).getLastName()}</div>
+                                        <div class="feedbackDate">on ${FeedbackList.get(i).getFeedbackDate()}</div>
+                                    </div>
+                                    <div class="feedbackBody"><div>Feedback Comments:</div>${FeedbackList.get(i).getFeedBackComment()}</div>
+                                </div>
+                            </c:forEach>
+                        </c:if>
                     </div>
                 </div>
                 <div class= "col-sm-1"></div>

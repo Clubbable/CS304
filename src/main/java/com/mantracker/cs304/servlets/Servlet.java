@@ -5,9 +5,7 @@
 package com.mantracker.cs304.servlets;
 
 import com.mantracker.cs304.storage.DataStorage;
-import com.mantracker.cs304.models.loginInfo;
-import com.mantracker.cs304.models.Purchase;
-import com.mantracker.cs304.models.Product;
+import com.mantracker.cs304.models.*;
 import java.io.IOException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -71,6 +69,14 @@ public class Servlet extends HttpServlet
                 String productID = (String) request.getParameter("productID");
                 Product product = DataStorage.getProduct(productID);
                 request.setAttribute("ProductInfo", product);
+                List<ProductFeedback> feedbackList = DataStorage.getProductFeedback(productID);
+                request.setAttribute("FeedbackList", feedbackList);
+                if (feedbackList.size() > 0) {
+                    request.setAttribute("FeedbackListsLastItemIndex", feedbackList.size() - 1);
+                } else {
+                    request.setAttribute("FeedbackListsLastItemIndex", 0);
+                }
+ 
                 requestDispather = request.getRequestDispatcher("/WEB-INF/productPage.jsp");
             } else if (requestRedirAddress.equals("createProduct")) {
                 requestDispather = request.getRequestDispatcher("/WEB-INF/productCreate.jsp");

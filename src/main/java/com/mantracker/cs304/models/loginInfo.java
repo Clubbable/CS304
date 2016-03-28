@@ -7,7 +7,7 @@ package com.mantracker.cs304.models;
 
 /**
  *
- * @author marti
+ * @author syltaxue
  */
 public class loginInfo {
     String username;
