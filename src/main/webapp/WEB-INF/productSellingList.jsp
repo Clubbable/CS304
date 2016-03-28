@@ -112,58 +112,59 @@
                 <div class= "col-sm-2"></div>
                 <div class= "col-sm-8">
                     <div class="purchaseLabel">Your Purchase</div>
-                    <div class="productHeader">
-                        <table class="table">
-                            <thead>
-                              <tr>
-                                <th style="width:35%">Title</th>
-                                <th style="width:15%">Price</th>
-                                <th style="width:29%">Category</th>
-                                <th style="width:21%">Delete</th>
-                              </tr>
-                            </thead>
-                        </table>
-                    </div>
-
-                    <c:forEach var="i" begin="0" end="${ProductListsLastItemIndex}">
-                        <div class="productItem">
-                            <div class="productItemWrapper">
-                                <table class="table">
-                                    <tbody>
-                                      <tr>
-                                        <th class="productColumns productItem-title" style="width:35%">
-                                            <form method="post">
-                                                <div style="display:none">
-                                                    <input class="username" type="text" name="username" value=""/>
-                                                    <input class="password" type="text" name="password" value=""/>
-                                                    <input class="loginStatus" type="text" name="loginStatus" value=""/>
-                                                    <input type="text" name="type" value="redirect"/>
-                                                    <input type="text" name="address" value="productPage"/>
-                                                    <input type="text" name="productID" value="${ProductLists.get(i).getProductId()}"/>
-                                                </div>
-                                                <input  type="submit" value="${ProductLists.get(i).getTitle()}" style="border:none; background:none; text-decoration: underline;"/>            
-                                            </form>
-                                        </th>
-                                        <th class="productColumns" style="width:15%">${ProductLists.get(i).getPrice()}</th>
-                                        <th class="productColumns" style="width:29%">${ProductLists.get(i).getType()}</th>
-                                        <th class="productColumns" style="width:21%">
-                                            <form method="post">
-                                                <div style="display:none">
-                                                    <input class="username" type="text" name="username" value=""/>
-                                                    <input class="password" type="text" name="password" value=""/>
-                                                    <input class="loginStatus" type="text" name="loginStatus" value=""/>
-                                                    <input id = "signInType" type="text" name="type" value="deleteProduct"/>
-                                                    <input id = "signInValue" type="text" name="productID" value="${ProductLists.get(i).getProductId()}"/>
-                                                </div>
-                                                <input class="btn btn-primary" type="submit" value="Delete">
-                                            </form>
-                                        </th>
-                                      </tr>
-                                    </tbody>
-                                </table>
-                            </div>
+                    <c:if test="${ProductListsLastItemIndex ge 1}">
+                        <div class="productHeader">
+                            <table class="table">
+                                <thead>
+                                  <tr>
+                                    <th style="width:35%">Title</th>
+                                    <th style="width:15%">Price</th>
+                                    <th style="width:29%">Category</th>
+                                    <th style="width:21%">Delete</th>
+                                  </tr>
+                                </thead>
+                            </table>
                         </div>
-                    </c:forEach>
+                        <c:forEach var="i" begin="0" end="${ProductListsLastItemIndex}">
+                            <div class="productItem">
+                                <div class="productItemWrapper">
+                                    <table class="table">
+                                        <tbody>
+                                          <tr>
+                                            <th class="productColumns productItem-title" style="width:35%">
+                                                <form method="post">
+                                                    <div style="display:none">
+                                                        <input class="username" type="text" name="username" value=""/>
+                                                        <input class="password" type="text" name="password" value=""/>
+                                                        <input class="loginStatus" type="text" name="loginStatus" value=""/>
+                                                        <input type="text" name="type" value="redirect"/>
+                                                        <input type="text" name="address" value="productPage"/>
+                                                        <input type="text" name="productID" value="${ProductLists.get(i).getProductId()}"/>
+                                                    </div>
+                                                    <input  type="submit" value="${ProductLists.get(i).getTitle()}" style="border:none; background:none; text-decoration: underline;"/>            
+                                                </form>
+                                            </th>
+                                            <th class="productColumns" style="width:15%">${ProductLists.get(i).getPrice()}</th>
+                                            <th class="productColumns" style="width:29%">${ProductLists.get(i).getType()}</th>
+                                            <th class="productColumns" style="width:21%">
+                                                <form method="post">
+                                                    <div style="display:none">
+                                                        <input class="username" type="text" name="username" value=""/>
+                                                        <input class="password" type="text" name="password" value=""/>
+                                                        <input class="loginStatus" type="text" name="loginStatus" value=""/>
+                                                        <input id = "signInType" type="text" name="type" value="deleteProduct"/>
+                                                        <input id = "signInValue" type="text" name="productID" value="${ProductLists.get(i).getProductId()}"/>
+                                                    </div>
+                                                    <input class="btn btn-primary" type="submit" value="Delete">
+                                                </form>
+                                            </th>
+                                          </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </c:forEach>
+                    </c:if>
                 </div>
                 <div class= "col-sm-2"></div>
             </div>

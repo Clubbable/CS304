@@ -111,68 +111,70 @@
                 <div class= "col-sm-2"></div>
                 <div class= "col-sm-8">
                     <div class="orderLabel">Your Order</div>
-                    <c:forEach var="i" begin="0" end="${OrderListsLastItemIndex}">
-                        <div class="orderWrapper">
-                            <div class="orderDetails">
-                                <table class="table">
-                                    <thead>
-                                      <tr>
-                                        <th style="width:25%">ORDER PLACED</th>
-                                        <th style="width:10%">TOTAL</th>
-                                        <th style="width:39%">SHIP TO</th>
-                                        <th style="width:26%">ORDER NUMBER</th>
-                                      </tr>
-                                    </thead>
-                                    <tbody>
-                                      <tr>
-                                        <th style="width:25%">Date: ${OrderLists.get(i).getPurchaseDate()}</th>
-                                        <th style="width:10%">${OrderLists.get(i).getPrice()} CAD</th>
-                                        <th style="width:39%">${OrderLists.get(i).getShippingAddress()}</th>
-                                        <th style="width:26%">#${OrderLists.get(i).getOrderNumber()}</th>
-                                      </tr>
-                                    </tbody>
-                                </table>
+                    <c:if test="${OrderListsLastItemIndex ge 1}">
+                        <c:forEach var="i" begin="0" end="${OrderListsLastItemIndex}">
+                            <div class="orderWrapper">
+                                <div class="orderDetails">
+                                    <table class="table">
+                                        <thead>
+                                          <tr>
+                                            <th style="width:25%">ORDER PLACED</th>
+                                            <th style="width:10%">TOTAL</th>
+                                            <th style="width:39%">SHIP TO</th>
+                                            <th style="width:26%">ORDER NUMBER</th>
+                                          </tr>
+                                        </thead>
+                                        <tbody>
+                                          <tr>
+                                            <th style="width:25%">Date: ${OrderLists.get(i).getPurchaseDate()}</th>
+                                            <th style="width:10%">${OrderLists.get(i).getPrice()} CAD</th>
+                                            <th style="width:39%">${OrderLists.get(i).getShippingAddress()}</th>
+                                            <th style="width:26%">#${OrderLists.get(i).getOrderNumber()}</th>
+                                          </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="productDetails">
+                                    <table class="table">
+                                        <thead>
+                                          <tr>
+                                            <th style="width:70%">Product Title: ${OrderLists.get(i).getTitle()}</th>
+                                            <th style="width:30%">
+                                                <form method="post">
+                                                    <div style="display:none">
+                                                        <input class="username" type="text" name="username" value=""/>
+                                                        <input class="password" type="text" name="password" value=""/>
+                                                        <input class="loginStatus" type="text" name="loginStatus" value=""/>
+                                                        <input id = "signInType" type="text" name="type" value="feedbackProduct"/>
+                                                        <input id = "signInValue" type="text" name="productID" value="${OrderLists.get(i).getProductId()}"/>
+                                                    </div>
+                                                    <input class="btn btn-primary" type="submit" value="Submit Feedback to Product">
+                                                </form>
+                                            </th>
+                                          </tr>
+                                        </thead>
+                                        <tbody>
+                                          <tr>
+                                            <th style="width:70%">Sold By: ${OrderLists.get(i).getFirstName()} ${OrderLists.get(i).getLastName()}</th>
+                                            <th style="width:30%">
+                                                <form method="post">
+                                                    <div style="display:none">
+                                                        <input class="username" type="text" name="username" value=""/>
+                                                        <input class="password" type="text" name="password" value=""/>
+                                                        <input class="loginStatus" type="text" name="loginStatus" value=""/>
+                                                        <input id = "signInType" type="text" name="type" value="feedbackSeller"/>
+                                                        <input id = "signInValue" type="text" name="supplierID" value="${OrderLists.get(i).getSupplierUserID()}"/>
+                                                    </div>
+                                                    <input class="btn btn-primary" type="submit" value="Submit Feedback to Seller">
+                                                </form>
+                                            </th>
+                                          </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
-                            <div class="productDetails">
-                                <table class="table">
-                                    <thead>
-                                      <tr>
-                                        <th style="width:70%">Product Title: ${OrderLists.get(i).getTitle()}</th>
-                                        <th style="width:30%">
-                                            <form method="post">
-                                                <div style="display:none">
-                                                    <input class="username" type="text" name="username" value=""/>
-                                                    <input class="password" type="text" name="password" value=""/>
-                                                    <input class="loginStatus" type="text" name="loginStatus" value=""/>
-                                                    <input id = "signInType" type="text" name="type" value="feedbackProduct"/>
-                                                    <input id = "signInValue" type="text" name="productID" value="${OrderLists.get(i).getProductId()}"/>
-                                                </div>
-                                                <input class="btn btn-primary" type="submit" value="Submit Feedback to Product">
-                                            </form>
-                                        </th>
-                                      </tr>
-                                    </thead>
-                                    <tbody>
-                                      <tr>
-                                        <th style="width:70%">Sold By: ${OrderLists.get(i).getFirstName()} ${OrderLists.get(i).getLastName()}</th>
-                                        <th style="width:30%">
-                                            <form method="post">
-                                                <div style="display:none">
-                                                    <input class="username" type="text" name="username" value=""/>
-                                                    <input class="password" type="text" name="password" value=""/>
-                                                    <input class="loginStatus" type="text" name="loginStatus" value=""/>
-                                                    <input id = "signInType" type="text" name="type" value="feedbackSeller"/>
-                                                    <input id = "signInValue" type="text" name="supplierID" value="${OrderLists.get(i).getSupplierUserID()}"/>
-                                                </div>
-                                                <input class="btn btn-primary" type="submit" value="Submit Feedback to Seller">
-                                            </form>
-                                        </th>
-                                      </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </c:forEach>
+                        </c:forEach>
+                    </c:if>
                 </div>
                 <div class= "col-sm-2"></div>
             </div>
