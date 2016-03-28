@@ -525,4 +525,61 @@ public class DataStorage extends DatabaseStorage
         }
         return feedbackList;
     }
+
+    public static List<SupplierFeedback> getSupplierFeedback (String username) {
+        List<SupplierFeedback> feedbackList = new ArrayList();
+        
+        // Define database variables
+        Connection connection = null;
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+
+        try
+        {
+            // Create StringBuilder for the query
+            StringBuilder sb = new StringBuilder();
+
+            // Build the query
+            sb.append("SELECT * ");
+            sb.append("FROM SupplierFeedback, User ");
+            sb.append("WHERE supplierUserID = '" + username + "' AND UserName = CustomerUserID ");
+            sb.append("ORDER BY FeedbackID ASC ");
+
+            // Get a connection
+            connection = getConnection();
+
+            // Prepare statement
+            statement = connection.prepareStatement(sb.toString());
+
+            // Execute the query
+            resultSet = statement.executeQuery();
+            // Get the result
+            while (resultSet.next())
+            {
+                int FeedbackID = resultSet.getInt("FeedbackID");
+                String FeedbackDate = resultSet.getString("FeedBackDate");
+                String FeedBackComment = resultSet.getString("FeedBackComment");
+                int rateStar = resultSet.getInt("rateStar");
+                String supplierUserID = resultSet.getString("supplierUserID");
+                String FeedBackTitle = resultSet.getString("FeedBackTitle");
+                String CustomerUserID = resultSet.getString("CustomerUserID");
+                String lastName = resultSet.getString("lastName");
+                String firstName = resultSet.getString("firstName");
+                
+                feedbackList.add(new SupplierFeedback(FeedbackID, FeedbackDate, FeedBackComment, rateStar, supplierUserID, FeedBackTitle, CustomerUserID, lastName, firstName));
+            }
+        }
+        catch (Exception ex)
+        {
+            // Log
+            LogManager.getLogger(DataStorage.class).fatal("get feedback List error", ex);
+        }
+        finally
+        {
+            safeClose(resultSet);
+            safeClose(statement);
+            safeClose(connection);
+        }
+        return feedbackList;
+    }
 }

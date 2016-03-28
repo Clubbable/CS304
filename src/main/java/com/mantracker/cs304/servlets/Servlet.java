@@ -76,7 +76,6 @@ public class Servlet extends HttpServlet
                 } else {
                     request.setAttribute("FeedbackListsLastItemIndex", 0);
                 }
- 
                 requestDispather = request.getRequestDispatcher("/WEB-INF/productPage.jsp");
             } else if (requestRedirAddress.equals("createProduct")) {
                 requestDispather = request.getRequestDispatcher("/WEB-INF/productCreate.jsp");
@@ -90,6 +89,13 @@ public class Servlet extends HttpServlet
                 request.setAttribute("ProductLists", products);
                 requestDispather = request.getRequestDispatcher("/WEB-INF/productSellingList.jsp");
             } else if (requestRedirAddress.equals("feedbackHistory")) {
+                List<SupplierFeedback> feedbackList = DataStorage.getSupplierFeedback(username);
+                request.setAttribute("FeedbackList", feedbackList);
+                if (feedbackList.size() > 0) {
+                    request.setAttribute("FeedbackListsLastItemIndex", feedbackList.size() - 1);
+                } else {
+                    request.setAttribute("FeedbackListsLastItemIndex", 0);
+                }
                 requestDispather = request.getRequestDispatcher("/WEB-INF/feedbackHistory.jsp");
             } else {
                 requestDispather = request.getRequestDispatcher("/WEB-INF/index.jsp");

@@ -62,6 +62,22 @@
             margin: 20px 0;
         }
     </style>
+    <script>
+        sessionStorage.loginStatus = false;
+        if (${loginStatus} === true) {
+            sessionStorage.loginStatus = ${loginStatus};
+            sessionStorage.username = "${username}";
+            sessionStorage.password = "${password}";
+            sessionStorage.lastname = "${lastname}";
+            sessionStorage.firstname = "${firstname}";
+        } else {
+            sessionStorage.loginStatus = false;
+            sessionStorage.username = "";
+            sessionStorage.password = "";
+            sessionStorage.lastname = "";
+            sessionStorage.firstname = "";
+        }
+    </script>
     <body>
         <div class = "container-fluid" style="padding: 0;">
             <div class = "header" style = "height: 80px; background: #19193B; display:list-item">
@@ -150,4 +166,30 @@
             </div>
         </div>
     </body>
+    <script>
+        if (sessionStorage.loginStatus === "true") {
+            document.getElementById("signInBtn").setAttribute("value", "Sign Out");
+            document.getElementById("signInValue").setAttribute("value", "logout");
+            document.getElementById("signInType").setAttribute("value", "logout");
+            document.getElementById("createAccBtn").setAttribute("style", "display:none");
+        } else if (sessionStorage.loginStatus === "false") {
+            document.getElementById("signInBtn").setAttribute("value", "Sign In");
+            document.getElementById("signInValue").setAttribute("value", "login");
+            document.getElementById("signInType").setAttribute("value", "redirect");
+            document.getElementById("createAccBtn").setAttribute("style", "display:inline-block");
+        }
+        
+        var unArrays = document.getElementsByClassName("username");
+        for(var i = 0; i < unArrays.length; i++) {
+            unArrays[i].setAttribute("value", sessionStorage.username);
+        }
+        var pwArrays = document.getElementsByClassName("password");
+        for(var i = 0; i < pwArrays.length; i++) {
+            pwArrays[i].setAttribute("value", sessionStorage.password);
+        }
+        var loginArrays = document.getElementsByClassName("loginStatus");
+        for(var i = 0; i < loginArrays.length; i++) {
+            loginArrays[i].setAttribute("value", sessionStorage.loginStatus);
+        }
+    </script>
 </html>
