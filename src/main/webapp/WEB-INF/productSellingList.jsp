@@ -32,6 +32,11 @@
         .productColumns {
             font-weight: 500;
         }
+        .purchaseLabel {
+            font-weight: bolder;
+            font-size:xx-large;
+            margin: 30px 0;
+        }
     </style>
     <script>
         sessionStorage.loginStatus = false;
@@ -106,6 +111,7 @@
             <div class="row">
                 <div class= "col-sm-2"></div>
                 <div class= "col-sm-8">
+                    <div class="purchaseLabel">Your Purchase</div>
                     <div class="productHeader">
                         <table class="table">
                             <thead>
@@ -149,7 +155,7 @@
                                                     <input id = "signInType" type="text" name="type" value="deleteProduct"/>
                                                     <input id = "signInValue" type="text" name="productID" value="${ProductLists.get(i).getProductId()}"/>
                                                 </div>
-                                                <input id="signInBtn" class="btn btn-primary" type="submit" value="Delete">
+                                                <input class="btn btn-primary" type="submit" value="Delete">
                                             </form>
                                         </th>
                                       </tr>

@@ -13,19 +13,15 @@ import org.joda.time.DateTime;
  */
 public class Purchase {
     
-    int shippingNumber;
-    String custShippingAddress;
-    String supShippingAddress;
+    String ShippingAddress;
     int orderNumber;
     int productId;
     String cardNumber;
     int customerUserId;
     DateTime purchaseDate;
 
-    public Purchase(int shippingNumber, String custAddress, String supAddress, int orderNumber, int productId, String cardNumber, int customerUserId, DateTime purchaseDate) {
-        this.shippingNumber = shippingNumber;
-        this.custShippingAddress = custAddress;
-        this.supShippingAddress = supAddress;
+    public Purchase(String ShippingAddress, int orderNumber, int productId, String cardNumber, int customerUserId, DateTime purchaseDate) {
+        this.ShippingAddress = ShippingAddress;
         this.orderNumber = orderNumber;
         this.productId = productId;
         this.cardNumber = cardNumber;
@@ -33,16 +29,9 @@ public class Purchase {
         this.purchaseDate = purchaseDate;
     }
 
-    public int getShippingNumber() {
-        return shippingNumber;
-    }
 
-    public String getCustAddress() {
-        return custShippingAddress;
-    }
-
-    public String getSupAddress() {
-        return supShippingAddress;
+    public String getShippingAddress() {
+        return ShippingAddress;
     }
 
     public int getOrderNumber() {
