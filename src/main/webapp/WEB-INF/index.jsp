@@ -135,6 +135,7 @@
                                     <input class="loginStatus" type="text" name="loginStatus" value=""/>
                                     <input type="text" name="type" value="redirect"/>
                                     <input type="text" name="address" value="feedbackHistory"/>
+                                    <input id="feedbackHistorySupplierID" type="text" name="supplierID" value=""/>
                                 </div>
                                 <input  id="123" class="btn btn-default navbar-btn userActBtn" type="submit" value="Your Feedbacks"></input>
                             </form>
@@ -292,13 +293,14 @@
             document.getElementById("signInType").setAttribute("value", "logout");
             document.getElementById("createAccBtn").setAttribute("style", "display:none");
             document.getElementById("userActivities").setAttribute("style", "display:block");
+            document.getElementById("feedbackHistorySupplierID").setAttribute("value", sessionStorage.username);
         } else if (sessionStorage.loginStatus === "false") {
             document.getElementById("signInBtn").setAttribute("value", "Sign In");
             document.getElementById("signInValue").setAttribute("value", "login");
             document.getElementById("signInType").setAttribute("value", "redirect");
             document.getElementById("createAccBtn").setAttribute("style", "display:inline-block");
             document.getElementById("userActivities").setAttribute("style", "display:none");
-            
+            document.getElementById("feedbackHistorySupplierID").setAttribute("value", null);
         }
         
         var unArrays = document.getElementsByClassName("username");

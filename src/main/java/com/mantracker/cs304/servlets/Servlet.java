@@ -89,7 +89,8 @@ public class Servlet extends HttpServlet
                 request.setAttribute("ProductLists", products);
                 requestDispather = request.getRequestDispatcher("/WEB-INF/productSellingList.jsp");
             } else if (requestRedirAddress.equals("feedbackHistory")) {
-                List<SupplierFeedback> feedbackList = DataStorage.getSupplierFeedback(username);
+                String supplierID = (String) request.getParameter("supplierID");
+                List<SupplierFeedback> feedbackList = DataStorage.getSupplierFeedback(supplierID);
                 request.setAttribute("FeedbackList", feedbackList);
                 if (feedbackList.size() > 0) {
                     request.setAttribute("FeedbackListsLastItemIndex", feedbackList.size() - 1);

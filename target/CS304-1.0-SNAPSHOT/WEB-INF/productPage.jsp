@@ -61,6 +61,18 @@
             border-width: thin;
             margin: 20px 0;
         }
+        .seller{
+            display: flex;
+        }
+        .viewSellerFeedback {
+            border:none;
+            background:none;
+            font-weight:bolder;
+            padding: 0;
+            margin: 0;
+            margin-left: 10px;
+            text-decoration: underline;
+        }
     </style>
     <script>
         sessionStorage.loginStatus = false;
@@ -133,13 +145,26 @@
                 </div>
             </div>
             <div class="body">
-                <div class="body-type">${ProductInfo.getType()}</div>
+                <div class="body-type">${ProductInfo.getType().toUpperCase()}</div>
                 <div class= "col-sm-1"></div>
                 <div class= "col-sm-10">
                     <div class="body-description">
                         <div class="title">${ProductInfo.getTitle()}</div>
                         <div class="Wrapper" style="display:flex">
-                            <div class="seller">Seller: ${ProductInfo.getFirstName()} ${ProductInfo.getLastName()}</div>
+                            <div class="seller">
+                                Seller: ${ProductInfo.getFirstName()} ${ProductInfo.getLastName()}
+                                <form method="post">
+                                    <div style="display:none">
+                                        <input class="username" type="text" name="username" value=""/>
+                                        <input class="password" type="text" name="password" value=""/>
+                                        <input class="loginStatus" type="text" name="loginStatus" value=""/>
+                                        <input type="text" name="type" value="redirect"/>
+                                        <input type="text" name="address" value="feedbackHistory"/>
+                                        <input type="text" name="supplierID" value="${ProductInfo.getSupplierUserId()}"/>
+                                    </div>
+                                    <input class="btn btn-default navbar-btn userActBtn viewSellerFeedback" type="submit" value="View Seller's Feedback"></input>
+                                </form>
+                            </div>
                         </div>
                         <div class="price-wrapper">
                             <div>Price:</div>
