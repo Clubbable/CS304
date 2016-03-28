@@ -167,6 +167,7 @@ public class Servlet extends HttpServlet
             requestDispather.forward(request, response);
         } else if (requestType.equals("deleteProduct")) {
             String loginStatus = (String) request.getParameter("loginStatus");
+            request.setAttribute("loginStatus", loginStatus);
             try {
                 String productID = (String) request.getParameter("productID");
                 
@@ -180,7 +181,6 @@ public class Servlet extends HttpServlet
                 request.setAttribute("ProductLists", products);
             } catch (Exception e){
                 request.setAttribute("deleteProductStatus", false);
-                request.setAttribute("loginStatus", loginStatus);
             }
             RequestDispatcher requestDispather = request.getRequestDispatcher("/WEB-INF/productSellingList.jsp");
             requestDispather.forward(request, response);

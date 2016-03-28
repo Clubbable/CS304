@@ -198,46 +198,16 @@ public class DataStorage extends DatabaseStorage
         PreparedStatement statement = null;
         ResultSet resultSet = null;
         boolean createSuccessful = false;
-        int id = 1;
         int result = 0;
-        
-        try
-        {
-            // Get the total count of the amount of user, and set it as the new ID of the newly created user
-            // Create StringBuilder for the query
-            StringBuilder sb = new StringBuilder();
-            // Build the query
-            sb.append("SELECT COUNT(*) AS countNum ");
-            sb.append("FROM Product ");
-            sb.append("WHERE productID >= 0 ;");
-            connection = getConnection();
-            statement = connection.prepareStatement(sb.toString());
-            resultSet = statement.executeQuery();
-            if (resultSet.next()) {
-                id = resultSet.getInt("countNum") + 1;
-            }
-        }
-       catch (Exception ex)
-        {
-            // Log
-            LogManager.getLogger(DataStorage.class).fatal("Get product count error", ex);
-        }
-        finally
-        {
-            safeClose(resultSet);
-            safeClose(statement);
-            safeClose(connection);
-        }
-        
+
         try
         {
         // Create new user
         // Build the query
         StringBuilder sb = new StringBuilder();
         // Build the query
-        sb.append("INSERT INTO Product (productID, description, title, price, supplierUserID, type)");
+        sb.append("INSERT INTO Product (description, title, price, supplierUserID, type)");
         sb.append("VALUES (");
-        sb.append(Integer.toString(id) + ",");
         sb.append("'" + description+ "',");
         sb.append("'" + title+ "',");
         sb.append(price+ ",");
@@ -589,37 +559,9 @@ public class DataStorage extends DatabaseStorage
         PreparedStatement statement = null;
         ResultSet resultSet = null;
         boolean createSuccessful = false;
-        int id = 1;
+
         int result = 0;
-        
-        try
-        {
-            // Get the total count of the amount of user, and set it as the new ID of the newly created user
-            // Create StringBuilder for the query
-            StringBuilder sb = new StringBuilder();
-            // Build the query
-            sb.append("SELECT COUNT(*) AS countNum ");
-            sb.append("FROM ProductFeedback ");
-            sb.append("WHERE FeedbackID >= 0 ;");
-            connection = getConnection();
-            statement = connection.prepareStatement(sb.toString());
-            resultSet = statement.executeQuery();
-            if (resultSet.next()) {
-                id = resultSet.getInt("countNum") + 1;
-            }
-        }
-       catch (Exception ex)
-        {
-            // Log
-            LogManager.getLogger(DataStorage.class).fatal("Get productFeedback count error", ex);
-        }
-        finally
-        {
-            safeClose(resultSet);
-            safeClose(statement);
-            safeClose(connection);
-        }
-        
+
         try
         {
             // Create new user
@@ -627,9 +569,8 @@ public class DataStorage extends DatabaseStorage
             StringBuilder sb = new StringBuilder();
             // Build the query
             String createdTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
-            sb.append("INSERT INTO ProductFeedback (FeedbackID, FeedBackDate, FeedBackComment, rateStar, productID, FeedBackTitle, CustomerUserID)");
+            sb.append("INSERT INTO ProductFeedback (FeedBackDate, FeedBackComment, rateStar, productID, FeedBackTitle, CustomerUserID)");
             sb.append("VALUES (");
-            sb.append(Integer.toString(id) + ",");
             sb.append("'" + createdTime+ "',");
             sb.append("'" + feedbackComment+ "',");
             sb.append(rateStar+ ",");
@@ -665,36 +606,7 @@ public class DataStorage extends DatabaseStorage
         PreparedStatement statement = null;
         ResultSet resultSet = null;
         boolean createSuccessful = false;
-        int id = 1;
         int result = 0;
-        
-        try
-        {
-            // Get the total count of the amount of user, and set it as the new ID of the newly created user
-            // Create StringBuilder for the query
-            StringBuilder sb = new StringBuilder();
-            // Build the query
-            sb.append("SELECT COUNT(*) AS countNum ");
-            sb.append("FROM SupplierFeedback ");
-            sb.append("WHERE FeedbackID >= 0 ;");
-            connection = getConnection();
-            statement = connection.prepareStatement(sb.toString());
-            resultSet = statement.executeQuery();
-            if (resultSet.next()) {
-                id = resultSet.getInt("countNum") + 1;
-            }
-        }
-       catch (Exception ex)
-        {
-            // Log
-            LogManager.getLogger(DataStorage.class).fatal("Get supplierFeedback count error", ex);
-        }
-        finally
-        {
-            safeClose(resultSet);
-            safeClose(statement);
-            safeClose(connection);
-        }
         
         try
         {
@@ -703,9 +615,8 @@ public class DataStorage extends DatabaseStorage
         StringBuilder sb = new StringBuilder();
         // Build the query
         String createdTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
-        sb.append("INSERT INTO SupplierFeedback (FeedbackID, FeedBackDate, FeedBackComment, rateStar, CustomerUserID, supplierUserID, FeedBackTitle)");
+        sb.append("INSERT INTO SupplierFeedback (FeedBackDate, FeedBackComment, rateStar, CustomerUserID, supplierUserID, FeedBackTitle)");
         sb.append("VALUES (");
-        sb.append(Integer.toString(id) + ",");
         sb.append("'" + createdTime+ "',");
         sb.append("'" + feedbackComment+ "',");
         sb.append(rateStar+ ",");
