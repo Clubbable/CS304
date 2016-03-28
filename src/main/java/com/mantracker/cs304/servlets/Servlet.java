@@ -50,8 +50,6 @@ public class Servlet extends HttpServlet
         if (requestType.equals("redirect")) {
             RequestDispatcher requestDispather;
             request.setAttribute("loginStatus", request.getParameter("loginStatus"));
-            request.setAttribute("username", request.getParameter("username"));
-            request.setAttribute("password", request.getParameter("password"));
             if (requestRedirAddress.equals("orderHistory")) {
                 List<Purchase> orders =  DataStorage.getOrders(username);
                 if (orders.size() > 0) {
@@ -98,6 +96,20 @@ public class Servlet extends HttpServlet
                     request.setAttribute("FeedbackListsLastItemIndex", 0);
                 }
                 requestDispather = request.getRequestDispatcher("/WEB-INF/feedbackHistory.jsp");
+            }  else if (requestRedirAddress.equals("createFeedback")) {
+                String feedbackType = (String) request.getParameter("feedbackType");
+                request.setAttribute("feedbackType", feedbackType);
+                if (feedbackType.equals("Product")) {
+                    // Submit a feedback for product
+                    String productID = (String) request.getParameter("productID");
+                    request.setAttribute("productID", productID);
+                    
+                } else {
+                    // Subtmit a feedback for supplier
+                    String supplierID = (String) request.getParameter("supplierID");
+                    request.setAttribute("supplierID", supplierID);
+                }
+                requestDispather = request.getRequestDispatcher("/WEB-INF/createFeedback.jsp");
             } else {
                 requestDispather = request.getRequestDispatcher("/WEB-INF/index.jsp");
             }
@@ -159,7 +171,6 @@ public class Servlet extends HttpServlet
                 String productID = (String) request.getParameter("productID");
                 
                 request.setAttribute("deleteProductStatus", DataStorage.deleteProduct(productID));
-                request.setAttribute("deleteProductStatus", loginStatus);
                 List<Product> products =  DataStorage.getProductLists(username);
                 if (products.size() > 0) {
                     request.setAttribute("ProductListsLastItemIndex", products.size() - 1);
@@ -169,9 +180,44 @@ public class Servlet extends HttpServlet
                 request.setAttribute("ProductLists", products);
             } catch (Exception e){
                 request.setAttribute("deleteProductStatus", false);
-                request.setAttribute("deleteProductStatus", loginStatus);
+                request.setAttribute("loginStatus", loginStatus);
             }
             RequestDispatcher requestDispather = request.getRequestDispatcher("/WEB-INF/productSellingList.jsp");
+            requestDispather.forward(request, response);
+        } else if (requestType.equals("createFeedback")) {
+            String loginStatus = (String) request.getParameter("loginStatus");
+            request.setAttribute("loginStatus", loginStatus);
+            try {
+                String feedbackType = (String) request.getParameter("feedbackType");
+                String CustomerID = (String) request.getParameter("customerID");
+                String feedbackComment = (String) request.getParameter("feedbackComment");
+                String rateStar = (String) request.getParameter("rateStar");
+                String feedbackTitle = (String) request.getParameter("feedbackTitle");
+                if (feedbackType.equals("Product")){
+                    String productID = (String) request.getParameter("productID");
+                    request.setAttribute("submitFeedbackStatus", DataStorage.submitProductFeedback(productID, CustomerID, feedbackComment, rateStar, feedbackTitle));
+                } else {
+                    String supplierID = (String) request.getParameter("supplierID");
+                    request.setAttribute("submitFeedbackStatus", DataStorage.submitSupplierFeedback(supplierID, CustomerID, feedbackComment, rateStar, feedbackTitle));
+                }
+                List<Product> products =  DataStorage.getProductLists(username);
+                if (products.size() > 0) {
+                    request.setAttribute("ProductListsLastItemIndex", products.size() - 1);
+                } else {
+                    request.setAttribute("ProductListsLastItemIndex", 0);
+                }
+                request.setAttribute("ProductLists", products);
+            } catch (Exception e){
+                request.setAttribute("submitFeedbackStatus", false);
+            }
+            List<Purchase> orders =  DataStorage.getOrders(username);
+            if (orders.size() > 0) {
+                request.setAttribute("OrderListsLastItemIndex", orders.size() - 1);
+            } else {
+                request.setAttribute("OrderListsLastItemIndex", 0);
+            }
+            request.setAttribute("OrderLists", orders);
+            RequestDispatcher requestDispather = request.getRequestDispatcher("/WEB-INF/orderHistory.jsp");
             requestDispather.forward(request, response);
         }
     }

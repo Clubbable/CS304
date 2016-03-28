@@ -14,7 +14,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import org.apache.logging.log4j.LogManager;
-
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 /**
  * @author Martin Liu
  * @version $Revision$ on $Date$ by $Author$
@@ -581,5 +582,157 @@ public class DataStorage extends DatabaseStorage
             safeClose(connection);
         }
         return feedbackList;
+    }
+    
+    public static boolean submitProductFeedback (String productID, String CustomerID, String feedbackComment, String rateStar, String feedbackTitle) {
+        Connection connection = null;
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+        boolean createSuccessful = false;
+        int id = 1;
+        int result = 0;
+        
+        try
+        {
+            // Get the total count of the amount of user, and set it as the new ID of the newly created user
+            // Create StringBuilder for the query
+            StringBuilder sb = new StringBuilder();
+            // Build the query
+            sb.append("SELECT COUNT(*) AS countNum ");
+            sb.append("FROM ProductFeedback ");
+            sb.append("WHERE FeedbackID >= 0 ;");
+            connection = getConnection();
+            statement = connection.prepareStatement(sb.toString());
+            resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                id = resultSet.getInt("countNum") + 1;
+            }
+        }
+       catch (Exception ex)
+        {
+            // Log
+            LogManager.getLogger(DataStorage.class).fatal("Get productFeedback count error", ex);
+        }
+        finally
+        {
+            safeClose(resultSet);
+            safeClose(statement);
+            safeClose(connection);
+        }
+        
+        try
+        {
+            // Create new user
+            // Build the query
+            StringBuilder sb = new StringBuilder();
+            // Build the query
+            String createdTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
+            sb.append("INSERT INTO ProductFeedback (FeedbackID, FeedBackDate, FeedBackComment, rateStar, productID, FeedBackTitle, CustomerUserID)");
+            sb.append("VALUES (");
+            sb.append(Integer.toString(id) + ",");
+            sb.append("'" + createdTime+ "',");
+            sb.append("'" + feedbackComment+ "',");
+            sb.append(rateStar+ ",");
+            sb.append(productID+ ",");
+            sb.append("'" + feedbackTitle+ "',");
+            sb.append("'" + CustomerID+ "') ");
+            // Get a connection
+            connection = getConnection();
+            statement = connection.prepareStatement(sb.toString());
+            // Execute the query
+            result = statement.executeUpdate();
+            if (result == 1) {
+                createSuccessful = true;
+            }
+        }
+        catch (Exception ex)
+        {
+            // Log
+            LogManager.getLogger(DataStorage.class).fatal("Creat Product Feedback error", ex);
+        }
+        finally
+        {
+            safeClose(resultSet);
+            safeClose(statement);
+            safeClose(connection);
+        }
+        
+        return createSuccessful;
+    }
+    
+    public static boolean submitSupplierFeedback (String supplierID, String CustomerID, String feedbackComment, String rateStar, String feedbackTitle) {
+        Connection connection = null;
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+        boolean createSuccessful = false;
+        int id = 1;
+        int result = 0;
+        
+        try
+        {
+            // Get the total count of the amount of user, and set it as the new ID of the newly created user
+            // Create StringBuilder for the query
+            StringBuilder sb = new StringBuilder();
+            // Build the query
+            sb.append("SELECT COUNT(*) AS countNum ");
+            sb.append("FROM SupplierFeedback ");
+            sb.append("WHERE FeedbackID >= 0 ;");
+            connection = getConnection();
+            statement = connection.prepareStatement(sb.toString());
+            resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                id = resultSet.getInt("countNum") + 1;
+            }
+        }
+       catch (Exception ex)
+        {
+            // Log
+            LogManager.getLogger(DataStorage.class).fatal("Get supplierFeedback count error", ex);
+        }
+        finally
+        {
+            safeClose(resultSet);
+            safeClose(statement);
+            safeClose(connection);
+        }
+        
+        try
+        {
+        // Create new user
+        // Build the query
+        StringBuilder sb = new StringBuilder();
+        // Build the query
+        String createdTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
+        sb.append("INSERT INTO SupplierFeedback (FeedbackID, FeedBackDate, FeedBackComment, rateStar, CustomerUserID, supplierUserID, FeedBackTitle)");
+        sb.append("VALUES (");
+        sb.append(Integer.toString(id) + ",");
+        sb.append("'" + createdTime+ "',");
+        sb.append("'" + feedbackComment+ "',");
+        sb.append(rateStar+ ",");
+        sb.append("'" + CustomerID+ "',");
+        sb.append("'" + supplierID+ "',");
+        sb.append("'" + feedbackTitle+ "') ");
+        // Get a connection
+        connection = getConnection();
+        statement = connection.prepareStatement(sb.toString());
+        // Execute the query
+        result = statement.executeUpdate();
+        if (result == 1) {
+            createSuccessful = true;
+        }
+        }
+        catch (Exception ex)
+        {
+            // Log
+            LogManager.getLogger(DataStorage.class).fatal("Creat Supplier Feedback error", ex);
+        }
+        finally
+        {
+            safeClose(resultSet);
+            safeClose(statement);
+            safeClose(connection);
+        }
+        
+        return createSuccessful;
     }
 }

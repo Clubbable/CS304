@@ -145,8 +145,10 @@
                                                         <input class="username" type="text" name="username" value=""/>
                                                         <input class="password" type="text" name="password" value=""/>
                                                         <input class="loginStatus" type="text" name="loginStatus" value=""/>
-                                                        <input id = "signInType" type="text" name="type" value="feedbackProduct"/>
-                                                        <input id = "signInValue" type="text" name="productID" value="${OrderLists.get(i).getProductId()}"/>
+                                                        <input type="text" name="type" value="redirect"/>
+                                                        <input type="text" name="address" value="createFeedback"/>
+                                                        <input type="text" name="feedbackType" value="Product"/>
+                                                        <input type="text" name="productID" value="${OrderLists.get(i).getProductId()}"/>
                                                     </div>
                                                     <input class="btn btn-primary" type="submit" value="Submit Feedback to Product">
                                                 </form>
@@ -162,8 +164,10 @@
                                                         <input class="username" type="text" name="username" value=""/>
                                                         <input class="password" type="text" name="password" value=""/>
                                                         <input class="loginStatus" type="text" name="loginStatus" value=""/>
-                                                        <input id = "signInType" type="text" name="type" value="feedbackSeller"/>
-                                                        <input id = "signInValue" type="text" name="supplierID" value="${OrderLists.get(i).getSupplierUserID()}"/>
+                                                        <input type="text" name="type" value="redirect"/>
+                                                        <input type="text" name="address" value="createFeedback"/>
+                                                        <input type="text" name="feedbackType" value="Supplier"/>
+                                                        <input type="text" name="supplierID" value="${OrderLists.get(i).getSupplierUserID()}"/>
                                                     </div>
                                                     <input class="btn btn-primary" type="submit" value="Submit Feedback to Seller">
                                                 </form>
@@ -205,10 +209,5 @@
         for(var i = 0; i < loginArrays.length; i++) {
             loginArrays[i].setAttribute("value", sessionStorage.loginStatus);
         }
-    </script>
-    <script>
-        $("#productForm").submit(function (event) {
-            document.getElementById("product-type").value = document.getElementById("type-select").value ? document.getElementById("type-select").value : "electronics";
-        });
     </script>
 </html>
