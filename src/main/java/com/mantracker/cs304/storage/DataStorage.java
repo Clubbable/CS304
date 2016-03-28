@@ -6,9 +6,7 @@
 package com.mantracker.cs304.storage;
 
 import com.mantracker.cs304.database.DatabaseStorage;
-import com.mantracker.cs304.models.PurchaseCount;
-import com.mantracker.cs304.models.Product;
-import com.mantracker.cs304.models.loginInfo;
+import com.mantracker.cs304.models.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -410,5 +408,64 @@ public class DataStorage extends DatabaseStorage
             safeClose(connection);
         }
         return product;
+    }
+    
+    public static List<Purchase> getOrders (String username) {
+        List<Purchase> orderList = new ArrayList();
+        
+        // Define database variables
+        Connection connection = null;
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+
+        try
+        {
+            // Create StringBuilder for the query
+            StringBuilder sb = new StringBuilder();
+
+            // Build the query
+            sb.append("SELECT Purch.ShippingAddress, Purch.OrderNumber, Purch.purchaseDate, Purch.productID, Purch.CustomerUserID, Purch.CardNumber, Prod.title, Prod.price, Prod.supplierUserID, U.lastName, U.firstName ");
+            sb.append("FROM Purchase Purch, User U, Product Prod ");
+            sb.append("WHERE Purch.productID = Prod.productID AND U.userName = Purch.CustomerUserID " + "AND U.userName = '" + username + "' ");
+            sb.append("ORDER BY Purch.OrderNumber ASC ");
+
+            // Get a connection
+            connection = getConnection();
+
+            // Prepare statement
+            statement = connection.prepareStatement(sb.toString());
+
+            // Execute the query
+            resultSet = statement.executeQuery();
+            // Get the result
+            while (resultSet.next())
+            {
+                String ShippingAddress = resultSet.getString("ShippingAddress");
+                int OrderNumber = resultSet.getInt("OrderNumber");
+                String purchaseDate = resultSet.getString("purchaseDate");
+                int productID = resultSet.getInt("productID");
+                String title = resultSet.getString("title");
+                String lastName = resultSet.getString("lastName");
+                String firstName = resultSet.getString("firstName");
+                String customerID = resultSet.getString("CustomerUserID");
+                String cardNumber = resultSet.getString("CardNumber");
+                float price = resultSet.getFloat("price");
+                String supplierUserID = resultSet.getString("supplierUserID");
+                
+                orderList.add(new Purchase(ShippingAddress, OrderNumber, productID, price, supplierUserID, cardNumber, customerID, purchaseDate, firstName, lastName, title));
+            }
+        }
+        catch (Exception ex)
+        {
+            // Log
+            LogManager.getLogger(DataStorage.class).fatal("get Order List error", ex);
+        }
+        finally
+        {
+            safeClose(resultSet);
+            safeClose(statement);
+            safeClose(connection);
+        }
+        return orderList;
     }
 }

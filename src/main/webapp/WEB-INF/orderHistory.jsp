@@ -111,7 +111,7 @@
                 <div class= "col-sm-2"></div>
                 <div class= "col-sm-8">
                     <div class="orderLabel">Your Order</div>
-                    <c:forEach var="i" begin="0" end="${ProductListsLastItemIndex}">
+                    <c:forEach var="i" begin="0" end="${OrderListsLastItemIndex}">
                         <div class="orderWrapper">
                             <div class="orderDetails">
                                 <table class="table">
@@ -125,10 +125,10 @@
                                     </thead>
                                     <tbody>
                                       <tr>
-                                        <th style="width:25%">Date: 2014-05-21</th>
-                                        <th style="width:10%">131 CAD</th>
-                                        <th style="width:39%">2509 sada ave, vancouve BC</th>
-                                        <th style="width:26%">#121231231</th>
+                                        <th style="width:25%">Date: ${OrderLists.get(i).getPurchaseDate()}</th>
+                                        <th style="width:10%">${OrderLists.get(i).getPrice()} CAD</th>
+                                        <th style="width:39%">${OrderLists.get(i).getShippingAddress()}</th>
+                                        <th style="width:26%">#${OrderLists.get(i).getOrderNumber()}</th>
                                       </tr>
                                     </tbody>
                                 </table>
@@ -137,7 +137,7 @@
                                 <table class="table">
                                     <thead>
                                       <tr>
-                                        <th style="width:70%">Title Ipad</th>
+                                        <th style="width:70%">Product Title: ${OrderLists.get(i).getTitle()}</th>
                                         <th style="width:30%">
                                             <form method="post">
                                                 <div style="display:none">
@@ -145,7 +145,7 @@
                                                     <input class="password" type="text" name="password" value=""/>
                                                     <input class="loginStatus" type="text" name="loginStatus" value=""/>
                                                     <input id = "signInType" type="text" name="type" value="feedbackProduct"/>
-                                                    <input id = "signInValue" type="text" name="productID" value="${ProductLists.get(i).getProductId()}"/>
+                                                    <input id = "signInValue" type="text" name="productID" value="${OrderLists.get(i).getProductId()}"/>
                                                 </div>
                                                 <input class="btn btn-primary" type="submit" value="Submit Feedback to Product">
                                             </form>
@@ -154,7 +154,7 @@
                                     </thead>
                                     <tbody>
                                       <tr>
-                                        <th style="width:70%">Sold By: Admin Kenneth</th>
+                                        <th style="width:70%">Sold By: ${OrderLists.get(i).getFirstName()} ${OrderLists.get(i).getLastName()}</th>
                                         <th style="width:30%">
                                             <form method="post">
                                                 <div style="display:none">
@@ -162,7 +162,7 @@
                                                     <input class="password" type="text" name="password" value=""/>
                                                     <input class="loginStatus" type="text" name="loginStatus" value=""/>
                                                     <input id = "signInType" type="text" name="type" value="feedbackSeller"/>
-                                                    <input id = "signInValue" type="text" name="supplierID" value="${ProductLists.get(i).getProductId()}"/>
+                                                    <input id = "signInValue" type="text" name="supplierID" value="${OrderLists.get(i).getSupplierUserID()}"/>
                                                 </div>
                                                 <input class="btn btn-primary" type="submit" value="Submit Feedback to Seller">
                                             </form>

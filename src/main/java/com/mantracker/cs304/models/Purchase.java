@@ -17,16 +17,25 @@ public class Purchase {
     int orderNumber;
     int productId;
     String cardNumber;
-    int customerUserId;
-    DateTime purchaseDate;
+    String customerUserId;
+    String purchaseDate;
+    String firstName;
+    String lastName;
+    String title;
+    float price;
+    String supplierUserID;
 
-    public Purchase(String ShippingAddress, int orderNumber, int productId, String cardNumber, int customerUserId, DateTime purchaseDate) {
+    public Purchase(String ShippingAddress, int orderNumber, int productId, float price, String supplierUserID, String cardNumber, String customerUserId, String purchaseDate, String firstName, String lastName, String title) {
         this.ShippingAddress = ShippingAddress;
         this.orderNumber = orderNumber;
         this.productId = productId;
-        this.cardNumber = cardNumber;
         this.customerUserId = customerUserId;
         this.purchaseDate = purchaseDate;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.title = title;
+        this.price = price;
+        this.supplierUserID = supplierUserID;
     }
 
 
@@ -46,13 +55,31 @@ public class Purchase {
         return cardNumber;
     }
 
-    public int getCustomerUserId() {
+    public String getCustomerUserId() {
         return customerUserId;
     }
 
-    public DateTime getPurchaseDate() {
+    public String getPurchaseDate() {
         return purchaseDate;
     }
     
+    public String getLastName() {
+        return lastName;
+    }
     
+    public String getFirstName() {
+        return firstName;
+    }
+    
+    public String getTitle() {
+        return title;
+    }
+    
+    public float getPrice() {
+        return price;
+    }
+    
+    public String getSupplierUserID () {
+        return supplierUserID;
+    }
 }

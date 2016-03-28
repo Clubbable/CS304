@@ -6,6 +6,7 @@ package com.mantracker.cs304.servlets;
 
 import com.mantracker.cs304.storage.DataStorage;
 import com.mantracker.cs304.models.loginInfo;
+import com.mantracker.cs304.models.Purchase;
 import com.mantracker.cs304.models.Product;
 import java.io.IOException;
 import javax.servlet.RequestDispatcher;
@@ -54,6 +55,13 @@ public class Servlet extends HttpServlet
             request.setAttribute("username", request.getParameter("username"));
             request.setAttribute("password", request.getParameter("password"));
             if (requestRedirAddress.equals("orderHistory")) {
+                List<Purchase> orders =  DataStorage.getOrders(username);
+                if (orders.size() > 0) {
+                    request.setAttribute("OrderListsLastItemIndex", orders.size() - 1);
+                } else {
+                    request.setAttribute("OrderListsLastItemIndex", 0);
+                }
+                request.setAttribute("OrderLists", orders);
                 requestDispather = request.getRequestDispatcher("/WEB-INF/orderHistory.jsp");
             } else if (requestRedirAddress.equals("login")) {
                 requestDispather = request.getRequestDispatcher("/WEB-INF/login.jsp");
