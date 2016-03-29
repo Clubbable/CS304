@@ -159,7 +159,7 @@
                             <div class="rateWrapper">
                                 <div class="col-sm-12 rateWrapper">
                                     <div class=" inputTitle">Payment Method</div>
-                                    <select id="type-select" class="form-control">
+                                    <select id="method-select" class="form-control">
                                         <option>Enter a new card</option>
                                         <c:if test="${paymentMethodLastIndex ge 1}">
                                             <c:forEach var="i" begin="0" end="${paymentMethodLastIndex}">
@@ -187,11 +187,11 @@
                                 </div>
                                 <div class="col-sm-6 newCardWrapper">
                                     <div class=" inputTitle">Card number</div>
-                                    <input id="cardNumber" type="number" class="form-control" name="newCardNumber" placeholder="">
+                                    <input id="newCardNumber" type="text" class="form-control" name="newCardNumber" placeholder="">
                                 </div>
                                 <div class="col-sm-3 newCardWrapper">
                                     <div class=" inputTitle">Expires Date</div>
-                                    <input id="cardNumber" type="number" class="form-control" name="newCardExpire" placeholder="">
+                                    <input id="newCardProp" type="text" class="form-control" name="newCardExpire" placeholder="">
                                 </div>
                             </div>
                             <button id="submitBtn" class="btn btn-lg btn-primary btn-block" type="submit">
@@ -231,8 +231,18 @@
         }
     </script>
     <script>
-        $("#type-select").on("change", function (event) {
-            document.getElementById("feedback-rate").value = document.getElementById("type-select").value ? document.getElementById("type-select").value : "5";
+        $("#method-select").on("change", function (event) {
+            if (document.getElementById("newCardType").value !== "Enter a new card") {
+//                 Disable the enter new card inputs
+                $( "#newCardType" ).prop( "disabled", true ); 
+                $( "#newCardNumber" ).prop( "disabled", true ); 
+                $( "#newCardProp" ).prop( "disabled", true ); 
+            } else {
+                $( "#newCardType" ).prop( "disabled", false ); 
+                $( "#newCardNumber" ).prop( "disabled", false ); 
+                $( "#newCardProp" ).prop( "disabled", false ); 
+            }
+//            document.getElementById("feedback-rate").value = document.getElementById("type-select").value ? document.getElementById("type-select").value : "5";
         });
     </script>
 </html>
