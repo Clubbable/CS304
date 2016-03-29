@@ -28,7 +28,6 @@
             padding-left: 2px;
             padding-bottom: 2px;
             font-weight: 700;
-            margin-top: 10px;
         }
         .description{
             height: 200px !important;
@@ -41,6 +40,13 @@
             border-style: double;
             border-width: thin;
             margin: 20px 0;
+        }
+        .newCardWrapper {
+            padding: 0;
+            margin-bottom: 10px;
+        }
+        .lableTitle {
+            margin-top: 60px;
         }
     </style>
     <script>
@@ -119,7 +125,7 @@
                     <div class= "col-sm-6">
                         <div class="createLable">Create an order</div>
                         <div class="body-description">
-                            <div class="body-type">Product Categoty: ${ProductInfo.getType().toUpperCase()}</div>
+                            <div class="body-type">Product Category: ${ProductInfo.getType().toUpperCase()}</div>
                             <div class="title">Product Title: ${ProductInfo.getTitle()}</div>
                             <div class="Wrapper" style="display:flex">
                                 <div class="seller">
@@ -169,8 +175,25 @@
                                     <input id="feedback-rate" type="text" style="display:none" class="form-control" name="rateStar" value="5">
                                 </div>
                             </div>
-                            <div class=" inputTitle">Feedback Comment</div>
-                            <textArea type="text" class="form-control description" value = "" name="feedbackComment" required></textarea>
+                            <div>
+                                <div class="inputTitle lableTitle">OR Enter a new card</div>
+                                <div class="col-sm-3 newCardWrapper">
+                                    <div class=" inputTitle">Card Type</div>
+                                    <select id="newCardType" class="form-control">
+                                      <option>credit</option>
+                                      <option>debit</option>
+                                    </select>
+                                    <input id="newCardTypeInput" type="text" style="display:none" class="form-control" name="newCardType" value="electronics">
+                                </div>
+                                <div class="col-sm-6 newCardWrapper">
+                                    <div class=" inputTitle">Card number</div>
+                                    <input id="cardNumber" type="number" class="form-control" name="newCardNumber" placeholder="">
+                                </div>
+                                <div class="col-sm-3 newCardWrapper">
+                                    <div class=" inputTitle">Expires Date</div>
+                                    <input id="cardNumber" type="number" class="form-control" name="newCardExpire" placeholder="">
+                                </div>
+                            </div>
                             <button id="submitBtn" class="btn btn-lg btn-primary btn-block" type="submit">
                                 Create
                             </button>

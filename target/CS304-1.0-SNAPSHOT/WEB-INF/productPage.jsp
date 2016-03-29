@@ -171,7 +171,18 @@
                             <div>${ProductInfo.getPrice()}</div>
                             <div> CAD</div>
                         </div>
-                        <button type="button" class="btn btn-primary active">Buy it now</button>
+                        <form method="post">
+                            <div style="display:none">
+                                <input class="username" type="text" name="username" value=""/>
+                                <input class="password" type="text" name="password" value=""/>
+                                <input class="loginStatus" type="text" name="loginStatus" value=""/>
+                                <input type="text" name="type" value="redirect"/>
+                                <input type="text" name="address" value="createOrder"/>
+                                <input type="text" name="supplierID" value="${ProductInfo.getSupplierUserId()}"/>
+                                <input type="text" name="productID" value="${ProductInfo.getProductId()}"/>
+                            </div>
+                            <input class="btn btn-primary active" type="submit" value="Buy it now"></input>
+                        </form> 
                         <hr>
                         
                         <div class="description"><div>Description:</div>${ProductInfo.getDescription()}</div>

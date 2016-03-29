@@ -110,6 +110,20 @@ public class Servlet extends HttpServlet
                     request.setAttribute("supplierID", supplierID);
                 }
                 requestDispather = request.getRequestDispatcher("/WEB-INF/createFeedback.jsp");
+            } else if (requestRedirAddress.equals("createOrder")) {
+                String productID = (String) request.getParameter("productID");
+                request.setAttribute("productID", productID);
+                request.setAttribute("customerID", username);
+                List<paymentMethod> paymentMethods = DataStorage.getPaymentMethods(username);
+                request.setAttribute("paymentMethods", paymentMethods);
+                if (paymentMethods.size() > 0) {
+                    request.setAttribute("paymentMethodLastIndex", paymentMethods.size() - 1);
+                } else {
+                    request.setAttribute("paymentMethodLastIndex", 0);
+                }
+                Product product = DataStorage.getProduct(productID);
+                request.setAttribute("ProductInfo", product);
+                requestDispather = request.getRequestDispatcher("/WEB-INF/createOrder.jsp");
             } else {
                 requestDispather = request.getRequestDispatcher("/WEB-INF/index.jsp");
             }

@@ -646,4 +646,74 @@ public class DataStorage extends DatabaseStorage
         
         return createSuccessful;
     }
+    
+    public static List<paymentMethod> getPaymentMethods(String ownerID){
+        List<paymentMethod> paymentMethodList = new ArrayList();
+        
+        // Define database variables
+        Connection connection = null;
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+
+        try
+        {
+            // Create StringBuilder for the query
+            StringBuilder sb = new StringBuilder();
+
+            // Build the query
+            sb.append("SELECT *");
+            sb.append("FROM PaymentMethod P, DebitPaymentMethod D ");
+            sb.append("WHERE P.CardNumber = D.CardNumber AND P.ownerID = '" + ownerID + "' ");
+            // Get a connection
+            connection = getConnection();
+
+            // Prepare statement
+            statement = connection.prepareStatement(sb.toString());
+
+            // Execute the query
+            resultSet = statement.executeQuery();
+            // Get the result
+            while (resultSet.next())
+            {
+                String cardNumber = resultSet.getString("CardNumber");
+                String accountType = resultSet.getString("accountType");
+                paymentMethodList.add(new paymentMethod(cardNumber, ownerID, "debit", accountType, null));
+            }
+            
+            // Create StringBuilder for the query
+            StringBuilder sb2 = new StringBuilder();
+
+            // Build the query
+            sb2.append("SELECT *");
+            sb2.append("FROM PaymentMethod P, CreditPaymentMethod C ");
+            sb2.append("WHERE P.CardNumber = C.CardNumber AND P.ownerID = '" + ownerID + "' ");
+            // Get a connection
+            connection = getConnection();
+
+            // Prepare statement
+            statement = connection.prepareStatement(sb2.toString());
+
+            // Execute the query
+            resultSet = statement.executeQuery();
+            // Get the result
+            while (resultSet.next())
+            {
+                String cardNumber = resultSet.getString("CardNumber");
+                String expireDate = resultSet.getString("expireDate");
+                paymentMethodList.add(new paymentMethod(cardNumber, ownerID, "credit", null, expireDate));
+            }
+        }
+        catch (Exception ex)
+        {
+            // Log
+            LogManager.getLogger(DataStorage.class).fatal("Get payment method list error", ex);
+        }
+        finally
+        {
+            safeClose(resultSet);
+            safeClose(statement);
+            safeClose(connection);
+        }
+        return paymentMethodList;
+    }
 }

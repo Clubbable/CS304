@@ -258,33 +258,6 @@
                 </div>
             </div>
         </div>
-
-        <table class="pure-table pure-table-striped">
-            <thead>
-                <th>Title</th>
-                <th>UserName</th>
-                <th>Purchase Amount</th>
-            </thead>
-            <tbody>
-                <c:forEach items="${PurchaseCounts}" var="PurchaseCount" varStatus="counter">
-                    <tr>
-                       <td>${PurchaseCount.getTitle()} ${loginStatus}</td>
-                       <td>${PurchaseCount.getUserName()}</td>
-                       <td>${PurchaseCount.getPurchaseAmount()}</td>
-                    </tr>
-                </c:forEach>
-            </tbody>
-        </table>
-        <form method="post">
-            <div style="display:none">
-                <input class="username" type="text" name="username" value=""/>
-                <input class="password" type="text" name="password" value=""/>
-                <input class="loginStatus" type="text" name="loginStatus" value=""/>
-                <input type="text" name="type" value="redirect"/>
-                <input type="text" name="address" value="productPage"/>
-            </div>
-            <input  class="btn btn-primary" type="submit" value="Link to product page" >
-        </form>
     </body>
     <script>
         if (sessionStorage.loginStatus === "true") {
