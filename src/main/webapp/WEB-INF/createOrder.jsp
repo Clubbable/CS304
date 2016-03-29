@@ -1,8 +1,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%-- 
-    Document   : productPage
-    Created on : 20-Mar-2016, 7:54:37 PM
+    Document   : createOrder
+    Created on : 26-Mar-2016, 7:54:37 PM
     Author     : syltaxue
 --%>
 
@@ -11,67 +11,36 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
         <!-- Optional theme -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css" integrity="sha384-aUGj/X2zp5rLCbBxumKTCw2Z50WgIr1vs/PFN4praOTvYXWlVyh2UtNUU0KAUhAX" crossorigin="anonymous">
-        <title>Product</title>
+        <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+        <title>Buy it Now</title>
     </head>
     <style>
-        .body-type{
-           font-size: x-large;
-           margin: 10px 0px;
-           padding-left:40px;
-           padding-bottom:10px;
-           border-bottom: 1px solid #e7e7e7;
+        .createLable {
+            font-weight:bolder;
+            font-size: x-large;
+            margin: 20px 0;
+            text-align:center;
         }
-        .title{
-            font-weight:700;
-            font-size:x-large;
+        .rateWrapper {
+            padding: 0;
         }
-        .date {
-            margin-left: 50px;
+        .inputTitle{
+            padding-left: 2px;
+            padding-bottom: 2px;
+            font-weight: 700;
+            margin-top: 10px;
+        }
+        .description{
+            height: 200px !important;
+            margin-bottom: 20px;
         }
         .price-wrapper {
             display:flex;
-            margin:20px 0;
         }
-        .description {
-            margin: 50px 0;
-        }
-        .feedbacksLabel{
-            font-weight:700;
-            font-size:large;
-        }
-        .feedbackAuthorWrapper{
-            margin-left:30px;
-            display: flex;
-        }
-        .feedbackTitleWrapper{
-            display: flex;
-            margin-top: 30px;
-            margin-left:30px;
-        }
-        .feedbackTitle {
-            font-weight:700;
-            font-size:medium;
-            padding-left: 10px;
-        }
-        .feedbackBody{
-            margin: 30px;
-        }
-        .feedbackWrapper{
+        .body-description {
             border-style: double;
             border-width: thin;
             margin: 20px 0;
-        }
-        .seller{
-            display: flex;
-        }
-        .viewSellerFeedback {
-            border:none;
-            background:none;
-            font-weight:bolder;
-            padding: 0;
-            margin: 0;
-            margin-left: 10px;
-            text-decoration: underline;
         }
     </style>
     <script>
@@ -145,69 +114,70 @@
                 </div>
             </div>
             <div class="body">
-                <div class="body-type">${ProductInfo.getType().toUpperCase()}</div>
-                <div class= "col-sm-1"></div>
-                <div class= "col-sm-10">
-                    <div class="body-description">
-                        <div class="title">${ProductInfo.getTitle()}</div>
-                        <div class="Wrapper" style="display:flex">
-                            <div class="seller">
-                                Seller: ${ProductInfo.getFirstName()} ${ProductInfo.getLastName()}
-                                <form method="post">
-                                    <div style="display:none">
-                                        <input class="username" type="text" name="username" value=""/>
-                                        <input class="password" type="text" name="password" value=""/>
-                                        <input class="loginStatus" type="text" name="loginStatus" value=""/>
-                                        <input type="text" name="type" value="redirect"/>
-                                        <input type="text" name="address" value="feedbackHistory"/>
-                                        <input type="text" name="supplierID" value="${ProductInfo.getSupplierUserId()}"/>
-                                    </div>
-                                    <input class="btn btn-default navbar-btn userActBtn viewSellerFeedback" type="submit" value="View Seller's Feedback"></input>
-                                </form>
+                <div class="row">
+                    <div class= "col-sm-3"></div>
+                    <div class= "col-sm-6">
+                        <div class="createLable">Create an order</div>
+                        <div class="body-description">
+                            <div class="body-type">Product Categoty: ${ProductInfo.getType().toUpperCase()}</div>
+                            <div class="title">Product Title: ${ProductInfo.getTitle()}</div>
+                            <div class="Wrapper" style="display:flex">
+                                <div class="seller">
+                                    Seller: ${ProductInfo.getFirstName()} ${ProductInfo.getLastName()}
+                                </div>
+                            </div>
+                            <div class="price-wrapper">
+                                <div>Price:</div>
+                                <div>${ProductInfo.getPrice()}</div>
+                                <div> CAD</div>
                             </div>
                         </div>
-                        <div class="price-wrapper">
-                            <div>Price:</div>
-                            <div>${ProductInfo.getPrice()}</div>
-                            <div> CAD</div>
-                        </div>
-                        <form method="post">
+                        <form class="form-signin" method="post">
                             <div style="display:none">
                                 <input class="username" type="text" name="username" value=""/>
                                 <input class="password" type="text" name="password" value=""/>
+                                <input type="text" name="type" value="createFeedback"/>
+                                <input type="text" name="feedbackType" value="${feedbackType}"/>
+                                <c:if test="${feedbackType == 'Product'}">
+                                    <input type="text" name="productID" value="${productID}"/>
+                                    <input class="username" type="text" name="customerID" value=""/>
+                                </c:if>
+                                <c:if test="${feedbackType == 'Supplier'}">
+                                    <input type="text" name="supplierID" value="${supplierID}"/>
+                                    <input class="username" type="text" name="customerID" value=""/>
+                                </c:if>
                                 <input class="loginStatus" type="text" name="loginStatus" value=""/>
-                                <input type="text" name="type" value="redirect"/>
-                                <input type="text" name="address" value="createOrder"/>
-                                <input type="text" name="supplierID" value="${ProductInfo.getSupplierUserId()}"/>
-                                <input type="text" name="productID" value="${ProductInfo.getProductId()}"/>
                             </div>
-                            <input class="btn btn-primary active" type="submit" value="Buy it now"></input>
-                        </form> 
-                        <hr>
-                        
-                        <div class="description"><div>Description:</div>${ProductInfo.getDescription()}</div>
-                        <hr>
-                    </div>
-                    <div class="feedbacks">
-                        <div class="feedbacksLabel">Customer Reviews</div>
-                        <c:if test="${FeedbackListsLastItemIndex ge 1}">
-                            <c:forEach var="i" begin="0" end="${FeedbackListsLastItemIndex}">
-                                <div class="feedbackWrapper">
-                                    <div class="feedbackTitleWrapper">
-                                        <div class="feedbackRate">Rate:${FeedbackList.get(i).getRateStar()}</div>
-                                        <div class="feedbackTitle">Feedback Title: ${FeedbackList.get(i).getFeedbackTitle()}</div>
-                                    </div>
-                                    <div class="feedbackAuthorWrapper">
-                                        <div class="feedbackAuthor">Created by ${FeedbackList.get(i).getFirstName()} ${FeedbackList.get(i).getLastName()}</div>
-                                        <div class="feedbackDate">on ${FeedbackList.get(i).getFeedbackDate()}</div>
-                                    </div>
-                                    <div class="feedbackBody"><div>Feedback Comments:</div>${FeedbackList.get(i).getFeedBackComment()}</div>
+                            <div class=" inputTitle">Shipping Address</div>
+                            <input class="form-control input-lg" type="text" name="shippAddress" placeholder="Address" required autofocus>
+                            <div class="rateWrapper">
+                                <div class="col-sm-12 rateWrapper">
+                                    <div class=" inputTitle">Payment Method</div>
+                                    <select id="type-select" class="form-control">
+                                        <option>Enter a new card</option>
+                                        <c:if test="${paymentMethodLastIndex ge 1}">
+                                            <c:forEach var="i" begin="0" end="${paymentMethodLastIndex}">
+                                                <c:if test="${paymentMethods.get(i).getCardType() == 'debit'}">
+                                                    <option>${paymentMethods.get(i).getCardType()}: ${paymentMethods.get(i).getCardNumber()} Type: ${paymentMethods.get(i).getAccountType()}</option>
+                                                </c:if>
+                                                <c:if test="${paymentMethods.get(i).getCardType() == 'credit'}">
+                                                    <option>${paymentMethods.get(i).getCardType()}: ${paymentMethods.get(i).getCardNumber()} Expires on ${paymentMethods.get(i).getExpireDate()}</option>
+                                                </c:if>
+                                            </c:forEach>
+                                        </c:if>
+                                    </select>
+                                    <input id="feedback-rate" type="text" style="display:none" class="form-control" name="rateStar" value="5">
                                 </div>
-                            </c:forEach>
-                        </c:if>
+                            </div>
+                            <div class=" inputTitle">Feedback Comment</div>
+                            <textArea type="text" class="form-control description" value = "" name="feedbackComment" required></textarea>
+                            <button id="submitBtn" class="btn btn-lg btn-primary btn-block" type="submit">
+                                Create
+                            </button>
+                        </form>
                     </div>
+                    <div class= "col-sm-3"></div>
                 </div>
-                <div class= "col-sm-1"></div>
             </div>
         </div>
     </body>
@@ -236,5 +206,10 @@
         for(var i = 0; i < loginArrays.length; i++) {
             loginArrays[i].setAttribute("value", sessionStorage.loginStatus);
         }
+    </script>
+    <script>
+        $("#type-select").on("change", function (event) {
+            document.getElementById("feedback-rate").value = document.getElementById("type-select").value ? document.getElementById("type-select").value : "5";
+        });
     </script>
 </html>
