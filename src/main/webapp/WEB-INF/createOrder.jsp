@@ -138,24 +138,16 @@
                                 <div> CAD</div>
                             </div>
                         </div>
-                        <form class="form-signin" method="post">
+                        <form class="createOrderForm" method="post">
                             <div style="display:none">
                                 <input class="username" type="text" name="username" value=""/>
                                 <input class="password" type="text" name="password" value=""/>
-                                <input type="text" name="type" value="createFeedback"/>
-                                <input type="text" name="feedbackType" value="${feedbackType}"/>
-                                <c:if test="${feedbackType == 'Product'}">
-                                    <input type="text" name="productID" value="${productID}"/>
-                                    <input class="username" type="text" name="customerID" value=""/>
-                                </c:if>
-                                <c:if test="${feedbackType == 'Supplier'}">
-                                    <input type="text" name="supplierID" value="${supplierID}"/>
-                                    <input class="username" type="text" name="customerID" value=""/>
-                                </c:if>
+                                <input type="text" name="type" value="createOrder"/>
+                                <input type="text" name="productID" value="${productID}"/>
                                 <input class="loginStatus" type="text" name="loginStatus" value=""/>
                             </div>
                             <div class=" inputTitle">Shipping Address</div>
-                            <input class="form-control input-lg" type="text" name="shippAddress" placeholder="Address" required autofocus>
+                            <input class="form-control input-lg" type="text" name="shippingAddress" placeholder="Address" required autofocus>
                             <div class="rateWrapper">
                                 <div class="col-sm-12 rateWrapper">
                                     <div class=" inputTitle">Payment Method</div>
@@ -164,10 +156,10 @@
                                         <c:if test="${paymentMethodLastIndex ge 1}">
                                             <c:forEach var="i" begin="0" end="${paymentMethodLastIndex}">
                                                 <c:if test="${paymentMethods.get(i).getCardType() == 'debit'}">
-                                                    <option>${paymentMethods.get(i).getCardType()}: ${paymentMethods.get(i).getCardNumber()} Type: ${paymentMethods.get(i).getAccountType()}</option>
+                                                    <option>${paymentMethods.get(i).getCardType()}: Card No.:${paymentMethods.get(i).getCardNumber()}; Account Type: ${paymentMethods.get(i).getAccountType()}</option>
                                                 </c:if>
                                                 <c:if test="${paymentMethods.get(i).getCardType() == 'credit'}">
-                                                    <option>${paymentMethods.get(i).getCardType()}: ${paymentMethods.get(i).getCardNumber()} Expires on ${paymentMethods.get(i).getExpireDate()}</option>
+                                                    <option>${paymentMethods.get(i).getCardType()}: Card No.:${paymentMethods.get(i).getCardNumber()}; Expires on ${paymentMethods.get(i).getExpireDate()}</option>
                                                 </c:if>
                                             </c:forEach>
                                         </c:if>
@@ -183,14 +175,14 @@
                                       <option>credit</option>
                                       <option>debit</option>
                                     </select>
-                                    <input id="newCardTypeInput" type="text" style="display:none" class="form-control" name="newCardType" value="electronics">
+                                    <input id="newCardTypeInput" type="text" style="display:none" class="form-control" name="newCardType" value="credit">
                                 </div>
                                 <div class="col-sm-6 newCardWrapper">
                                     <div class=" inputTitle">Card number</div>
                                     <input id="newCardNumber" type="text" class="form-control" name="newCardNumber" placeholder="">
                                 </div>
                                 <div class="col-sm-3 newCardWrapper">
-                                    <div class=" inputTitle">Expires Date</div>
+                                    <div id="newCardPropLable" class=" inputTitle">Expires Date</div>
                                     <input id="newCardProp" type="text" class="form-control" name="newCardExpire" placeholder="">
                                 </div>
                             </div>
@@ -232,8 +224,8 @@
     </script>
     <script>
         $("#method-select").on("change", function (event) {
-            if (document.getElementById("newCardType").value !== "Enter a new card") {
-//                 Disable the enter new card inputs
+            if (document.getElementById("method-select").value !== "Enter a new card") {
+                // Disable the enter new card inputs
                 $( "#newCardType" ).prop( "disabled", true ); 
                 $( "#newCardNumber" ).prop( "disabled", true ); 
                 $( "#newCardProp" ).prop( "disabled", true ); 
@@ -242,7 +234,17 @@
                 $( "#newCardNumber" ).prop( "disabled", false ); 
                 $( "#newCardProp" ).prop( "disabled", false ); 
             }
-//            document.getElementById("feedback-rate").value = document.getElementById("type-select").value ? document.getElementById("type-select").value : "5";
+        });
+        $("#newCardType").on("change", function (event) {
+            if (document.getElementById("newCardType").value === "debit") {
+                document.getElementById("newCardTypeInput").value = "debit";
+                document.getElementById("newCardPropLable").innerHTML  = "Account Type";
+                document.getElementById("newCardProp").setAttribute("name", "newCardAccType");
+            } else {
+                document.getElementById("newCardTypeInput").value = "credit";
+                document.getElementById("newCardPropLable").innerHTML  = "Expires Date";
+                document.getElementById("newCardProp").setAttribute("name", "newCardExpire");
+            }
         });
     </script>
 </html>
