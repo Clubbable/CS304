@@ -716,4 +716,152 @@ public class DataStorage extends DatabaseStorage
         }
         return paymentMethodList;
     }
+    
+    public static boolean addDebitPaymentMethod(String cardNumber, String customerID, String accType) {
+        Connection connection = null;
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+        boolean addSuccessful = false;
+        int result = 0;
+        
+        try
+        {
+            // Build the query
+            StringBuilder sb = new StringBuilder();
+            // Build the query
+            sb.append("INSERT INTO PaymentMethod (CardNumber, ownerID)");
+            sb.append("VALUES (");
+            sb.append("'" + cardNumber+ "',");
+            sb.append("'" + customerID+ "') ");
+            // Get a connection
+            connection = getConnection();
+            statement = connection.prepareStatement(sb.toString());
+            // Execute the query
+            result = statement.executeUpdate();
+            // Build the query
+            StringBuilder sb2 = new StringBuilder();
+            // Build the query
+            sb2.append("INSERT INTO DebitPaymentMethod (CardNumber, accountType)");
+            sb2.append("VALUES (");
+            sb2.append("'" + cardNumber+ "',");
+            sb2.append("'" + accType+ "') ");
+            // Get a connection
+            connection = getConnection();
+            statement = connection.prepareStatement(sb2.toString());
+            // Execute the query
+            result = statement.executeUpdate();
+            if (result == 1) {
+                addSuccessful = true;
+            }
+        }
+        catch (Exception ex)
+        {
+            // Log
+            LogManager.getLogger(DataStorage.class).fatal("Add debit payment method error", ex);
+        }
+        finally
+        {
+            safeClose(resultSet);
+            safeClose(statement);
+            safeClose(connection);
+        }
+        
+        return addSuccessful;
+    }
+    
+    public static boolean addCreditPaymentMethod(String cardNumber, String customerID, String expireDate) {
+        Connection connection = null;
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+        boolean addSuccessful = false;
+        int result = 0;
+        
+        try
+        {
+            // Build the query
+            StringBuilder sb = new StringBuilder();
+            // Build the query
+            sb.append("INSERT INTO PaymentMethod (CardNumber, ownerID)");
+            sb.append("VALUES (");
+            sb.append("'" + cardNumber+ "',");
+            sb.append("'" + customerID+ "') ");
+            // Get a connection
+            connection = getConnection();
+            statement = connection.prepareStatement(sb.toString());
+            // Execute the query
+            result = statement.executeUpdate();
+            // Build the query
+            StringBuilder sb2 = new StringBuilder();
+            // Build the query
+            sb2.append("INSERT INTO CreditPaymentMethod (CardNumber, expireDate)");
+            sb2.append("VALUES (");
+            sb2.append("'" + cardNumber+ "',");
+            sb2.append("'" + expireDate+ "') ");
+            // Get a connection
+            connection = getConnection();
+            statement = connection.prepareStatement(sb2.toString());
+            // Execute the query
+            result = statement.executeUpdate();
+            if (result == 1) {
+                addSuccessful = true;
+            }
+        }
+        catch (Exception ex)
+        {
+            // Log
+            LogManager.getLogger(DataStorage.class).fatal("Add credit payment method error", ex);
+        }
+        finally
+        {
+            safeClose(resultSet);
+            safeClose(statement);
+            safeClose(connection);
+        }
+        
+        return addSuccessful;
+    }
+    
+    public static boolean createOrder(String productID, String CustomerID, String shippingAddress, String cardNumber){
+        Connection connection = null;
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+        boolean addSuccessful = false;
+        int result = 0;
+        
+        try
+        {
+            // Build the query
+            StringBuilder sb = new StringBuilder();
+           String purchaseDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
+            // Build the query
+            sb.append("INSERT INTO Purchase (ShippingAddress, productID, CardNumber, purchaseDate, CustomerUserID)");
+            sb.append("VALUES (");
+            sb.append("'" + shippingAddress+ "',");
+            sb.append(productID+ ",");
+            sb.append("'" + cardNumber+ "',");
+            sb.append("'" + purchaseDate+ "',");
+            sb.append("'" + CustomerID+ "') ");
+            // Get a connection
+            connection = getConnection();
+            statement = connection.prepareStatement(sb.toString());
+            // Execute the query
+            result = statement.executeUpdate();
+            if (result == 1) {
+                addSuccessful = true;
+            }
+        }
+        catch (Exception ex)
+        {
+            // Log
+            LogManager.getLogger(DataStorage.class).fatal("Create order error", ex);
+        }
+        finally
+        {
+            safeClose(resultSet);
+            safeClose(statement);
+            safeClose(connection);
+        }
+        
+        return addSuccessful;
+    }
 }

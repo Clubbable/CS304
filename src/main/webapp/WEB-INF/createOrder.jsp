@@ -164,26 +164,26 @@
                                             </c:forEach>
                                         </c:if>
                                     </select>
-                                    <input id="feedback-rate" type="text" style="display:none" class="form-control" name="rateStar" value="5">
+                                    <input id="paymentMethodSelect" type="text" style="display:none" class="form-control" name="paymentMethodSelect" value="Enter a new card">
                                 </div>
                             </div>
                             <div>
                                 <div class="inputTitle lableTitle">OR Enter a new card</div>
-                                <div class="col-sm-3 newCardWrapper">
+                                <div class="col-sm-2 newCardWrapper">
                                     <div class=" inputTitle">Card Type</div>
                                     <select id="newCardType" class="form-control">
                                       <option>credit</option>
                                       <option>debit</option>
                                     </select>
-                                    <input id="newCardTypeInput" type="text" style="display:none" class="form-control" name="newCardType" value="credit">
+                                    <input id="newCardTypeInput" type="text" style="display:none" class="form-control" name="newCardType" value="credit" required>
                                 </div>
                                 <div class="col-sm-6 newCardWrapper">
                                     <div class=" inputTitle">Card number</div>
-                                    <input id="newCardNumber" type="text" class="form-control" name="newCardNumber" placeholder="">
+                                    <input id="newCardNumber" type="text" class="form-control" name="newCardNumber" placeholder="" required>
                                 </div>
-                                <div class="col-sm-3 newCardWrapper">
+                                <div class="col-sm-4 newCardWrapper">
                                     <div id="newCardPropLable" class=" inputTitle">Expires Date</div>
-                                    <input id="newCardProp" type="text" class="form-control" name="newCardExpire" placeholder="">
+                                    <input id="newCardProp" type="date" class="form-control" name="newCardExpire" placeholder="" required>
                                 </div>
                             </div>
                             <button id="submitBtn" class="btn btn-lg btn-primary btn-block" type="submit">
@@ -224,15 +224,22 @@
     </script>
     <script>
         $("#method-select").on("change", function (event) {
+            document.getElementById("paymentMethodSelect").value = document.getElementById("method-select").value;
             if (document.getElementById("method-select").value !== "Enter a new card") {
                 // Disable the enter new card inputs
                 $( "#newCardType" ).prop( "disabled", true ); 
                 $( "#newCardNumber" ).prop( "disabled", true ); 
                 $( "#newCardProp" ).prop( "disabled", true ); 
+                $( "#newCardType" ).prop( "required", false ); 
+                $( "#newCardNumber" ).prop( "required", false ); 
+                $( "#newCardProp" ).prop( "required", false ); 
             } else {
                 $( "#newCardType" ).prop( "disabled", false ); 
                 $( "#newCardNumber" ).prop( "disabled", false ); 
                 $( "#newCardProp" ).prop( "disabled", false ); 
+                $( "#newCardType" ).prop( "required", true ); 
+                $( "#newCardNumber" ).prop( "required", true ); 
+                $( "#newCardProp" ).prop( "required", true ); 
             }
         });
         $("#newCardType").on("change", function (event) {

@@ -233,6 +233,38 @@ public class Servlet extends HttpServlet
             request.setAttribute("OrderLists", orders);
             RequestDispatcher requestDispather = request.getRequestDispatcher("/WEB-INF/orderHistory.jsp");
             requestDispather.forward(request, response);
+        } else if (requestType.equals("createOrder")) {
+            String loginStatus = (String) request.getParameter("loginStatus");
+            request.setAttribute("loginStatus", loginStatus);
+            String productID = (String) request.getParameter("productID");
+            try {
+                String shippingAddress = (String) request.getParameter("shippingAddress");
+                String CustomerID = username;
+                String paymentMethodSelect = (String) request.getParameter("paymentMethodSelect");
+                if (paymentMethodSelect.equals("Enter a new card")){
+                    String newCardType = (String) request.getParameter("newCardType");
+                    String newCardNumber = (String) request.getParameter("newCardNumber");
+                    if (newCardType.equals("debit")){
+                        String newCardAccType = (String) request.getParameter("newCardAccType");
+                        DataStorage.addDebitPaymentMethod(newCardNumber, CustomerID, newCardAccType);
+                    } else {
+                        // Credit
+                        String newCardExpire = (String) request.getParameter("newCardExpire");
+                        DataStorage.addCreditPaymentMethod(newCardNumber, CustomerID, newCardExpire);
+                    }
+                    request.setAttribute("createOrderStatus", DataStorage.createOrder(productID, CustomerID, shippingAddress, newCardNumber));
+                } else {
+                    // Existing card
+                    String cardNum = paymentMethodSelect.substring(paymentMethodSelect.indexOf("Card No.:") + 9, paymentMethodSelect.indexOf(";"));
+                    request.setAttribute("createOrderStatus", DataStorage.createOrder(productID, CustomerID, shippingAddress, cardNum));
+                }
+            } catch (Exception e){
+                request.setAttribute("createOrderStatus", false); 
+            }
+            Product product = DataStorage.getProduct(productID);
+            request.setAttribute("ProductInfo", product);
+            RequestDispatcher requestDispather = request.getRequestDispatcher("/WEB-INF/productPage.jsp");
+            requestDispather.forward(request, response);
         }
     }
 
