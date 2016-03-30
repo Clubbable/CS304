@@ -76,11 +76,18 @@
                             </form>
                         </div>
                         <div class = "col-xs-6 col-sm-5">
-                            <form class="navbar-form navbar-left" role="search">
-                              <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Search">
-                              </div>
-                              <button type="submit" class="btn btn-default">Submit</button>
+                            <form class="navbar-form navbar-left" role="search" method='post'>
+                                <div style="display:none">
+                                    <input class="username" type="text" name="username" value=""/>
+                                    <input class="password" type="text" name="password" value=""/>
+                                    <input class="loginStatus" type="text" name="loginStatus" value=""/>
+                                    <input type="text" name="type" value="redirect"/>
+                                    <input type="text" name="address" value="searchResult"/>
+                                </div>
+                                <div class="form-group">
+                                  <input type="text" class="form-control" placeholder="Search" name='keyWords'>
+                                </div>
+                                <button type="submit" class="btn btn-default">Submit</button>
                             </form>
                         </div>
                         <div class = "col-xs-2 col-sm-3">
