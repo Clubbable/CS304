@@ -124,8 +124,8 @@
                 <div class= "col-sm-10">
                     <div class="feedbacks">
                         <div class="feedbacksLabel">Customer Reviews</div>
-                        <c:if test="${FeedbackListsLastItemIndex ge 1}">
-                            <c:forEach var="i" begin="0" end="${FeedbackListsLastItemIndex}">
+                        <c:if test="${FeedbackListsSize ge 1}">
+                            <c:forEach var="i" begin="0" end="${FeedbackListsSize - 1}">
                                 <div class="feedbackWrapper">
                                     <div class="feedbackTitleWrapper">
                                         <div class="feedbackRate">Rate:${FeedbackList.get(i).getRateStar()}</div>

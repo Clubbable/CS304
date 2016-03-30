@@ -119,7 +119,7 @@
                 <div class= "col-sm-2"></div>
                 <div class= "col-sm-8">
                     <div class="purchaseLabel">Your Purchase</div>
-                    <c:if test="${ProductListsLastItemIndex ge 1}">
+                    <c:if test="${ProductListsSize ge 1}">
                         <div class="productHeader">
                             <table class="table">
                                 <thead>
@@ -132,7 +132,7 @@
                                 </thead>
                             </table>
                         </div>
-                        <c:forEach var="i" begin="0" end="${ProductListsLastItemIndex}">
+                        <c:forEach var="i" begin="0" end="${ProductListsSize - 1}">
                             <div class="productItem">
                                 <div class="productItemWrapper">
                                     <table class="table">

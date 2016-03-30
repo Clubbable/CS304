@@ -160,8 +160,8 @@
                                     <div class=" inputTitle">Payment Method</div>
                                     <select id="method-select" class="form-control">
                                         <option>Enter a new card</option>
-                                        <c:if test="${paymentMethodLastIndex ge 1}">
-                                            <c:forEach var="i" begin="0" end="${paymentMethodLastIndex}">
+                                        <c:if test="${paymentMethodSize ge 1}">
+                                            <c:forEach var="i" begin="0" end="${paymentMethodSize - 1}">
                                                 <c:if test="${paymentMethods.get(i).getCardType() == 'debit'}">
                                                     <option>${paymentMethods.get(i).getCardType()}: Card No.:${paymentMethods.get(i).getCardNumber()}; Account Type: ${paymentMethods.get(i).getAccountType()}</option>
                                                 </c:if>

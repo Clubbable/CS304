@@ -118,8 +118,8 @@
                 <div class= "col-sm-2"></div>
                 <div class= "col-sm-8">
                     <div class="orderLabel">Your Order</div>
-                    <c:if test="${OrderListsLastItemIndex ge 1}">
-                        <c:forEach var="i" begin="0" end="${OrderListsLastItemIndex}">
+                    <c:if test="${OrderListsSize ge 1}">
+                        <c:forEach var="i" begin="0" end="${OrderListsSize - 1}">
                             <div class="orderWrapper">
                                 <div class="orderDetails">
                                     <table class="table">

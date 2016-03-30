@@ -52,11 +52,7 @@ public class Servlet extends HttpServlet
             request.setAttribute("loginStatus", request.getParameter("loginStatus"));
             if (requestRedirAddress.equals("orderHistory")) {
                 List<Purchase> orders =  DataStorage.getOrders(username);
-                if (orders.size() > 0) {
-                    request.setAttribute("OrderListsLastItemIndex", orders.size() - 1);
-                } else {
-                    request.setAttribute("OrderListsLastItemIndex", 0);
-                }
+                request.setAttribute("OrderListsSize", orders.size());
                 request.setAttribute("OrderLists", orders);
                 requestDispather = request.getRequestDispatcher("/WEB-INF/orderHistory.jsp");
             } else if (requestRedirAddress.equals("login")) {
@@ -69,32 +65,20 @@ public class Servlet extends HttpServlet
                 request.setAttribute("ProductInfo", product);
                 List<ProductFeedback> feedbackList = DataStorage.getProductFeedback(productID);
                 request.setAttribute("FeedbackList", feedbackList);
-                if (feedbackList.size() > 0) {
-                    request.setAttribute("FeedbackListsLastItemIndex", feedbackList.size() - 1);
-                } else {
-                    request.setAttribute("FeedbackListsLastItemIndex", 0);
-                }
+                request.setAttribute("FeedbackListsSize", feedbackList.size());
                 requestDispather = request.getRequestDispatcher("/WEB-INF/productPage.jsp");
             } else if (requestRedirAddress.equals("createProduct")) {
                 requestDispather = request.getRequestDispatcher("/WEB-INF/productCreate.jsp");
             } else if (requestRedirAddress.equals("sellList")) {
                 List<Product> products =  DataStorage.getProductLists(username);
-                if (products.size() > 0) {
-                    request.setAttribute("ProductListsLastItemIndex", products.size() - 1);
-                } else {
-                    request.setAttribute("ProductListsLastItemIndex", 0);
-                }
+                request.setAttribute("ProductListsSize", products.size());
                 request.setAttribute("ProductLists", products);
                 requestDispather = request.getRequestDispatcher("/WEB-INF/productSellingList.jsp");
             } else if (requestRedirAddress.equals("feedbackHistory")) {
                 String supplierID = (String) request.getParameter("supplierID");
                 List<SupplierFeedback> feedbackList = DataStorage.getSupplierFeedback(supplierID);
                 request.setAttribute("FeedbackList", feedbackList);
-                if (feedbackList.size() > 0) {
-                    request.setAttribute("FeedbackListsLastItemIndex", feedbackList.size() - 1);
-                } else {
-                    request.setAttribute("FeedbackListsLastItemIndex", 0);
-                }
+                request.setAttribute("FeedbackListsSize", feedbackList.size());
                 requestDispather = request.getRequestDispatcher("/WEB-INF/feedbackHistory.jsp");
             }  else if (requestRedirAddress.equals("createFeedback")) {
                 String feedbackType = (String) request.getParameter("feedbackType");
@@ -116,11 +100,7 @@ public class Servlet extends HttpServlet
                 request.setAttribute("customerID", username);
                 List<paymentMethod> paymentMethods = DataStorage.getPaymentMethods(username);
                 request.setAttribute("paymentMethods", paymentMethods);
-                if (paymentMethods.size() > 0) {
-                    request.setAttribute("paymentMethodLastIndex", paymentMethods.size() - 1);
-                } else {
-                    request.setAttribute("paymentMethodLastIndex", 0);
-                }
+                request.setAttribute("paymentMethodSize", paymentMethods.size());
                 Product product = DataStorage.getProduct(productID);
                 request.setAttribute("ProductInfo", product);
                 requestDispather = request.getRequestDispatcher("/WEB-INF/createOrder.jsp");
@@ -193,11 +173,7 @@ public class Servlet extends HttpServlet
                 
                 request.setAttribute("deleteProductStatus", DataStorage.deleteProduct(productID));
                 List<Product> products =  DataStorage.getProductLists(username);
-                if (products.size() > 0) {
-                    request.setAttribute("ProductListsLastItemIndex", products.size() - 1);
-                } else {
-                    request.setAttribute("ProductListsLastItemIndex", 0);
-                }
+                request.setAttribute("ProductListsSize", products.size());
                 request.setAttribute("ProductLists", products);
             } catch (Exception e){
                 request.setAttribute("deleteProductStatus", false);
@@ -221,21 +197,13 @@ public class Servlet extends HttpServlet
                     request.setAttribute("submitFeedbackStatus", DataStorage.submitSupplierFeedback(supplierID, CustomerID, feedbackComment, rateStar, feedbackTitle));
                 }
                 List<Product> products =  DataStorage.getProductLists(username);
-                if (products.size() > 0) {
-                    request.setAttribute("ProductListsLastItemIndex", products.size() - 1);
-                } else {
-                    request.setAttribute("ProductListsLastItemIndex", 0);
-                }
+                request.setAttribute("ProductListsSize", products.size());
                 request.setAttribute("ProductLists", products);
             } catch (Exception e){
                 request.setAttribute("submitFeedbackStatus", false);
             }
             List<Purchase> orders =  DataStorage.getOrders(username);
-            if (orders.size() > 0) {
-                request.setAttribute("OrderListsLastItemIndex", orders.size() - 1);
-            } else {
-                request.setAttribute("OrderListsLastItemIndex", 0);
-            }
+            request.setAttribute("OrderListsSize", orders.size());
             request.setAttribute("OrderLists", orders);
             RequestDispatcher requestDispather = request.getRequestDispatcher("/WEB-INF/orderHistory.jsp");
             requestDispather.forward(request, response);
