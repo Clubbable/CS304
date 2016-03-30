@@ -124,6 +124,12 @@ public class Servlet extends HttpServlet
                 Product product = DataStorage.getProduct(productID);
                 request.setAttribute("ProductInfo", product);
                 requestDispather = request.getRequestDispatcher("/WEB-INF/createOrder.jsp");
+            } else if (requestRedirAddress.equals("searchResult")) {
+                String keyWords = (String) request.getParameter("keyWords");
+                List<Product> productList =  DataStorage.getProductsByTitle(keyWords);
+                request.setAttribute("productListSize", productList.size());
+                request.setAttribute("productList", productList);
+                requestDispather = request.getRequestDispatcher("/WEB-INF/searchResult.jsp");
             } else {
                 requestDispather = request.getRequestDispatcher("/WEB-INF/index.jsp");
             }

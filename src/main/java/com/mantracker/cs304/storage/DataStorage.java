@@ -864,4 +864,61 @@ public class DataStorage extends DatabaseStorage
         
         return addSuccessful;
     }
+    
+    public static List<Product> getProductsByTitle (String keywords) {
+        List<Product> productList = new ArrayList();
+        
+        // Define database variables
+        Connection connection = null;
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+
+        try
+        {
+            // Create StringBuilder for the query
+            StringBuilder sb = new StringBuilder();
+
+            // Build the query
+            // Build the query
+            sb.append("SELECT title, description, price, type, supplierUserID, productID, lastName, firstName ");
+            sb.append("FROM Product, User ");
+            sb.append("WHERE title like '%" + keywords + "%' ");
+            sb.append("AND userName = supplierUserID ");
+
+            // Get a connection
+            connection = getConnection();
+
+            // Prepare statement
+            statement = connection.prepareStatement(sb.toString());
+
+            // Execute the query
+            resultSet = statement.executeQuery();
+            // Get the result
+            while (resultSet.next())
+            {
+                String title = resultSet.getString("title");
+                String description = resultSet.getString("description");
+                float price = resultSet.getFloat("price");
+                String type = resultSet.getString("type");
+                String supplierUserID = resultSet.getString("supplierUserID");
+                int productNumber = resultSet.getInt("productID");
+                String lastName = resultSet.getString("lastName");
+                String firstName = resultSet.getString("firstName");
+                
+                productList.add(new Product(productNumber, description, title, price, type, supplierUserID, lastName, firstName));
+            }
+        }
+        catch (Exception ex)
+        {
+            // Log
+            LogManager.getLogger(DataStorage.class).fatal("search product error", ex);
+        }
+        finally
+        {
+            safeClose(resultSet);
+            safeClose(statement);
+            safeClose(connection);
+        }
+        return productList;
+    }
 }
