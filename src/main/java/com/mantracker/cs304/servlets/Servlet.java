@@ -118,15 +118,20 @@ public class Servlet extends HttpServlet
                 }
                 requestDispather = request.getRequestDispatcher("/WEB-INF/createFeedback.jsp");
             } else if (requestRedirAddress.equals("createOrder")) {
-                String productID = (String) request.getParameter("productID");
-                request.setAttribute("productID", productID);
-                request.setAttribute("customerID", username);
-                List<paymentMethod> paymentMethods = DataStorage.getPaymentMethods(username);
-                request.setAttribute("paymentMethods", paymentMethods);
-                request.setAttribute("paymentMethodSize", paymentMethods.size());
-                Product product = DataStorage.getProduct(productID);
-                request.setAttribute("ProductInfo", product);
-                requestDispather = request.getRequestDispatcher("/WEB-INF/createOrder.jsp");
+                String loginStatus = (String) request.getParameter("loginStatus");
+                if(loginStatus.equals("false")) {
+                    requestDispather = request.getRequestDispatcher("/WEB-INF/login.jsp");
+                } else {
+                    String productID = (String) request.getParameter("productID");
+                    request.setAttribute("productID", productID);
+                    request.setAttribute("customerID", username);
+                    List<paymentMethod> paymentMethods = DataStorage.getPaymentMethods(username);
+                    request.setAttribute("paymentMethods", paymentMethods);
+                    request.setAttribute("paymentMethodSize", paymentMethods.size());
+                    Product product = DataStorage.getProduct(productID);
+                    request.setAttribute("ProductInfo", product);
+                    requestDispather = request.getRequestDispatcher("/WEB-INF/createOrder.jsp");
+                }
             } else if (requestRedirAddress.equals("searchResult")) {
                 String keyWords = (String) request.getParameter("keyWords");
                 List<Product> productList =  DataStorage.getProductsByTitle(keyWords);
