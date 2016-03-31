@@ -53,16 +53,16 @@ public class Servlet extends HttpServlet
     {
         List<Product> mostPopularProducts = DataStorage.getPopularProduct("all");
         request.setAttribute("popularProductList", mostPopularProducts);
-        request.setAttribute("popularProductListSize", mostPopularProducts.size());
+        request.setAttribute("popularProductListSize", Math.min(3,mostPopularProducts.size()));
         List<Product> mostPopularElectronicsProducts = DataStorage.getPopularProduct("electronics");
         request.setAttribute("popularElecProductList", mostPopularElectronicsProducts);
-        request.setAttribute("popularElecProductListSize", mostPopularElectronicsProducts.size());
+        request.setAttribute("popularElecProductListSize", Math.min(3,mostPopularElectronicsProducts.size()));
         List<Product> mostPopularFurnitureProducts = DataStorage.getPopularProduct("furniture");
         request.setAttribute("popularFurniProductList", mostPopularFurnitureProducts);
-        request.setAttribute("popularFurniProductListSize", mostPopularFurnitureProducts.size());
+        request.setAttribute("popularFurniProductListSize", Math.min(3,mostPopularFurnitureProducts.size()));
         List<Product> mostPopularBookProducts = DataStorage.getPopularProduct("book");
         request.setAttribute("popularBookProductList", mostPopularBookProducts);
-        request.setAttribute("popularBookProductListSize", mostPopularBookProducts.size());
+        request.setAttribute("popularBookProductListSize", Math.min(3,mostPopularBookProducts.size()));
         
         String requestType = (String) request.getParameter("type");
         String requestRedirAddress = (String) request.getParameter("address");

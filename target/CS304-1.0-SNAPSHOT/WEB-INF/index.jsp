@@ -193,24 +193,28 @@
                                  <div class ="btn btn-link" style="display:inline; flex:1; float:right; padding-top:20px; font-size:larger">See more >></div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-sm-6 col-md-4">
-                                        <div class="caption"></div>
-                                        <h3>Product title</h3>
-                                        <p>Description.....</p>
-                                        <p><a href="#" class="btn btn-primary" role="button">See Details</a></p>
-                                    </div>
-                                    <div class="col-sm-6 col-md-4">
-                                        <div class="caption"></div>
-                                        <h3>Product title</h3>
-                                        <p>Description.....</p>
-                                        <p><a href="#" class="btn btn-primary" role="button">See Details</a></p>
-                                    </div>
-                                    <div class="col-sm-6 col-md-4">
-                                        <div class="caption"></div>
-                                        <h3>Product title</h3>
-                                        <p>Description.....</p>
-                                        <p><a href="#" class="btn btn-primary" role="button">See Details</a></p>
-                                    </div>
+                                    <c:if test="${popularElecProductListSize ge 1}">
+                                        <c:forEach var="i" begin="0" end="${popularElecProductListSize - 1}">
+                                            <div class="col-sm-6 col-md-4">
+                                                <div class="caption"></div>
+                                                <h3>${popularElecProductList.get(i).getTitle()}</h3>
+                                                <p>${popularElecProductList.get(i).getDescription()}</p>
+                                                <p>
+                                                    <form method="post">
+                                                        <div style="display:none">
+                                                            <input class="username" type="text" name="username" value=""/>
+                                                            <input class="password" type="text" name="password" value=""/>
+                                                            <input class="loginStatus" type="text" name="loginStatus" value=""/>
+                                                            <input type="text" name="type" value="redirect"/>
+                                                            <input type="text" name="address" value="productPage"/>
+                                                            <input type="text" name="productID" value="${popularElecProductList.get(i).getProductId()}"/>
+                                                        </div>
+                                                        <input  class="btn btn-primary" type="submit" value="See Details"/>            
+                                                    </form>
+                                                </p>
+                                            </div>
+                                        </c:forEach>
+                                    </c:if>
                                 </div>
                             </div>
                         </c:if>
@@ -222,24 +226,28 @@
                                  <div class ="btn btn-link" style="display:inline; flex:1; float:right; padding-top:20px; font-size:larger">See more >></div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-sm-6 col-md-4">
-                                        <div class="caption"></div>
-                                        <h3>Product title</h3>
-                                        <p>Description.....</p>
-                                        <p><a href="#" class="btn btn-primary" role="button">See Details</a></p>
-                                    </div>
-                                    <div class="col-sm-6 col-md-4">
-                                        <div class="caption"></div>
-                                        <h3>Product title</h3>
-                                        <p>Description.....</p>
-                                        <p><a href="#" class="btn btn-primary" role="button">See Details</a></p>
-                                    </div>
-                                    <div class="col-sm-6 col-md-4">
-                                        <div class="caption"></div>
-                                        <h3>Product title</h3>
-                                        <p>Description.....</p>
-                                        <p><a href="#" class="btn btn-primary" role="button">See Details</a></p>
-                                    </div>
+                                    <c:if test="${popularFurniProductListSize ge 1}">
+                                        <c:forEach var="i" begin="0" end="${popularFurniProductListSize - 1}">
+                                            <div class="col-sm-6 col-md-4">
+                                                <div class="caption"></div>
+                                                <h3>${popularFurniProductList.get(i).getTitle()}</h3>
+                                                <p>${popularFurniProductList.get(i).getDescription()}</p>
+                                                <p>
+                                                    <form method="post">
+                                                        <div style="display:none">
+                                                            <input class="username" type="text" name="username" value=""/>
+                                                            <input class="password" type="text" name="password" value=""/>
+                                                            <input class="loginStatus" type="text" name="loginStatus" value=""/>
+                                                            <input type="text" name="type" value="redirect"/>
+                                                            <input type="text" name="address" value="productPage"/>
+                                                            <input type="text" name="productID" value="${popularFurniProductList.get(i).getProductId()}"/>
+                                                        </div>
+                                                        <input  class="btn btn-primary" type="submit" value="See Details"/>            
+                                                    </form>
+                                                </p>
+                                            </div>
+                                        </c:forEach>
+                                    </c:if>
                                 </div>
                             </div>
                         </c:if>
@@ -251,24 +259,28 @@
                                  <div class ="btn btn-link" style="display:inline; flex:1; float:right; padding-top:20px; font-size:larger">See more >></div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-sm-6 col-md-4">
-                                        <div class="caption"></div>
-                                        <h3>Product title</h3>
-                                        <p>Description.....</p>
-                                        <p><a href="#" class="btn btn-primary" role="button">See Details</a></p>
-                                    </div>
-                                    <div class="col-sm-6 col-md-4">
-                                        <div class="caption"></div>
-                                        <h3>Product title</h3>
-                                        <p>Description.....</p>
-                                        <p><a href="#" class="btn btn-primary" role="button">See Details</a></p>
-                                    </div>
-                                    <div class="col-sm-6 col-md-4">
-                                        <div class="caption"></div>
-                                        <h3>Product title</h3>
-                                        <p>Description.....</p>
-                                        <p><a href="#" class="btn btn-primary" role="button">See Details</a></p>
-                                    </div>
+                                    <c:if test="${popularBookProductListSize ge 1}">
+                                        <c:forEach var="i" begin="0" end="${popularBookProductListSize - 1}">
+                                            <div class="col-sm-6 col-md-4">
+                                                <div class="caption"></div>
+                                                <h3>${popularBookProductList.get(i).getTitle()}</h3>
+                                                <p>${popularBookProductList.get(i).getDescription()}</p>
+                                                <p>
+                                                    <form method="post">
+                                                        <div style="display:none">
+                                                            <input class="username" type="text" name="username" value=""/>
+                                                            <input class="password" type="text" name="password" value=""/>
+                                                            <input class="loginStatus" type="text" name="loginStatus" value=""/>
+                                                            <input type="text" name="type" value="redirect"/>
+                                                            <input type="text" name="address" value="productPage"/>
+                                                            <input type="text" name="productID" value="${popularBookProductList.get(i).getProductId()}"/>
+                                                        </div>
+                                                        <input  class="btn btn-primary" type="submit" value="See Details"/>            
+                                                    </form>
+                                                </p>
+                                            </div>
+                                        </c:forEach>
+                                    </c:if>
                                 </div>
                             </div>
                         </c:if>
