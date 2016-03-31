@@ -879,7 +879,6 @@ public class DataStorage extends DatabaseStorage
             StringBuilder sb = new StringBuilder();
 
             // Build the query
-            // Build the query
             sb.append("SELECT title, description, price, type, supplierUserID, productID, lastName, firstName ");
             sb.append("FROM Product, User ");
             sb.append("WHERE title like '%" + keywords + "%' ");
@@ -912,6 +911,62 @@ public class DataStorage extends DatabaseStorage
         {
             // Log
             LogManager.getLogger(DataStorage.class).fatal("search product error", ex);
+        }
+        finally
+        {
+            safeClose(resultSet);
+            safeClose(statement);
+            safeClose(connection);
+        }
+        return productList;
+    }
+    
+    public static List<Product> getPopularProduct (String type) {
+        List<Product> productList = new ArrayList();
+        
+        // Define database variables
+        Connection connection = null;
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+
+        try
+        {
+            // Create StringBuilder for the query
+            StringBuilder sb = new StringBuilder();
+
+            // Build the query
+            sb.append("SELECT COUNT(*) AS orderCount, Purch.productID, Prod.title, Prod.description, Prod.type ");
+            sb.append("FROM Purchase Purch, Product Prod ");
+            sb.append("WHERE Purch.productID = Prod.productID ");
+            if (!type.equals("all")) {
+                sb.append("AND Prod.type = '" + type + "' ");
+            }
+            sb.append("GROUP BY Purch.productID ");
+            sb.append("ORDER BY orderCount DESC ");
+
+            // Get a connection
+            connection = getConnection();
+
+            // Prepare statement
+            statement = connection.prepareStatement(sb.toString());
+
+            // Execute the query
+            resultSet = statement.executeQuery();
+            // Get the result
+            while (resultSet.next())
+            {
+                String title = resultSet.getString("title");
+                String description = resultSet.getString("description");
+                String prodType = resultSet.getString("type");
+                int productNumber = resultSet.getInt("productID");
+                
+                productList.add(new Product(productNumber, description, title, null, prodType, null, null, null));
+            }
+        }
+        catch (Exception ex)
+        {
+            // Log
+            LogManager.getLogger(DataStorage.class).fatal("Get most popular product error", ex);
         }
         finally
         {
