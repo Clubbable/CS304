@@ -935,7 +935,7 @@ public class DataStorage extends DatabaseStorage
             StringBuilder sb = new StringBuilder();
 
             // Build the query
-            sb.append("SELECT COUNT(*) AS orderCount, Purch.productID, Prod.title, Prod.description, Prod.type ");
+            sb.append("SELECT COUNT(*) AS orderCount, Purch.productID, Prod.title, Prod.description, Prod.type, Prod.price ");
             sb.append("FROM Purchase Purch, Product Prod ");
             sb.append("WHERE Purch.productID = Prod.productID ");
             if (!type.equals("all")) {
@@ -959,8 +959,8 @@ public class DataStorage extends DatabaseStorage
                 String description = resultSet.getString("description");
                 String prodType = resultSet.getString("type");
                 int productNumber = resultSet.getInt("productID");
-                
-                productList.add(new Product(productNumber, description, title, null, prodType, null, null, null));
+                float price = resultSet.getFloat("price");
+                productList.add(new Product(productNumber, description, title, price, prodType, null, null, null));
             }
         }
         catch (Exception ex)
