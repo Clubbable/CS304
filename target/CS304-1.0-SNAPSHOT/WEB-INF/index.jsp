@@ -169,7 +169,7 @@
                             <div class = "popularProduct" style="height:50px;">
                                 <div class="title">
                                     <div class = "popularProduct-title" style="display:inline; font-size:xx-large">Most Popular</div>
-                                    <div class="rateSelect">Rate: <select id="rate-select"><option>Max</option> <option>Min</option></select></div>
+                                    <div class="rateSelect">Show Rate: <select id="rate-select"><option>Max</option> <option>Min</option></select></div>
                                     <form method="post" class="seeMore">
                                         <div style="display:none">
                                             <input class="username" type="text" name="username" value=""/>
