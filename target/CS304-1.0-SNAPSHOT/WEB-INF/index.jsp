@@ -178,6 +178,7 @@
                                             <div class="col-sm-6 col-md-4">
                                                 <div class="caption"></div>
                                                 <h3>${popularProductList.get(i).getTitle()}</h3>
+                                                <p>Total Order amount: ${popularProductList.get(i).getProductAmount()}</p>
                                                 <p>${popularProductList.get(i).getDescription()}</p>
                                                 <p>
                                                     <form method="post">
@@ -221,6 +222,7 @@
                                             <div class="col-sm-6 col-md-4">
                                                 <div class="caption"></div>
                                                 <h3>${popularElecProductList.get(i).getTitle()}</h3>
+                                                <p>Total Order amount: ${popularElecProductList.get(i).getProductAmount()}</p>
                                                 <p>${popularElecProductList.get(i).getDescription()}</p>
                                                 <p>
                                                     <form method="post">
@@ -264,6 +266,7 @@
                                             <div class="col-sm-6 col-md-4">
                                                 <div class="caption"></div>
                                                 <h3>${popularFurniProductList.get(i).getTitle()}</h3>
+                                                <p>Total Order amount: ${popularFurniProductList.get(i).getProductAmount()}</p>
                                                 <p>${popularFurniProductList.get(i).getDescription()}</p>
                                                 <p>
                                                     <form method="post">
@@ -307,6 +310,7 @@
                                             <div class="col-sm-6 col-md-4">
                                                 <div class="caption"></div>
                                                 <h3>${popularBookProductList.get(i).getTitle()}</h3>
+                                                <p>Total Order amount: ${popularBookProductList.get(i).getProductAmount()}</p>
                                                 <p>${popularBookProductList.get(i).getDescription()}</p>
                                                 <p>
                                                     <form method="post">
