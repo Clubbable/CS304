@@ -19,8 +19,11 @@ public class Product {
     int productAmount;
     String firstName;
     String lastName;
+    int maxRate;
+    int minRate;
+    float averageRate;
 
-    public Product(int productId, String description, String title, Float price, String type, String supplierUserId, String lastName, String firstName, int productAmount) {
+    public Product(int productId, String description, String title, Float price, String type, String supplierUserId, String lastName, String firstName, int productAmount, int maxRate, int minRate, float averageRate) {
         this.productId = productId;
         this.description = description;
         this.title = title;
@@ -30,6 +33,9 @@ public class Product {
         this.lastName = lastName;
         this.firstName = firstName;
         this.productAmount = productAmount;
+        this.maxRate = maxRate;
+        this.minRate = minRate;
+        this.averageRate = averageRate;
     }
 
     public int getProductId() {
@@ -66,6 +72,18 @@ public class Product {
 
     public int getProductAmount() {
         return productAmount;
+    }
+
+    public int getMaxRate() {
+        return maxRate;
+    }
+
+    public int getMinRate() {
+        return minRate;
+    }
+
+    public float getAverageRate() {
+        return averageRate;
     }
     
     

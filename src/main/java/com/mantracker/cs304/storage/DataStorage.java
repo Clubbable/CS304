@@ -274,7 +274,7 @@ public class DataStorage extends DatabaseStorage
                 String supplierUserID = resultSet.getString("supplierUserID");
                 int productID = resultSet.getInt("productID");
                 
-                productList.add(new Product(productID, description, title, price, type, supplierUserID, null, null, 0));
+                productList.add(new Product(productID, description, title, price, type, supplierUserID, null, null, 0,0,0,0));
             }
         }
         catch (Exception ex)
@@ -364,7 +364,7 @@ public class DataStorage extends DatabaseStorage
                 int productNumber = resultSet.getInt("productID");
                 String lastName = resultSet.getString("lastName");
                 String firstName = resultSet.getString("firstName");
-                product = new Product(productNumber, description, title, price, type, supplierUserID, lastName, firstName, 0);
+                product = new Product(productNumber, description, title, price, type, supplierUserID, lastName, firstName, 0,0,0,0);
             }
         }
         catch (Exception ex)
@@ -904,7 +904,7 @@ public class DataStorage extends DatabaseStorage
                 String lastName = resultSet.getString("lastName");
                 String firstName = resultSet.getString("firstName");
                 
-                productList.add(new Product(productNumber, description, title, price, type, supplierUserID, lastName, firstName, 0));
+                productList.add(new Product(productNumber, description, title, price, type, supplierUserID, lastName, firstName, 0,0,0,0));
             }
         }
         catch (Exception ex)
@@ -935,9 +935,9 @@ public class DataStorage extends DatabaseStorage
             StringBuilder sb = new StringBuilder();
 
             // Build the query
-            sb.append("SELECT COUNT(*) AS orderCount, Purch.productID, Prod.title, Prod.description, Prod.type, Prod.price ");
-            sb.append("FROM Purchase Purch, Product Prod ");
-            sb.append("WHERE Purch.productID = Prod.productID ");
+            sb.append("SELECT COUNT(*) AS orderCount, Purch.productID, Prod.title, Prod.description, Prod.type, Prod.price, AVG(pf.rateStar) AS average, MAX(pf.rateStar) AS max, MIN(pf.rateStar) AS min");
+            sb.append("FROM Purchase Purch, Product Prod, ProductFeedback pf ");
+            sb.append("WHERE Purch.productID = Prod.productID AND pf.productId = Purch.productID ");
             if (!type.equals("all")) {
                 sb.append("AND Prod.type = '" + type + "' ");
             }
@@ -961,7 +961,10 @@ public class DataStorage extends DatabaseStorage
                 int productNumber = resultSet.getInt("productID");
                 int productAmount = resultSet.getInt("orderCount");
                 float price = resultSet.getFloat("price");
-                productList.add(new Product(productNumber, description, title, price, prodType, null, null, null, productAmount));
+                int maxRate = resultSet.getInt("max");
+                int minRate = resultSet.getInt("min");
+                float average = resultSet.getFloat("average");
+                productList.add(new Product(productNumber, description, title, price, prodType, null, null, null, productAmount, maxRate, minRate, average));
             }
         }
         catch (Exception ex)
@@ -977,4 +980,5 @@ public class DataStorage extends DatabaseStorage
         }
         return productList;
     }
+    
 }
