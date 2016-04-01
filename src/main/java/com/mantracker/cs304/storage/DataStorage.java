@@ -935,7 +935,7 @@ public class DataStorage extends DatabaseStorage
             StringBuilder sb = new StringBuilder();
 
             // Build the query
-            sb.append("SELECT COUNT(*) AS orderCount, Prod.title, Prod.description, Prod.type, Prod.price, AVG(pf.rateStar) AS average, MAX(pf.rateStar) AS max, MIN(pf.rateStar) AS min ");
+            sb.append("SELECT COUNT(*) AS orderCount, Prod.title, Prod.productId, Prod.description, Prod.type, Prod.price, AVG(pf.rateStar) AS average, MAX(pf.rateStar) AS max, MIN(pf.rateStar) AS min ");
             sb.append("FROM Product Prod, ProductFeedback pf ");
             sb.append("WHERE pf.productId = Prod.productID AND Prod.productID in (select productID from Purchase) ");
             if (!type.equals("all")) {
@@ -958,7 +958,7 @@ public class DataStorage extends DatabaseStorage
                 String title = resultSet.getString("title");
                 String description = resultSet.getString("description");
                 String prodType = resultSet.getString("type");
-                int productNumber = resultSet.getInt("productID");
+                int productNumber = resultSet.getInt("productId");
                 int productAmount = resultSet.getInt("orderCount");
                 float price = resultSet.getFloat("price");
                 int maxRate = resultSet.getInt("max");
