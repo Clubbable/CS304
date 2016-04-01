@@ -935,7 +935,7 @@ public class DataStorage extends DatabaseStorage
             StringBuilder sb = new StringBuilder();
 
             // Build the query
-            sb.append("SELECT COUNT(*) AS orderCount, Purch.productID, Prod.title, Prod.description, Prod.type, Prod.price, AVG(pf.rateStar) AS average, MAX(pf.rateStar) AS max, MIN(pf.rateStar) AS min");
+            sb.append("SELECT COUNT(*) AS orderCount, Purch.productID, Prod.title, Prod.description, Prod.type, Prod.price, AVG(pf.rateStar) AS average, MAX(pf.rateStar) AS max, MIN(pf.rateStar) AS min ");
             sb.append("FROM Purchase Purch, Product Prod, ProductFeedback pf ");
             sb.append("WHERE Purch.productID = Prod.productID AND pf.productId = Purch.productID ");
             if (!type.equals("all")) {
