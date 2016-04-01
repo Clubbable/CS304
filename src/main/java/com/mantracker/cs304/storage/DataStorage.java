@@ -251,7 +251,7 @@ public class DataStorage extends DatabaseStorage
             StringBuilder sb = new StringBuilder();
 
             // Build the query
-            sb.append("SELECT title, description, price, type, supplierUserID, productID ");
+            sb.append("SELECT title, description, price, type, supplierUserID, productID");
             sb.append("FROM Product ");
             sb.append("WHERE supplierUserID = '" + username + "' ");
             sb.append("ORDER BY productID ASC ");
@@ -274,7 +274,7 @@ public class DataStorage extends DatabaseStorage
                 String supplierUserID = resultSet.getString("supplierUserID");
                 int productID = resultSet.getInt("productID");
                 
-                productList.add(new Product(productID, description, title, price, type, supplierUserID, null, null));
+                productList.add(new Product(productID, description, title, price, type, supplierUserID, null, null, 0));
             }
         }
         catch (Exception ex)
@@ -364,7 +364,7 @@ public class DataStorage extends DatabaseStorage
                 int productNumber = resultSet.getInt("productID");
                 String lastName = resultSet.getString("lastName");
                 String firstName = resultSet.getString("firstName");
-                product = new Product(productNumber, description, title, price, type, supplierUserID, lastName, firstName);
+                product = new Product(productNumber, description, title, price, type, supplierUserID, lastName, firstName, 0);
             }
         }
         catch (Exception ex)
@@ -904,7 +904,7 @@ public class DataStorage extends DatabaseStorage
                 String lastName = resultSet.getString("lastName");
                 String firstName = resultSet.getString("firstName");
                 
-                productList.add(new Product(productNumber, description, title, price, type, supplierUserID, lastName, firstName));
+                productList.add(new Product(productNumber, description, title, price, type, supplierUserID, lastName, firstName, 0));
             }
         }
         catch (Exception ex)
@@ -959,8 +959,9 @@ public class DataStorage extends DatabaseStorage
                 String description = resultSet.getString("description");
                 String prodType = resultSet.getString("type");
                 int productNumber = resultSet.getInt("productID");
+                int productAmount = resultSet.getInt("orderCount");
                 float price = resultSet.getFloat("price");
-                productList.add(new Product(productNumber, description, title, price, prodType, null, null, null));
+                productList.add(new Product(productNumber, description, title, price, prodType, null, null, null, productAmount));
             }
         }
         catch (Exception ex)
