@@ -251,7 +251,7 @@ public class DataStorage extends DatabaseStorage
             StringBuilder sb = new StringBuilder();
 
             // Build the query
-            sb.append("SELECT title, description, price, type, supplierUserID, productID");
+            sb.append("SELECT title, description, price, type, supplierUserID, productID ");
             sb.append("FROM Product ");
             sb.append("WHERE supplierUserID = '" + username + "' ");
             sb.append("ORDER BY productID ASC ");
