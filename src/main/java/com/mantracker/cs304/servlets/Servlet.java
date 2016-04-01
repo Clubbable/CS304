@@ -144,7 +144,12 @@ public class Servlet extends HttpServlet
                 requestDispather = request.getRequestDispatcher("/WEB-INF/searchResult.jsp");
             }  else if (requestRedirAddress.equals("productList")) {
                 String productCategory = (String) request.getParameter("productCategory");
-                List<Product> productList = DataStorage.getPopularProduct(productCategory);
+                List<Product> productList;
+                if (productCategory.equals("boughtBySomeone")) {
+                    productList = DataStorage.getProductsBoughtBySomeone();
+                } else {
+                    productList = DataStorage.getPopularProduct(productCategory);
+                }
                 request.setAttribute("productCategory", productCategory);
                 request.setAttribute("ProductLists", productList);
                 request.setAttribute("ProductListsSize", productList.size());

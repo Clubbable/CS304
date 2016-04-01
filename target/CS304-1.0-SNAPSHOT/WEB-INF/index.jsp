@@ -223,7 +223,7 @@
                                             <input class="loginStatus" type="text" name="loginStatus" value=""/>
                                             <input type="text" name="type" value="redirect"/>
                                             <input type="text" name="address" value="productList"/>
-                                            <input type="text" name="productCategory" value="all"/>
+                                            <input type="text" name="productCategory" value="boughtBySomeone"/>
                                         </div>
                                         <input  class="btn btn-link" type="submit" value="See more >>" style="display:inline; flex:1; float:right; padding-top:20px; font-size:larger"/>            
                                     </form>
