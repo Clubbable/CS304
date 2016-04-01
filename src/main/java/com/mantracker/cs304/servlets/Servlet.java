@@ -42,6 +42,7 @@ public class Servlet extends HttpServlet
         List<Product> mostPopularBookProducts = DataStorage.getPopularProduct("book");
         request.setAttribute("popularBookProductList", mostPopularBookProducts);
         request.setAttribute("popularBookProductListSize", mostPopularBookProducts.size());
+        request.setAttribute("productsBoughtBySomeone", DataStorage.getProductsBoughtBySomeone());
         request.setAttribute("loginStatus", false);
         RequestDispatcher requestDispather = request.getRequestDispatcher("/WEB-INF/index.jsp");
         requestDispather.forward(request, response);
@@ -63,6 +64,7 @@ public class Servlet extends HttpServlet
         List<Product> mostPopularBookProducts = DataStorage.getPopularProduct("book");
         request.setAttribute("popularBookProductList", mostPopularBookProducts);
         request.setAttribute("popularBookProductListSize", Math.min(3,mostPopularBookProducts.size()));
+        request.setAttribute("productsBoughtBySomeone", DataStorage.getProductsBoughtBySomeone());
         
         String requestType = (String) request.getParameter("type");
         String requestRedirAddress = (String) request.getParameter("address");
