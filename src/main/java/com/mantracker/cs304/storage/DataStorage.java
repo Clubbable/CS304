@@ -935,13 +935,13 @@ public class DataStorage extends DatabaseStorage
             StringBuilder sb = new StringBuilder();
 
             // Build the query
-            sb.append("SELECT COUNT(*) AS orderCount, Purch.productID, Prod.title, Prod.description, Prod.type, Prod.price, AVG(pf.rateStar) AS average, MAX(pf.rateStar) AS max, MIN(pf.rateStar) AS min");
-            sb.append("FROM Purchase Purch, Product Prod, ProductFeedback pf ");
-            sb.append("WHERE Purch.productID = Prod.productID AND pf.productId = Purch.productID ");
+            sb.append("SELECT COUNT(*) AS orderCount, Prod.title, Prod.description, Prod.type, Prod.price, AVG(pf.rateStar) AS average, MAX(pf.rateStar) AS max, MIN(pf.rateStar) AS min ");
+            sb.append("FROM Product Prod, ProductFeedback pf ");
+            sb.append("WHERE pf.productId = Prod.productID AND Prod.productID in (select productID from Purchase) ");
             if (!type.equals("all")) {
                 sb.append("AND Prod.type = '" + type + "' ");
             }
-            sb.append("GROUP BY Purch.productID ");
+            sb.append("GROUP BY Prod.productID ");
             sb.append("ORDER BY orderCount DESC ");
 
             // Get a connection
