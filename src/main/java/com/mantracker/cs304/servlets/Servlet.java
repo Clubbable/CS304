@@ -66,7 +66,7 @@ public class Servlet extends HttpServlet
         request.setAttribute("popularBookProductList", mostPopularBookProducts);
         request.setAttribute("popularBookProductListSize", Math.min(3,mostPopularBookProducts.size()));
         request.setAttribute("productsBoughtBySomeone", DataStorage.getProductsBoughtBySomeone());
-        request.setAttribute("productsBoughtBySomeoneSize", DataStorage.getProductsBoughtBySomeone().size());
+        request.setAttribute("productsBoughtBySomeoneSize", Math.min(3,DataStorage.getProductsBoughtBySomeone().size()));
         
         String requestType = (String) request.getParameter("type");
         String requestRedirAddress = (String) request.getParameter("address");

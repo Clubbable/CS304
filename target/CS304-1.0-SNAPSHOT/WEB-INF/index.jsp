@@ -12,6 +12,7 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
         <!-- Optional theme -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css" integrity="sha384-aUGj/X2zp5rLCbBxumKTCw2Z50WgIr1vs/PFN4praOTvYXWlVyh2UtNUU0KAUhAX" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
         <title>Online Shopping System</title>
     </head>
     <style>
@@ -28,6 +29,9 @@
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
+        }
+        .rateSelect{
+            display: inline;
         }
     </style>
     <script>
@@ -165,6 +169,7 @@
                             <div class = "popularProduct" style="height:50px;">
                                 <div class="title">
                                     <div class = "popularProduct-title" style="display:inline; font-size:xx-large">Most Popular</div>
+                                    <div class="rateSelect">Rate: <select id="rate-select"><option>Max</option> <option>Min</option></select></div>
                                     <form method="post" class="seeMore">
                                         <div style="display:none">
                                             <input class="username" type="text" name="username" value=""/>
@@ -185,7 +190,9 @@
                                                 <h3 class="words">${popularProductList.get(i).getTitle()}</h3>
                                                 <p class="words">Total Order amount: ${popularProductList.get(i).getProductAmount()}</p>
                                                 <p class="words">${popularProductList.get(i).getDescription()}</p>
-                                                <p>
+                                                <p class="words">Average Rate: ${popularProductList.get(i).getAverageRate()}</p>
+                                                <p class="words maxRate">Best Rate: ${popularProductList.get(i).getMaxRate()}</p>
+                                                <p class="words minRate" style="display: none">Least Rate: ${popularProductList.get(i).getMinRate()}</p>
                                                     <form method="post">
                                                         <div style="display:none">
                                                             <input class="username" type="text" name="username" value=""/>
@@ -194,6 +201,49 @@
                                                             <input type="text" name="type" value="redirect"/>
                                                             <input type="text" name="address" value="productPage"/>
                                                             <input type="text" name="productID" value="${popularProductList.get(i).getProductId()}"/>
+                                                        </div>
+                                                        <input  class="btn btn-primary" type="submit" value="See Details"/>            
+                                                    </form>
+                                                </p>
+                                            </div>
+                                        </c:forEach>
+                                    </c:if>
+                                </div>
+                            </div>
+                            <hr style="width:100%; height:2px; background:#507786">
+                        </c:if>
+                        <c:if test="${productsBoughtBySomeoneSize ge 1}">
+                            <div class = "popularProduct" style="height:50px;">
+                                <div class="title">
+                                    <div class = "popularProduct-title" style="display:inline; font-size:xx-large">Products Others have purchased</div>
+                                    <form method="post" class="seeMore">
+                                        <div style="display:none">
+                                            <input class="username" type="text" name="username" value=""/>
+                                            <input class="password" type="text" name="password" value=""/>
+                                            <input class="loginStatus" type="text" name="loginStatus" value=""/>
+                                            <input type="text" name="type" value="redirect"/>
+                                            <input type="text" name="address" value="productList"/>
+                                            <input type="text" name="productCategory" value="all"/>
+                                        </div>
+                                        <input  class="btn btn-link" type="submit" value="See more >>" style="display:inline; flex:1; float:right; padding-top:20px; font-size:larger"/>            
+                                    </form>
+                                 </div>
+                                <div class="row">
+                                    <c:if test="${productsBoughtBySomeoneSize ge 1}">
+                                        <c:forEach var="i" begin="0" end="${productsBoughtBySomeoneSize - 1}">
+                                            <div class="col-sm-6 col-md-4">
+                                                <div class="caption"></div>
+                                                <h3 class="words">${productsBoughtBySomeone.get(i).getTitle()}</h3>
+                                                <p class="words">${productsBoughtBySomeone.get(i).getDescription()}</p>
+                                                <p>
+                                                    <form method="post">
+                                                        <div style="display:none">
+                                                            <input class="username" type="text" name="username" value=""/>
+                                                            <input class="password" type="text" name="password" value=""/>
+                                                            <input class="loginStatus" type="text" name="loginStatus" value=""/>
+                                                            <input type="text" name="type" value="redirect"/>
+                                                            <input type="text" name="address" value="productPage"/>
+                                                            <input type="text" name="productID" value="${productsBoughtBySomeone.get(i).getProductId()}"/>
                                                         </div>
                                                         <input  class="btn btn-primary" type="submit" value="See Details"/>            
                                                     </form>
@@ -229,6 +279,7 @@
                                                 <h3 class="words">${popularElecProductList.get(i).getTitle()}</h3>
                                                 <p class="words">Total Order amount: ${popularElecProductList.get(i).getProductAmount()}</p>
                                                 <p class="words">${popularElecProductList.get(i).getDescription()}</p>
+                                                <p class="words">Average Rate: ${popularElecProductList.get(i).getAverageRate()}</p>
                                                 <p>
                                                     <form method="post">
                                                         <div style="display:none">
@@ -273,6 +324,7 @@
                                                 <h3 class="words">${popularFurniProductList.get(i).getTitle()}</h3>
                                                 <p class="words">Total Order amount: ${popularFurniProductList.get(i).getProductAmount()}</p>
                                                 <p class="words">${popularFurniProductList.get(i).getDescription()}</p>
+                                                <p class="words">Average Rate: ${popularFurniProductList.get(i).getAverageRate()}</p>
                                                 <p>
                                                     <form method="post">
                                                         <div style="display:none">
@@ -317,6 +369,7 @@
                                                 <h3 class="words">${popularBookProductList.get(i).getTitle()}</h3>
                                                 <p class="words">Total Order amount: ${popularBookProductList.get(i).getProductAmount()}</p>
                                                 <p class="words">${popularBookProductList.get(i).getDescription()}</p>
+                                                <p class="words">Average Rate: ${popularBookProductList.get(i).getAverageRate()}</p>
                                                 <p>
                                                     <form method="post">
                                                         <div style="display:none">
@@ -371,5 +424,27 @@
         for(var i = 0; i < loginArrays.length; i++) {
             loginArrays[i].setAttribute("value", sessionStorage.loginStatus);
         }
+        
+        $("#rate-select").on("change", function (event) {
+            if (document.getElementById("rate-select").value === "Max") {
+                var maxRate = document.getElementsByClassName("maxRate");
+                for(var i = 0; i < maxRate.length; i++) {
+                    maxRate[i].setAttribute("style", "display: block");
+                }
+                var minRate = document.getElementsByClassName("minRate");
+                for(var i = 0; i < minRate.length; i++) {
+                    minRate[i].setAttribute("style", "display: none");
+                }
+            } else {
+                var maxRate = document.getElementsByClassName("maxRate");
+                for(var i = 0; i < maxRate.length; i++) {
+                    maxRate[i].setAttribute("style", "display: none");
+                }
+                var minRate = document.getElementsByClassName("minRate");
+                for(var i = 0; i < minRate.length; i++) {
+                    minRate[i].setAttribute("style", "display: block");
+                }
+            }
+        });
     </script>
 </html>
