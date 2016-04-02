@@ -156,6 +156,7 @@
                                                         <input type="text" name="type" value="redirect"/>
                                                         <input type="text" name="address" value="editCard"/>
                                                         <input type="text" name="cardNumber" value="${CardLists.get(i).getCardNumber()}"/>
+                                                        <input type="text" name="cardType" value="${CardLists.get(i).getCardType()}"/>
                                                     </div>
                                                     <input class="btn btn-primary" type="submit" value="Edit">
                                                 </form>

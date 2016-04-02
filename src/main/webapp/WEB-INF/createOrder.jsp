@@ -254,10 +254,12 @@
                 document.getElementById("newCardTypeInput").value = "debit";
                 document.getElementById("newCardPropLable").innerHTML  = "Account Type";
                 document.getElementById("newCardProp").setAttribute("name", "newCardAccType");
+                document.getElementById("newCardProp").setAttribute("type", "text");
             } else {
                 document.getElementById("newCardTypeInput").value = "credit";
                 document.getElementById("newCardPropLable").innerHTML  = "Expires Date";
                 document.getElementById("newCardProp").setAttribute("name", "newCardExpire");
+                document.getElementById("newCardProp").setAttribute("type", "date");
             }
         });
     </script>

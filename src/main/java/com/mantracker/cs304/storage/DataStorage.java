@@ -1128,4 +1128,61 @@ public class DataStorage extends DatabaseStorage
         }
         return deleteStatus;
     }
+    
+    public static paymentMethod getCardInfo(String cardNumber, String cardType) {
+        // Define database variables
+        Connection connection = null;
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+        paymentMethod payment = new paymentMethod();
+        try
+        {
+            // Create StringBuilder for the query
+            StringBuilder sb = new StringBuilder();
+
+            // Build the query
+            sb.append("SELECT * ");
+            if (cardType.equals("credit")) {
+                sb.append("FROM PaymentMethod P , CreditPaymentMethod C ");
+                sb.append("WHERE P.CardNumber = '" + cardNumber + "' AND P.CardNumber = C.CardNumber ");
+            } else {
+                sb.append("FROM PaymentMethod P, DebitPaymentMethod D ");
+                sb.append("WHERE P.CardNumber = '" + cardNumber + "' AND P.CardNumber = D.CardNumber ");
+            }
+
+            // Get a connection
+            connection = getConnection();
+
+            // Prepare statement
+            statement = connection.prepareStatement(sb.toString());
+
+            // Execute the query
+            resultSet = statement.executeQuery();
+            // Get the result
+            while (resultSet.next())
+            {
+                String cardNum = resultSet.getString("CardNumber");
+                String ownerID = resultSet.getString("ownerID");
+                if (cardType.equals("credit")) {
+                    String expireDate = resultSet.getString("expireDate");
+                    payment = new paymentMethod(cardNum, ownerID, cardType, null, expireDate);
+                } else {
+                    String accountType = resultSet.getString("accountType");
+                    payment = new paymentMethod(cardNum, ownerID, cardType, accountType, null);
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            // Log
+            LogManager.getLogger(DataStorage.class).fatal("Get cardinfo error", ex);
+        }
+        finally
+        {
+            safeClose(resultSet);
+            safeClose(statement);
+            safeClose(connection);
+        }
+        return payment;
+    }
 }

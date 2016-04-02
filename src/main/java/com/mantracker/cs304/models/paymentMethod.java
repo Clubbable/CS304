@@ -16,6 +16,9 @@ public class paymentMethod {
     String expireDate;
     String ownerID;
 
+    public paymentMethod () {
+    }
+
     public paymentMethod (String cardNumber, String ownerID, String cardType, String accountType, String expireDate) {
         this.cardNumber = cardNumber;
         this.ownerID = ownerID;

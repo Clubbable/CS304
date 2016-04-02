@@ -159,7 +159,12 @@ public class Servlet extends HttpServlet
                 request.setAttribute("CardLists", CardLists);
                 request.setAttribute("CardListsSize", CardLists.size());
                 requestDispather = request.getRequestDispatcher("/WEB-INF/cardList.jsp");
-            } else {
+            } else if (requestRedirAddress.equals("editCard")) {
+                String cardNumber = (String) request.getParameter("cardNumber");
+                String cardType = (String) request.getParameter("cardType");
+                request.setAttribute("cardInfo", DataStorage.getCardInfo(cardNumber, cardType));
+                requestDispather = request.getRequestDispatcher("/WEB-INF/editCard.jsp");
+            }  else {
                 requestDispather = request.getRequestDispatcher("/WEB-INF/index.jsp");
             }
             requestDispather.forward(request, response);
