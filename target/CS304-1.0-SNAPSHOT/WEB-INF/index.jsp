@@ -268,7 +268,7 @@
                         <c:if test="${popularElecProductListSize ge 1}">
                             <div class = "body-typeElectronics">
                                 <div class="title">
-                                    <div class = "typeA-title" style="display:inline; font-size:xx-large">ELECTRONICS</div>
+                                    <div class = "typeA-title" style="display:inline; font-size:xx-large">All ELECTRONICS</div>
                                     <form class="inline" method="post">
                                         <div style="display:none" class="inline">
                                             <input class="username" type="text" name="username" value=""/>
@@ -311,7 +311,7 @@
                             <hr style="width:100%; height:2px; background:#507786">
                             <div class = "body-typeFurniture">
                                 <div class="title">
-                                <div class = "typeB-title" style="display:inline; font-size:xx-large">Furniture</div>
+                                <div class = "typeB-title" style="display:inline; font-size:xx-large">All Furniture</div>
                                 <form method="post" class="inline">
                                     <div style="display:none">
                                         <input class="username" type="text" name="username" value=""/>
@@ -354,7 +354,7 @@
                             <hr style="width:100%; height:2px; background:#507786">
                             <div class = "body-typeBook">
                                 <div class="title">
-                                 <div class = "typeC-title" style="display:inline; font-size:xx-large">BOOK</div>
+                                 <div class = "typeC-title" style="display:inline; font-size:xx-large">All BOOKS</div>
                                 <form method="post" class="inline">
                                     <div style="display:none">
                                         <input class="username" type="text" name="username" value=""/>
