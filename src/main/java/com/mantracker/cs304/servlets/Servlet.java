@@ -30,6 +30,7 @@ public class Servlet extends HttpServlet
     public void doGet(HttpServletRequest request,
                       HttpServletResponse response) throws IOException, ServletException
     {
+        request.setAttribute("operationStatus", "");
         List<Product> mostPopularProducts = DataStorage.getPopularProduct("all");
         request.setAttribute("popularProductList", mostPopularProducts);
         request.setAttribute("popularProductListSize", Math.min(3,mostPopularProducts.size()));
@@ -53,6 +54,7 @@ public class Servlet extends HttpServlet
     public void doPost(HttpServletRequest request,
                        HttpServletResponse response) throws IOException, ServletException
     {
+        request.setAttribute("operationStatus", "");
         List<Product> mostPopularProducts = DataStorage.getPopularProduct("all");
         request.setAttribute("popularProductList", mostPopularProducts);
         request.setAttribute("popularProductListSize", Math.min(3,mostPopularProducts.size()));
@@ -195,10 +197,10 @@ public class Servlet extends HttpServlet
                 String passwordNewAcc = (String) request.getParameter("password");
                 String lastName = (String) request.getParameter("lastname");
                 String firstName = (String) request.getParameter("firstname");
-                request.setAttribute("createStatus", DataStorage.createAccount(usernameNewAcc, passwordNewAcc, lastName, firstName));
+                request.setAttribute("operationStatus", DataStorage.createAccount(usernameNewAcc, passwordNewAcc, lastName, firstName));
                 request.setAttribute("loginStatus", false);
             } catch (Exception e){
-                request.setAttribute("createStatus", false);
+                request.setAttribute("operationStatus", e.getMessage());
                 request.setAttribute("loginStatus", false);
             }
             RequestDispatcher requestDispather = request.getRequestDispatcher("/WEB-INF/index.jsp");
@@ -211,10 +213,10 @@ public class Servlet extends HttpServlet
                 String price = (String) request.getParameter("price");
                 String description = (String) request.getParameter("description");
                 
-                request.setAttribute("createStatus", DataStorage.createProduct(username, title, type, price, description));
+                request.setAttribute("operationStatus", DataStorage.createProduct(username, title, type, price, description));
                 request.setAttribute("loginStatus", loginStatus);
             } catch (Exception e){
-                request.setAttribute("createProductStatus", false);
+                request.setAttribute("operationStatus", e.getMessage());
                 request.setAttribute("loginStatus", loginStatus);
             }
             RequestDispatcher requestDispather = request.getRequestDispatcher("/WEB-INF/index.jsp");
@@ -225,12 +227,12 @@ public class Servlet extends HttpServlet
             try {
                 String productID = (String) request.getParameter("productID");
                 
-                request.setAttribute("deleteProductStatus", DataStorage.deleteProduct(productID));
+                request.setAttribute("operationStatus", DataStorage.deleteProduct(productID));
                 List<Product> products =  DataStorage.getProductLists(username);
                 request.setAttribute("ProductListsSize", products.size());
                 request.setAttribute("ProductLists", products);
             } catch (Exception e){
-                request.setAttribute("deleteProductStatus", false);
+                request.setAttribute("operationStatus", e.getMessage());
             }
             RequestDispatcher requestDispather = request.getRequestDispatcher("/WEB-INF/productSellingList.jsp");
             requestDispather.forward(request, response);
@@ -245,16 +247,16 @@ public class Servlet extends HttpServlet
                 String feedbackTitle = (String) request.getParameter("feedbackTitle");
                 if (feedbackType.equals("Product")){
                     String productID = (String) request.getParameter("productID");
-                    request.setAttribute("submitFeedbackStatus", DataStorage.submitProductFeedback(productID, CustomerID, feedbackComment, rateStar, feedbackTitle));
+                    request.setAttribute("operationStatus", DataStorage.submitProductFeedback(productID, CustomerID, feedbackComment, rateStar, feedbackTitle));
                 } else {
                     String supplierID = (String) request.getParameter("supplierID");
-                    request.setAttribute("submitFeedbackStatus", DataStorage.submitSupplierFeedback(supplierID, CustomerID, feedbackComment, rateStar, feedbackTitle));
+                    request.setAttribute("operationStatus", DataStorage.submitSupplierFeedback(supplierID, CustomerID, feedbackComment, rateStar, feedbackTitle));
                 }
                 List<Product> products =  DataStorage.getProductLists(username);
                 request.setAttribute("ProductListsSize", products.size());
                 request.setAttribute("ProductLists", products);
             } catch (Exception e){
-                request.setAttribute("submitFeedbackStatus", false);
+                request.setAttribute("operationStatus", e.getMessage());
             }
             List<Purchase> orders =  DataStorage.getOrders(username);
             request.setAttribute("OrderListsSize", orders.size());
@@ -280,14 +282,14 @@ public class Servlet extends HttpServlet
                         String newCardExpire = (String) request.getParameter("newCardExpire");
                         DataStorage.addCreditPaymentMethod(newCardNumber, CustomerID, newCardExpire);
                     }
-                    request.setAttribute("createOrderStatus", DataStorage.createOrder(productID, CustomerID, shippingAddress, newCardNumber));
+                    request.setAttribute("operationStatus", DataStorage.createOrder(productID, CustomerID, shippingAddress, newCardNumber));
                 } else {
                     // Existing card
                     String cardNum = paymentMethodSelect.substring(paymentMethodSelect.indexOf("Card No.:") + 9, paymentMethodSelect.indexOf(";"));
-                    request.setAttribute("createOrderStatus", DataStorage.createOrder(productID, CustomerID, shippingAddress, cardNum));
+                    request.setAttribute("operationStatus", DataStorage.createOrder(productID, CustomerID, shippingAddress, cardNum));
                 }
             } catch (Exception e){
-                request.setAttribute("createOrderStatus", false); 
+                request.setAttribute("operationStatus", e.getMessage()); 
             }
             Product product = DataStorage.getProduct(productID);
             request.setAttribute("ProductInfo", product);
@@ -299,9 +301,9 @@ public class Servlet extends HttpServlet
             try {
                 String cardNumber = (String) request.getParameter("cardNumber");
                 
-                request.setAttribute("deleteCardStatus", DataStorage.deleteCard(cardNumber));
+                request.setAttribute("operationStatus", DataStorage.deleteCard(cardNumber));
             } catch (Exception e){
-                request.setAttribute("deleteProductStatus", false);
+                request.setAttribute("operationStatus", e.getMessage());
             }
             List<paymentMethod> CardLists= DataStorage.getPaymentMethods(username);
             request.setAttribute("CardLists", CardLists);
@@ -317,9 +319,9 @@ public class Servlet extends HttpServlet
                 String cardAccType = (String) request.getParameter("cardAccType");
                 String cardExpire = (String) request.getParameter("cardExpire");
                 String oldCardNumber = (String) request.getParameter("oldCardNumber");
-                request.setAttribute("editCardStatus", DataStorage.editCard(oldCardNumber, cardNumber, cardType, cardAccType, cardExpire));
+                request.setAttribute("operationStatus", DataStorage.editCard(oldCardNumber, cardNumber, cardType, cardAccType, cardExpire));
             } catch (Exception e){
-                request.setAttribute("editCardStatus", false);
+                request.setAttribute("operationStatus", e.getMessage());
             }
             List<paymentMethod> CardLists= DataStorage.getPaymentMethods(username);
             request.setAttribute("CardLists", CardLists);

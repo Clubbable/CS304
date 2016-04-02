@@ -207,5 +207,8 @@
         $("#productForm").submit(function (event) {
             document.getElementById("product-type").value = document.getElementById("type-select").value ? document.getElementById("type-select").value : "electronics";
         });
+        if(${operationStatus != ""}) {
+            alert("${operationStatus}");
+        }
     </script>
 </html>

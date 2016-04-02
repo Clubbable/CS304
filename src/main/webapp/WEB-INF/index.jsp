@@ -450,5 +450,9 @@
                 }
             }
         });
+        
+        if(${operationStatus != ""}) {
+            alert("${operationStatus}");
+        }
     </script>
 </html>

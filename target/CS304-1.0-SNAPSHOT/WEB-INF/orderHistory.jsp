@@ -218,5 +218,9 @@
         for(var i = 0; i < loginArrays.length; i++) {
             loginArrays[i].setAttribute("value", sessionStorage.loginStatus);
         }
+        
+        if(${operationStatus != ""}) {
+            alert("${operationStatus}");
+        }
     </script>
 </html>

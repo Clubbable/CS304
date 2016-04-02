@@ -123,11 +123,11 @@ public class DataStorage extends DatabaseStorage
         return login;
     }
    
-    public static boolean createAccount(String username, String password, String lastName, String firstName) {
+    public static String createAccount(String username, String password, String lastName, String firstName) {
         Connection connection = null;
         PreparedStatement statement = null;
         ResultSet resultSet = null;
-        boolean createSuccessful = false;
+        String createSuccessful = "";
         boolean noDuplicate = true;
         int result = 0;
         // Check if the user exists
@@ -156,6 +156,7 @@ public class DataStorage extends DatabaseStorage
             noDuplicate = false;
             // Log
             LogManager.getLogger(DataStorage.class).fatal("Verify User exist error", ex);
+            createSuccessful = ex.getMessage();
         }
         if (noDuplicate) {
             try {
@@ -175,13 +176,14 @@ public class DataStorage extends DatabaseStorage
                 // Execute the query
                 result = statement.executeUpdate();
                 if (result == 1) {
-                    createSuccessful = true;
+                    createSuccessful = "Create Account Successfully";
                 }
             }
             catch (Exception ex)
             {
                 // Log
                 LogManager.getLogger(DataStorage.class).fatal("Creat Account error", ex);
+                createSuccessful = ex.getMessage();
             }
             finally
             {
@@ -193,39 +195,40 @@ public class DataStorage extends DatabaseStorage
         return createSuccessful;
     }
     
-    public static boolean createProduct(String username, String title, String type, String price, String description) {
+    public static String createProduct(String username, String title, String type, String price, String description) {
         Connection connection = null;
         PreparedStatement statement = null;
         ResultSet resultSet = null;
-        boolean createSuccessful = false;
+        String createSuccessful = "";
         int result = 0;
 
         try
         {
-        // Create new user
-        // Build the query
-        StringBuilder sb = new StringBuilder();
-        // Build the query
-        sb.append("INSERT INTO Product (description, title, price, supplierUserID, type)");
-        sb.append("VALUES (");
-        sb.append("'" + description+ "',");
-        sb.append("'" + title+ "',");
-        sb.append(price+ ",");
-        sb.append("'" + username+ "',");
-        sb.append("'" + type+ "')");
-        // Get a connection
-        connection = getConnection();
-        statement = connection.prepareStatement(sb.toString());
-        // Execute the query
-        result = statement.executeUpdate();
-        if (result == 1) {
-            createSuccessful = true;
-        }
+            // Create new user
+            // Build the query
+            StringBuilder sb = new StringBuilder();
+            // Build the query
+            sb.append("INSERT INTO Product (description, title, price, supplierUserID, type)");
+            sb.append("VALUES (");
+            sb.append("'" + description+ "',");
+            sb.append("'" + title+ "',");
+            sb.append(price+ ",");
+            sb.append("'" + username+ "',");
+            sb.append("'" + type+ "')");
+            // Get a connection
+            connection = getConnection();
+            statement = connection.prepareStatement(sb.toString());
+            // Execute the query
+            result = statement.executeUpdate();
+            if (result == 1) {
+                createSuccessful = "Create Product Successfully";
+            }
         }
         catch (Exception ex)
         {
             // Log
             LogManager.getLogger(DataStorage.class).fatal("Creat Product error", ex);
+            createSuccessful = ex.getMessage();
         }
         finally
         {
@@ -291,12 +294,12 @@ public class DataStorage extends DatabaseStorage
         return productList;
     }
 
-    public static boolean deleteProduct(String productID) {
+    public static String deleteProduct(String productID) {
         // Define database variables
         Connection connection = null;
         PreparedStatement statement = null;
         ResultSet resultSet = null;
-        boolean deleteStatus = false;
+        String deleteStatus = "";
         int result = 0;
         try
         {
@@ -315,13 +318,14 @@ public class DataStorage extends DatabaseStorage
 
             result = statement.executeUpdate();
             if (result == 1) {
-                deleteStatus = true;
+                deleteStatus = "Delect Product successfully";
             }
         }
         catch (Exception ex)
         {
             // Log
             LogManager.getLogger(DataStorage.class).fatal("Delete Product error", ex);
+            deleteStatus = ex.getMessage();
         }
         finally
         {
@@ -554,11 +558,11 @@ public class DataStorage extends DatabaseStorage
         return feedbackList;
     }
     
-    public static boolean submitProductFeedback (String productID, String CustomerID, String feedbackComment, String rateStar, String feedbackTitle) {
+    public static String submitProductFeedback (String productID, String CustomerID, String feedbackComment, String rateStar, String feedbackTitle) {
         Connection connection = null;
         PreparedStatement statement = null;
         ResultSet resultSet = null;
-        boolean createSuccessful = false;
+        String createSuccessful = "";
 
         int result = 0;
 
@@ -583,13 +587,14 @@ public class DataStorage extends DatabaseStorage
             // Execute the query
             result = statement.executeUpdate();
             if (result == 1) {
-                createSuccessful = true;
+                createSuccessful = "Submit Product Feedback Successfully";
             }
         }
         catch (Exception ex)
         {
             // Log
             LogManager.getLogger(DataStorage.class).fatal("Creat Product Feedback error", ex);
+            createSuccessful = ex.getMessage();
         }
         finally
         {
@@ -601,11 +606,11 @@ public class DataStorage extends DatabaseStorage
         return createSuccessful;
     }
     
-    public static boolean submitSupplierFeedback (String supplierID, String CustomerID, String feedbackComment, String rateStar, String feedbackTitle) {
+    public static String submitSupplierFeedback (String supplierID, String CustomerID, String feedbackComment, String rateStar, String feedbackTitle) {
         Connection connection = null;
         PreparedStatement statement = null;
         ResultSet resultSet = null;
-        boolean createSuccessful = false;
+        String createSuccessful = "";
         int result = 0;
         
         try
@@ -629,13 +634,14 @@ public class DataStorage extends DatabaseStorage
         // Execute the query
         result = statement.executeUpdate();
         if (result == 1) {
-            createSuccessful = true;
+            createSuccessful = "Submit supplier feedback Successfully";
         }
         }
         catch (Exception ex)
         {
             // Log
             LogManager.getLogger(DataStorage.class).fatal("Creat Supplier Feedback error", ex);
+            createSuccessful = ex.getMessage();
         }
         finally
         {
@@ -821,11 +827,11 @@ public class DataStorage extends DatabaseStorage
         return addSuccessful;
     }
     
-    public static boolean createOrder(String productID, String CustomerID, String shippingAddress, String cardNumber){
+    public static String createOrder(String productID, String CustomerID, String shippingAddress, String cardNumber){
         Connection connection = null;
         PreparedStatement statement = null;
         ResultSet resultSet = null;
-        boolean addSuccessful = false;
+        String addSuccessful = "";
         int result = 0;
         
         try
@@ -847,13 +853,14 @@ public class DataStorage extends DatabaseStorage
             // Execute the query
             result = statement.executeUpdate();
             if (result == 1) {
-                addSuccessful = true;
+                addSuccessful = "Create Order Successfully";
             }
         }
         catch (Exception ex)
         {
             // Log
             LogManager.getLogger(DataStorage.class).fatal("Create order error", ex);
+            addSuccessful = ex.getMessage();
         }
         finally
         {
@@ -1088,12 +1095,12 @@ public class DataStorage extends DatabaseStorage
         return productList;
     }
     
-    public static boolean deleteCard(String cardNumber) {
+    public static String deleteCard(String cardNumber) {
         // Define database variables
         Connection connection = null;
         PreparedStatement statement = null;
         ResultSet resultSet = null;
-        boolean deleteStatus = false;
+        String deleteStatus = "";
         int result = 0;
         try
         {
@@ -1112,13 +1119,14 @@ public class DataStorage extends DatabaseStorage
 
             result = statement.executeUpdate();
             if (result == 1) {
-                deleteStatus = true;
+                deleteStatus = "Delete Card successfully";
             }
         }
         catch (Exception ex)
         {
             // Log
             LogManager.getLogger(DataStorage.class).fatal("Delete Card error", ex);
+            return ex.getMessage();
         }
         finally
         {
@@ -1186,12 +1194,12 @@ public class DataStorage extends DatabaseStorage
         return payment;
     }
     
-    public static boolean editCard(String oldCardNumber, String cardNumber, String cardType, String cardAccType, String cardExpire) {
+    public static String editCard(String oldCardNumber, String cardNumber, String cardType, String cardAccType, String cardExpire) {
         // Define database variables
         Connection connection = null;
         PreparedStatement statement = null;
         ResultSet resultSet = null;
-        boolean editStatus = false;
+        String editStatus = "";
         int result = 0;
         try
         {
@@ -1231,13 +1239,14 @@ public class DataStorage extends DatabaseStorage
 
             result = statement.executeUpdate();
             if (result == 1) {
-                editStatus = true;
+                editStatus = "Successfully";
             }
         }
         catch (Exception ex)
         {
             // Log
             LogManager.getLogger(DataStorage.class).fatal("editCard error", ex);
+            return ex.getMessage();
         }
         finally
         {
