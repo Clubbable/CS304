@@ -1000,7 +1000,8 @@ public class DataStorage extends DatabaseStorage
             sb.append("WHERE p.productID = pu.productID ");
             sb.append("AND pu.productID ");
             sb.append("NOT IN (SELECT DISTINCT productID from Product WHERE productID NOT IN (SELECT ProductID From Purchase)) ");
-
+            sb.append("GROUP BY p.productID ");
+            
             // Get a connection
             connection = getConnection();
 
@@ -1023,7 +1024,7 @@ public class DataStorage extends DatabaseStorage
         catch (Exception ex)
         {
             // Log
-            LogManager.getLogger(DataStorage.class).fatal("Get most popular product error", ex);
+            LogManager.getLogger(DataStorage.class).fatal("getProductsBoughtBySomeone error", ex);
         }
         finally
         {
