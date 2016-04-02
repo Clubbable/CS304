@@ -308,6 +308,24 @@ public class Servlet extends HttpServlet
             request.setAttribute("CardListsSize", CardLists.size());
             RequestDispatcher requestDispather = request.getRequestDispatcher("/WEB-INF/cardList.jsp");
             requestDispather.forward(request, response);
+        }  else if (requestType.equals("editCard")) {
+            String loginStatus = (String) request.getParameter("loginStatus");
+            request.setAttribute("loginStatus", loginStatus);
+            try {
+                String cardNumber = (String) request.getParameter("cardNumber");
+                String cardType = (String) request.getParameter("cardType");
+                String cardAccType = (String) request.getParameter("cardAccType");
+                String cardExpire = (String) request.getParameter("cardExpire");
+                String oldCardNumber = (String) request.getParameter("oldCardNumber");
+                request.setAttribute("editCardStatus", DataStorage.editCard(oldCardNumber, cardNumber, cardType, cardAccType, cardExpire));
+            } catch (Exception e){
+                request.setAttribute("editCardStatus", false);
+            }
+            List<paymentMethod> CardLists= DataStorage.getPaymentMethods(username);
+            request.setAttribute("CardLists", CardLists);
+            request.setAttribute("CardListsSize", CardLists.size());
+            RequestDispatcher requestDispather = request.getRequestDispatcher("/WEB-INF/cardList.jsp");
+            requestDispather.forward(request, response);
         }
     }
 

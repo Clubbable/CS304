@@ -135,13 +135,15 @@
                             <div style="display:none">
                                 <input class="username" type="text" name="username" value=""/>
                                 <input class="password" type="text" name="password" value=""/>
-                                <input type="text" name="type" value="createOrder"/>
+                                <input type="text" name="type" value="editCard"/>
                                 <input class="loginStatus" type="text" name="loginStatus" value=""/>
+                                <input type="text" name="cardType" value="${cardInfo.getCardType()}">
+                                <input type="text" name="oldCardNumber" value="${cardInfo.getCardNumber()}">
                             </div>
                             <div>
                                 <div class="col-sm-2 newCardWrapper">
                                     <div class=" inputTitle">Card Type</div>
-                                    <input type="text" class="form-control" disabled name="cardType" value="${cardInfo.getCardType()}" required>
+                                    <input type="text" class="form-control" disabled value="${cardInfo.getCardType()}" required>
                                 </div>
                                 <div class="col-sm-6 newCardWrapper">
                                     <div class=" inputTitle">Card number</div>
