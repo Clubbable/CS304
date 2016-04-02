@@ -36,6 +36,7 @@ public class Purchase {
         this.title = title;
         this.price = price;
         this.supplierUserID = supplierUserID;
+        this.cardNumber =cardNumber;
     }
 
 

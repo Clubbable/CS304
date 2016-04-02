@@ -153,8 +153,9 @@
                                                         <input class="username" type="text" name="username" value=""/>
                                                         <input class="password" type="text" name="password" value=""/>
                                                         <input class="loginStatus" type="text" name="loginStatus" value=""/>
-                                                        <input id = "signInType" type="text" name="type" value="deleteProduct"/>
-                                                        <input id = "signInValue" type="text" name="productID" value="${CardLists.get(i).getCardNumber()}"/>
+                                                        <input type="text" name="type" value="redirect"/>
+                                                        <input type="text" name="address" value="editCard"/>
+                                                        <input type="text" name="cardNumber" value="${CardLists.get(i).getCardNumber()}"/>
                                                     </div>
                                                     <input class="btn btn-primary" type="submit" value="Edit">
                                                 </form>
@@ -165,8 +166,8 @@
                                                         <input class="username" type="text" name="username" value=""/>
                                                         <input class="password" type="text" name="password" value=""/>
                                                         <input class="loginStatus" type="text" name="loginStatus" value=""/>
-                                                        <input id = "signInType" type="text" name="type" value="deleteProduct"/>
-                                                        <input id = "signInValue" type="text" name="productID" value="${CardLists.get(i).getCardNumber()}"/>
+                                                        <input type="text" name="type" value="deleteCard"/>
+                                                        <input type="text" name="cardNumber" value="${CardLists.get(i).getCardNumber()}"/>
                                                     </div>
                                                     <input class="btn btn-primary" type="submit" value="Delete">
                                                 </form>

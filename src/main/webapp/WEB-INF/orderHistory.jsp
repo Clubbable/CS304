@@ -127,16 +127,18 @@
                                           <tr>
                                             <th style="width:25%">ORDER PLACED</th>
                                             <th style="width:10%">TOTAL</th>
-                                            <th style="width:39%">SHIP TO</th>
-                                            <th style="width:26%">ORDER NUMBER</th>
+                                            <th style="width:30%">SHIP TO</th>
+                                            <th style="width:20%">Card Number</th>
+                                            <th style="width:15%">ORDER NUMBER</th>
                                           </tr>
                                         </thead>
                                         <tbody>
                                           <tr>
                                             <th style="width:25%">Date: ${OrderLists.get(i).getPurchaseDate()}</th>
                                             <th style="width:10%">${OrderLists.get(i).getPrice()} CAD</th>
-                                            <th style="width:39%">${OrderLists.get(i).getShippingAddress()}</th>
-                                            <th style="width:26%">#${OrderLists.get(i).getOrderNumber()}</th>
+                                            <th style="width:30%">${OrderLists.get(i).getShippingAddress()}</th>
+                                            <th style="width:20%">${OrderLists.get(i).getCardNumber()}</th>
+                                            <th style="width:15%">#${OrderLists.get(i).getOrderNumber()}</th>
                                           </tr>
                                         </tbody>
                                     </table>

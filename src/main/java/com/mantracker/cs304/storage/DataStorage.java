@@ -1087,4 +1087,45 @@ public class DataStorage extends DatabaseStorage
         }
         return productList;
     }
+    
+    public static boolean deleteCard(String cardNumber) {
+        // Define database variables
+        Connection connection = null;
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+        boolean deleteStatus = false;
+        int result = 0;
+        try
+        {
+            // Create StringBuilder for the query
+            StringBuilder sb = new StringBuilder();
+
+            // Build the query
+            sb.append("DELETE FROM PaymentMethod ");
+            sb.append("WHERE CardNumber = '" + cardNumber + "' ");
+
+            // Get a connection
+            connection = getConnection();
+
+            // Prepare statement
+            statement = connection.prepareStatement(sb.toString());
+
+            result = statement.executeUpdate();
+            if (result == 1) {
+                deleteStatus = true;
+            }
+        }
+        catch (Exception ex)
+        {
+            // Log
+            LogManager.getLogger(DataStorage.class).fatal("Delete Card error", ex);
+        }
+        finally
+        {
+            safeClose(resultSet);
+            safeClose(statement);
+            safeClose(connection);
+        }
+        return deleteStatus;
+    }
 }

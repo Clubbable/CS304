@@ -288,6 +288,21 @@ public class Servlet extends HttpServlet
             request.setAttribute("ProductInfo", product);
             RequestDispatcher requestDispather = request.getRequestDispatcher("/WEB-INF/productPage.jsp");
             requestDispather.forward(request, response);
+        }  else if (requestType.equals("deleteCard")) {
+            String loginStatus = (String) request.getParameter("loginStatus");
+            request.setAttribute("loginStatus", loginStatus);
+            try {
+                String cardNumber = (String) request.getParameter("cardNumber");
+                
+                request.setAttribute("deleteCardStatus", DataStorage.deleteCard(cardNumber));
+            } catch (Exception e){
+                request.setAttribute("deleteProductStatus", false);
+            }
+            List<paymentMethod> CardLists= DataStorage.getPaymentMethods(username);
+            request.setAttribute("CardLists", CardLists);
+            request.setAttribute("CardListsSize", CardLists.size());
+            RequestDispatcher requestDispather = request.getRequestDispatcher("/WEB-INF/cardList.jsp");
+            requestDispather.forward(request, response);
         }
     }
 
