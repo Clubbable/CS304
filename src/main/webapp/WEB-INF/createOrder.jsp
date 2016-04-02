@@ -186,7 +186,7 @@
                                 </div>
                                 <div class="col-sm-6 newCardWrapper">
                                     <div class=" inputTitle">Card number</div>
-                                    <input id="newCardNumber" type="text" class="form-control" name="newCardNumber" placeholder="" required>
+                                    <input id="newCardNumber" type="text" minlength="16" maxlength="16" class="form-control" name="newCardNumber" placeholder="" required>
                                 </div>
                                 <div class="col-sm-4 newCardWrapper">
                                     <div id="newCardPropLable" class=" inputTitle">Expires Date</div>

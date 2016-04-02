@@ -125,7 +125,7 @@
                                     <input type="text" name="type" value="redirect"/>
                                     <input type="text" name="address" value="createProduct"/>
                                 </div>
-                                <input  id="123" class="btn btn-default navbar-btn userActBtn" type="submit" value="Create a Sale"></input>
+                                <input class="btn btn-default navbar-btn userActBtn" type="submit" value="Create a Sale"></input>
                             </form>
                             <form method="post">
                                 <div style="display:none">
@@ -135,7 +135,7 @@
                                     <input type="text" name="type" value="redirect"/>
                                     <input type="text" name="address" value="sellList"/>
                                 </div>
-                                <input  id="123" class="btn btn-default navbar-btn userActBtn" type="submit" value="Your Selling List"></input>
+                                <input class="btn btn-default navbar-btn userActBtn" type="submit" value="Your Selling List"></input>
                             </form>
                             <form method="post">
                                 <div style="display:none">
@@ -145,7 +145,7 @@
                                     <input type="text" name="type" value="redirect"/>
                                     <input type="text" name="address" value="orderHistory"/>
                                 </div>
-                                <input  id="123" class="btn btn-default navbar-btn userActBtn" type="submit" value="Order History"></input>
+                                <input class="btn btn-default navbar-btn userActBtn" type="submit" value="Order History"></input>
                             </form>
                             <form method="post">
                                 <div style="display:none">
@@ -156,7 +156,17 @@
                                     <input type="text" name="address" value="feedbackHistory"/>
                                     <input id="feedbackHistorySupplierID" type="text" name="supplierID" value=""/>
                                 </div>
-                                <input  id="123" class="btn btn-default navbar-btn userActBtn" type="submit" value="Your Feedbacks"></input>
+                                <input class="btn btn-default navbar-btn userActBtn" type="submit" value="Your Feedbacks"></input>
+                            </form>
+                            <form method="post">
+                                <div style="display:none">
+                                    <input class="username" type="text" name="username" value=""/>
+                                    <input class="password" type="text" name="password" value=""/>
+                                    <input class="loginStatus" type="text" name="loginStatus" value=""/>
+                                    <input type="text" name="type" value="redirect"/>
+                                    <input type="text" name="address" value="cardList"/>
+                                </div>
+                                <input class="btn btn-default navbar-btn userActBtn" type="submit" value="Card List"></input>
                             </form>
                         </div>
                     </div>
@@ -277,7 +287,6 @@
                                             <div class="col-sm-6 col-md-4">
                                                 <div class="caption"></div>
                                                 <h3 class="words">${popularElecProductList.get(i).getTitle()}</h3>
-                                                <p class="words">Total Order amount: ${popularElecProductList.get(i).getProductAmount()}</p>
                                                 <p class="words">${popularElecProductList.get(i).getDescription()}</p>
                                                 <p>
                                                     <form method="post">
@@ -321,7 +330,6 @@
                                             <div class="col-sm-6 col-md-4">
                                                 <div class="caption"></div>
                                                 <h3 class="words">${popularFurniProductList.get(i).getTitle()}</h3>
-                                                <p class="words">Total Order amount: ${popularFurniProductList.get(i).getProductAmount()}</p>
                                                 <p class="words">${popularFurniProductList.get(i).getDescription()}</p>
                                                 <p>
                                                     <form method="post">
@@ -365,7 +373,6 @@
                                             <div class="col-sm-6 col-md-4">
                                                 <div class="caption"></div>
                                                 <h3 class="words">${popularBookProductList.get(i).getTitle()}</h3>
-                                                <p class="words">Total Order amount: ${popularBookProductList.get(i).getProductAmount()}</p>
                                                 <p class="words">${popularBookProductList.get(i).getDescription()}</p>
                                                 <p>
                                                     <form method="post">

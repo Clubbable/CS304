@@ -142,7 +142,7 @@ public class Servlet extends HttpServlet
                 request.setAttribute("productListSize", productList.size());
                 request.setAttribute("productList", productList);
                 requestDispather = request.getRequestDispatcher("/WEB-INF/searchResult.jsp");
-            }  else if (requestRedirAddress.equals("productList")) {
+            } else if (requestRedirAddress.equals("productList")) {
                 String productCategory = (String) request.getParameter("productCategory");
                 List<Product> productList;
                 if (productCategory.equals("boughtBySomeone")) {
@@ -154,6 +154,11 @@ public class Servlet extends HttpServlet
                 request.setAttribute("ProductLists", productList);
                 request.setAttribute("ProductListsSize", productList.size());
                 requestDispather = request.getRequestDispatcher("/WEB-INF/productList.jsp");
+            } else if (requestRedirAddress.equals("cardList")) {
+                List<paymentMethod> CardLists= DataStorage.getPaymentMethods(username);
+                request.setAttribute("CardLists", CardLists);
+                request.setAttribute("CardListsSize", CardLists.size());
+                requestDispather = request.getRequestDispatcher("/WEB-INF/cardList.jsp");
             } else {
                 requestDispather = request.getRequestDispatcher("/WEB-INF/index.jsp");
             }
