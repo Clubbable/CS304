@@ -22,15 +22,15 @@
         .userActBtn {
             margin-right: 30px;
         }
-        .seeMore {
-            display: inline;
-        }
         .words{
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
         }
         .rateSelect{
+            display: inline;
+        }
+        .inline {
             display: inline;
         }
     </style>
@@ -170,7 +170,7 @@
                                 <div class="title">
                                     <div class = "popularProduct-title" style="display:inline; font-size:xx-large">Most Popular</div>
                                     <div class="rateSelect">Show Rate: <select id="rate-select"><option>Max</option> <option>Min</option></select></div>
-                                    <form method="post" class="seeMore">
+                                    <form method="post" class="inline">
                                         <div style="display:none">
                                             <input class="username" type="text" name="username" value=""/>
                                             <input class="password" type="text" name="password" value=""/>
@@ -216,7 +216,7 @@
                             <div class = "popularProduct" style="height:50px;">
                                 <div class="title">
                                     <div class = "popularProduct-title" style="display:inline; font-size:xx-large">Products Others have purchased</div>
-                                    <form method="post" class="seeMore">
+                                    <form method="post" class="inline">
                                         <div style="display:none">
                                             <input class="username" type="text" name="username" value=""/>
                                             <input class="password" type="text" name="password" value=""/>
@@ -259,8 +259,8 @@
                             <div class = "body-typeElectronics">
                                 <div class="title">
                                     <div class = "typeA-title" style="display:inline; font-size:xx-large">ELECTRONICS</div>
-                                    <form method="post">
-                                        <div style="display:none" class="seeMore">
+                                    <form class="inline" method="post">
+                                        <div style="display:none" class="inline">
                                             <input class="username" type="text" name="username" value=""/>
                                             <input class="password" type="text" name="password" value=""/>
                                             <input class="loginStatus" type="text" name="loginStatus" value=""/>
@@ -279,7 +279,6 @@
                                                 <h3 class="words">${popularElecProductList.get(i).getTitle()}</h3>
                                                 <p class="words">Total Order amount: ${popularElecProductList.get(i).getProductAmount()}</p>
                                                 <p class="words">${popularElecProductList.get(i).getDescription()}</p>
-                                                <p class="words">Average Rate: ${popularElecProductList.get(i).getAverageRate()}</p>
                                                 <p>
                                                     <form method="post">
                                                         <div style="display:none">
@@ -304,7 +303,7 @@
                             <div class = "body-typeFurniture">
                                 <div class="title">
                                 <div class = "typeB-title" style="display:inline; font-size:xx-large">Furniture</div>
-                                <form method="post" class="seeMore">
+                                <form method="post" class="inline">
                                     <div style="display:none">
                                         <input class="username" type="text" name="username" value=""/>
                                         <input class="password" type="text" name="password" value=""/>
@@ -324,7 +323,6 @@
                                                 <h3 class="words">${popularFurniProductList.get(i).getTitle()}</h3>
                                                 <p class="words">Total Order amount: ${popularFurniProductList.get(i).getProductAmount()}</p>
                                                 <p class="words">${popularFurniProductList.get(i).getDescription()}</p>
-                                                <p class="words">Average Rate: ${popularFurniProductList.get(i).getAverageRate()}</p>
                                                 <p>
                                                     <form method="post">
                                                         <div style="display:none">
@@ -349,7 +347,7 @@
                             <div class = "body-typeBook">
                                 <div class="title">
                                  <div class = "typeC-title" style="display:inline; font-size:xx-large">BOOK</div>
-                                <form method="post" class="seeMore">
+                                <form method="post" class="inline">
                                     <div style="display:none">
                                         <input class="username" type="text" name="username" value=""/>
                                         <input class="password" type="text" name="password" value=""/>
@@ -369,7 +367,6 @@
                                                 <h3 class="words">${popularBookProductList.get(i).getTitle()}</h3>
                                                 <p class="words">Total Order amount: ${popularBookProductList.get(i).getProductAmount()}</p>
                                                 <p class="words">${popularBookProductList.get(i).getDescription()}</p>
-                                                <p class="words">Average Rate: ${popularBookProductList.get(i).getAverageRate()}</p>
                                                 <p>
                                                     <form method="post">
                                                         <div style="display:none">

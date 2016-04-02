@@ -141,7 +141,7 @@
                                 <div class=" inputTitle">Price</div>
                                 <div class="input-group">
                                     <div class="input-group-addon">$</div>
-                                    <input id="passwordConfirm" type="number" class="form-control" name="price" placeholder="0.00" required>
+                                    <input id="passwordConfirm" type="number" step="0.01" class="form-control" name="price" placeholder="0.00" required>
                                 </div>
                             </div>
                         </div>

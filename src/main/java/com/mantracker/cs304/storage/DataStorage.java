@@ -999,7 +999,7 @@ public class DataStorage extends DatabaseStorage
             sb.append("from Purchase pu, Product p ");
             sb.append("WHERE p.productID = pu.productID ");
             sb.append("AND pu.productID ");
-            sb.append("NOT IN (SELECT productID from Product WHERE productID NOT IN (SELECT ProductID From Purchase)) ");
+            sb.append("NOT IN (SELECT DISTINCT productID from Product WHERE productID NOT IN (SELECT ProductID From Purchase)) ");
 
             // Get a connection
             connection = getConnection();
@@ -1034,4 +1034,56 @@ public class DataStorage extends DatabaseStorage
         return productList;
     }
     
+    
+    public static List<Product> getProductByType (String type) {
+        List<Product> productList = new ArrayList();
+        
+        // Define database variables
+        Connection connection = null;
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+
+        try
+        {
+            // Create StringBuilder for the query
+            StringBuilder sb = new StringBuilder();
+
+            // Build the query
+            sb.append("SELECT *  ");
+            sb.append("FROM Product ");
+            sb.append("WHERE type = '" + type + "' ");
+            sb.append("ORDER BY productID ASC ");
+
+            // Get a connection
+            connection = getConnection();
+
+            // Prepare statement
+            statement = connection.prepareStatement(sb.toString());
+
+            // Execute the query
+            resultSet = statement.executeQuery();
+            // Get the result
+            while (resultSet.next())
+            {
+                String title = resultSet.getString("title");
+                String description = resultSet.getString("description");
+                String prodType = resultSet.getString("type");
+                int productNumber = resultSet.getInt("productId");
+                float price = resultSet.getFloat("price");
+                productList.add(new Product(productNumber, description, title, price, prodType, null, null, null, 0, 0, 0, 0));
+            }
+        }
+        catch (Exception ex)
+        {
+            // Log
+            LogManager.getLogger(DataStorage.class).fatal("Get product by type error", ex);
+        }
+        finally
+        {
+            safeClose(resultSet);
+            safeClose(statement);
+            safeClose(connection);
+        }
+        return productList;
+    }
 }
