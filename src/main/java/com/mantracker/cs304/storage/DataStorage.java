@@ -89,15 +89,17 @@ public class DataStorage extends DatabaseStorage
             // Build the query
             sb.append("SELECT userName, password, firstName, lastName ");
             sb.append("FROM User ");
-            sb.append("WHERE userName = '" + username + "' ");
-            sb.append("AND password = '" + password + "' ");
-
+            sb.append("WHERE userName=? AND password=?");
+            
             // Get a connection
             connection = getConnection();
 
             // Prepare statement
             statement = connection.prepareStatement(sb.toString());
 
+            statement.setString(1, username);
+            statement.setString(2, password);
+            
             // Execute the query
             resultSet = statement.executeQuery();
             if (resultSet.next()) {
@@ -138,13 +140,14 @@ public class DataStorage extends DatabaseStorage
             // Build the query
             sb.append("SELECT userName ");
             sb.append("FROM User ");
-            sb.append("WHERE userName = '" + username + "';");
+            sb.append("WHERE userName =?");
             // Get a connection
             connection = getConnection();
 
             // Prepare statement
             statement = connection.prepareStatement(sb.toString());
-
+            statement.setString(1, username);
+            
             // Execute the query
             resultSet = statement.executeQuery();
             if (resultSet.next()) {
@@ -165,14 +168,16 @@ public class DataStorage extends DatabaseStorage
                 StringBuilder sb = new StringBuilder();
                 // Build the query
                 sb.append("INSERT INTO User (userName, password, firstName, lastName)");
-                sb.append("VALUES (");
-                sb.append("'" + username+ "',");
-                sb.append("'" + password+ "',");
-                sb.append("'" + firstName+ "',");
-                sb.append("'" + lastName+ "')");
+                sb.append("VALUES (?,?,?,?)");
+                
                 // Get a connection
                 connection = getConnection();
                 statement = connection.prepareStatement(sb.toString());
+                statement.setString(1, username);
+                statement.setString(2, password);
+                statement.setString(3, lastName);
+                statement.setString(4, firstName);
+                
                 // Execute the query
                 result = statement.executeUpdate();
                 if (result == 1) {
@@ -209,15 +214,16 @@ public class DataStorage extends DatabaseStorage
             StringBuilder sb = new StringBuilder();
             // Build the query
             sb.append("INSERT INTO Product (description, title, price, supplierUserID, type)");
-            sb.append("VALUES (");
-            sb.append("'" + description+ "',");
-            sb.append("'" + title+ "',");
-            sb.append(price+ ",");
-            sb.append("'" + username+ "',");
-            sb.append("'" + type+ "')");
+            sb.append("VALUES (?,?,?,?,?)");
+            
             // Get a connection
             connection = getConnection();
             statement = connection.prepareStatement(sb.toString());
+            statement.setString(1, description);
+            statement.setString(2, title);
+            statement.setString(3, price);
+            statement.setString(4, username);
+            statement.setString(5, type);
             // Execute the query
             result = statement.executeUpdate();
             if (result == 1) {
@@ -574,16 +580,17 @@ public class DataStorage extends DatabaseStorage
             // Build the query
             String createdTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
             sb.append("INSERT INTO ProductFeedback (FeedBackDate, FeedBackComment, rateStar, productID, FeedBackTitle, CustomerUserID)");
-            sb.append("VALUES (");
-            sb.append("'" + createdTime+ "',");
-            sb.append("'" + feedbackComment+ "',");
-            sb.append(rateStar+ ",");
-            sb.append(productID+ ",");
-            sb.append("'" + feedbackTitle+ "',");
-            sb.append("'" + CustomerID+ "') ");
+            sb.append("VALUES (?,?,?,?,?,?)");
+            
             // Get a connection
             connection = getConnection();
             statement = connection.prepareStatement(sb.toString());
+            statement.setString(1, createdTime);
+            statement.setString(2, feedbackComment);
+            statement.setString(3, rateStar);
+            statement.setString(4, productID);
+            statement.setString(5, feedbackTitle);
+            statement.setString(6, CustomerID);
             // Execute the query
             result = statement.executeUpdate();
             if (result == 1) {
@@ -621,16 +628,17 @@ public class DataStorage extends DatabaseStorage
         // Build the query
         String createdTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
         sb.append("INSERT INTO SupplierFeedback (FeedBackDate, FeedBackComment, rateStar, CustomerUserID, supplierUserID, FeedBackTitle)");
-        sb.append("VALUES (");
-        sb.append("'" + createdTime+ "',");
-        sb.append("'" + feedbackComment+ "',");
-        sb.append(rateStar+ ",");
-        sb.append("'" + CustomerID+ "',");
-        sb.append("'" + supplierID+ "',");
-        sb.append("'" + feedbackTitle+ "') ");
+        sb.append("VALUES (?,?,?,?,?,?)");
+        
         // Get a connection
         connection = getConnection();
         statement = connection.prepareStatement(sb.toString());
+        statement.setString(1,createdTime);
+        statement.setString(2, feedbackComment);
+        statement.setString(3, rateStar);
+        statement.setString(4, CustomerID);
+        statement.setString(5, supplierID);
+        statement.setString(6, feedbackTitle);
         // Execute the query
         result = statement.executeUpdate();
         if (result == 1) {
@@ -838,20 +846,30 @@ public class DataStorage extends DatabaseStorage
         {
             // Build the query
             StringBuilder sb = new StringBuilder();
-           String purchaseDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
+            String purchaseDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
             // Build the query
             sb.append("INSERT INTO Purchase (ShippingAddress, productID, CardNumber, purchaseDate, CustomerUserID)");
-            sb.append("VALUES (");
-            sb.append("'" + shippingAddress+ "',");
-            sb.append(productID+ ",");
-            sb.append("'" + cardNumber+ "',");
-            sb.append("'" + purchaseDate+ "',");
-            sb.append("'" + CustomerID+ "') ");
+            sb.append("VALUES (?,?,?,?,?)");
+            
             // Get a connection
             connection = getConnection();
             statement = connection.prepareStatement(sb.toString());
+            
+            statement.setString(1,shippingAddress);
+            statement.setString(2, productID);
+            statement.setString(3, cardNumber);
+            statement.setString(4, purchaseDate);
+            statement.setString(5, CustomerID);
             // Execute the query
-            result = statement.executeUpdate();
+            
+            try{
+                result = statement.executeUpdate();
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("Please only enter numbers in the card field.");   
+            }
+            
             if (result == 1) {
                 addSuccessful = "Create Order Successfully";
             }
@@ -1208,34 +1226,52 @@ public class DataStorage extends DatabaseStorage
 
             // Build the query
             sb.append("UPDATE PaymentMethod ");
-            sb.append("SET CardNumber = '" + cardNumber + "' ");
-            sb.append("WHERE CardNumber = '" + oldCardNumber + "' ");
+            sb.append("SET CardNumber =? ");
+            sb.append("WHERE CardNumber =? ");
 
             // Get a connection
             connection = getConnection();
 
             // Prepare statement
             statement = connection.prepareStatement(sb.toString());
+            
+            statement.setString(1, cardNumber);
+            statement.setString(2, oldCardNumber);
 
-            result = statement.executeUpdate();
+            try{
+                result = statement.executeUpdate();
+            }
+            catch(Exception ex){
+                throw new Exception("Please only use numbers in the card number field.");
+            }
             
             sb = new StringBuilder();
 
+            // Get a connection
+            connection = getConnection();
+            
             // Build the query
             if (cardType.equals("credit")){
                 sb.append("UPDATE CreditPaymentMethod ");
-                sb.append("SET expireDate = '" + cardExpire + "' ");
-                sb.append("WHERE CardNumber = '" + cardNumber + "' ");
+                sb.append("SET expireDate =? ");
+                sb.append("WHERE CardNumber =? ");    
+                
+                // Prepare statement
+                statement = connection.prepareStatement(sb.toString());
+                
+                statement.setString(1, cardExpire);
+                statement.setString(2, cardNumber);
             } else {
                 sb.append("UPDATE DebitPaymentMethod ");
-                sb.append("SET accountType = '" + cardAccType + "' ");
-                sb.append("WHERE CardNumber = '" + cardNumber + "' ");
+                sb.append("SET accountType =? ");
+                sb.append("WHERE CardNumber =? ");
+                
+                // Prepare statement
+                statement = connection.prepareStatement(sb.toString());
+                
+                statement.setString(1, cardAccType);
+                statement.setString(2, cardNumber);
             }
-            // Get a connection
-            connection = getConnection();
-
-            // Prepare statement
-            statement = connection.prepareStatement(sb.toString());
 
             result = statement.executeUpdate();
             if (result == 1) {
