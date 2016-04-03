@@ -106,6 +106,8 @@
                             </div>
                             <input type="text" name="username" class="form-control" placeholder="Username" required autofocus>
                             <input type="password" name="password" class="form-control" placeholder="Password" required>
+                            <input type="text" name="supplierID" value="${ProductInfo.getSupplierUserId()}" style="display:none"/>
+                            <input type="text" name="productID" value="${productID}" style="display:none"/>
                             <button class="btn btn-lg btn-primary btn-block" type="submit">
                                 Sign in
                             </button>
