@@ -133,7 +133,7 @@
                                     </div>
                                     <div class="feedbackAuthorWrapper">
                                         <div class="feedbackAuthor">Created by ${FeedbackList.get(i).getFirstName()} ${FeedbackList.get(i).getLastName()}</div>
-                                        <div class="feedbackDate">on ${FeedbackList.get(i).getFeedbackDate()}</div>
+                                        <div class="feedbackDate">&nbsp;on ${FeedbackList.get(i).getFeedbackDate()}</div>
                                     </div>
                                     <div class="feedbackBody"><div>Feedback Comments:</div>${FeedbackList.get(i).getFeedBackComment()}</div>
                                 </div>
