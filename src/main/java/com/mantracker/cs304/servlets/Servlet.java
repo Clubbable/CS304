@@ -150,7 +150,12 @@ public class Servlet extends HttpServlet
                 if (productCategory.equals("boughtBySomeone")) {
                     productList = DataStorage.getProductsBoughtBySomeone();
                 } else {
-                    productList = DataStorage.getProductByType(productCategory);
+                    if (productCategory.equals("all")){
+                        productList = DataStorage.getPopularProduct(productCategory);
+                    }
+                    else{
+                        productList = DataStorage.getProductByType(productCategory);
+                    }
                 }
                 request.setAttribute("productCategory", productCategory);
                 request.setAttribute("ProductLists", productList);
