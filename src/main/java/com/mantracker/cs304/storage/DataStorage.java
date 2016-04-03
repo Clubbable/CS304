@@ -844,6 +844,10 @@ public class DataStorage extends DatabaseStorage
         
         try
         {
+            if (!cardNumber.matches("[0-9]+")){
+                throw new Exception("Please only use numbers in the card number field.");
+            }
+            
             // Build the query
             StringBuilder sb = new StringBuilder();
             String purchaseDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
@@ -862,13 +866,8 @@ public class DataStorage extends DatabaseStorage
             statement.setString(5, CustomerID);
             // Execute the query
             
-            try{
-                result = statement.executeUpdate();
-            }
-            catch(Exception ex)
-            {
-                throw new Exception("Please only enter numbers in the card field.");   
-            }
+            
+            result = statement.executeUpdate();
             
             if (result == 1) {
                 addSuccessful = "Create Order Successfully";
@@ -1170,10 +1169,10 @@ public class DataStorage extends DatabaseStorage
             sb.append("SELECT * ");
             if (cardType.equals("credit")) {
                 sb.append("FROM PaymentMethod P , CreditPaymentMethod C ");
-                sb.append("WHERE P.CardNumber = '" + cardNumber + "' AND P.CardNumber = C.CardNumber ");
+                sb.append("WHERE P.CardNumber =? AND P.CardNumber = C.CardNumber ");
             } else {
                 sb.append("FROM PaymentMethod P, DebitPaymentMethod D ");
-                sb.append("WHERE P.CardNumber = '" + cardNumber + "' AND P.CardNumber = D.CardNumber ");
+                sb.append("WHERE P.CardNumber =? AND P.CardNumber = D.CardNumber ");
             }
 
             // Get a connection
@@ -1181,7 +1180,8 @@ public class DataStorage extends DatabaseStorage
 
             // Prepare statement
             statement = connection.prepareStatement(sb.toString());
-
+            statement.setString(1, cardNumber);
+            
             // Execute the query
             resultSet = statement.executeQuery();
             // Get the result
@@ -1219,8 +1219,13 @@ public class DataStorage extends DatabaseStorage
         ResultSet resultSet = null;
         String editStatus = "";
         int result = 0;
+        
         try
         {
+            if (!cardNumber.matches("[0-9]+")){
+                throw new Exception("Please only use numbers in the card number field.");
+            }
+            
             // Create StringBuilder for the query
             StringBuilder sb = new StringBuilder();
 
@@ -1237,13 +1242,8 @@ public class DataStorage extends DatabaseStorage
             
             statement.setString(1, cardNumber);
             statement.setString(2, oldCardNumber);
-
-            try{
-                result = statement.executeUpdate();
-            }
-            catch(Exception ex){
-                throw new Exception("Please only use numbers in the card number field.");
-            }
+            
+            result = statement.executeUpdate();
             
             sb = new StringBuilder();
 
