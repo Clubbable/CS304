@@ -124,4 +124,9 @@
             </div>
         </div>
     </body>
+    <script>
+        if(${operationStatus != ""}) {
+            alert("${operationStatus}");
+        }
+    </script>
 </html>

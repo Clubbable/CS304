@@ -224,7 +224,7 @@ public class Servlet extends HttpServlet
                 request.setAttribute("operationStatus", e.getMessage());
                 request.setAttribute("loginStatus", false);
             }
-            RequestDispatcher requestDispather = request.getRequestDispatcher("/WEB-INF/index.jsp");
+            RequestDispatcher requestDispather = request.getRequestDispatcher("/WEB-INF/login.jsp");
             requestDispather.forward(request, response);
         } else if (requestType.equals("createProduct")) {
             String loginStatus = (String) request.getParameter("loginStatus");
