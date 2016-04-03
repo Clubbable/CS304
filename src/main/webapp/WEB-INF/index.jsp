@@ -113,7 +113,7 @@
                 </div>
             </div>
             <div class="body">
-                <div class= "row" id="userActivities">
+                <div class= "row" id="userActivities" style="left-margin:">
                     <div class= "col-sm-1"></div>
                     <div class= "col-sm-10">
                         <div style="display:flex">
@@ -176,22 +176,24 @@
                     <div class= "col-sm-1"></div>
                     <div class= "col-sm-10">
                         <c:if test="${popularProductListSize ge 1}">
-                            <div class = "popularProduct" style="height:50px;">
-                                <div class="title">
-                                    <div class = "popularProduct-title" style="display:inline; font-size:xx-large">Most Popular</div>
-                                    <div class="rateSelect">Show Rate: <select id="rate-select"><option>Max</option> <option>Min</option></select></div>
-                                    <form method="post" class="inline">
-                                        <div style="display:none">
-                                            <input class="username" type="text" name="username" value=""/>
-                                            <input class="password" type="text" name="password" value=""/>
-                                            <input class="loginStatus" type="text" name="loginStatus" value=""/>
-                                            <input type="text" name="type" value="redirect"/>
-                                            <input type="text" name="address" value="productList"/>
-                                            <input type="text" name="productCategory" value="all"/>
-                                        </div>
-                                        <input  class="btn btn-link" type="submit" value="See more >>" style="display:inline; flex:1; float:right; padding-top:20px; font-size:larger"/>            
-                                    </form>
-                                 </div>
+                            <div class = "popularProduct" style="margin-left: 15px;">
+                                <div class="row">
+                                    <div class="title">
+                                        <div class = "popularProduct-title" style="display:inline; font-size:xx-large">Most Popular</div>
+                                        <div class="rateSelect">Show Rate: <select id="rate-select"><option>Max</option> <option>Min</option></select></div>
+                                            <form method="post" class="inline">
+                                            <div style="display:none">
+                                                <input class="username" type="text" name="username" value=""/>
+                                                <input class="password" type="text" name="password" value=""/>
+                                                <input class="loginStatus" type="text" name="loginStatus" value=""/>
+                                                <input type="text" name="type" value="redirect"/>
+                                                <input type="text" name="address" value="productList"/>
+                                                <input type="text" name="productCategory" value="all"/>
+                                            </div>
+                                            <input  class="btn btn-link" type="submit" value="See more >>" style="display:inline; flex:1; float:right; padding-top:20px; font-size:larger"/>            
+                                        </form>
+                                    </div>
+                                </div>
                                 <div class="row">
                                     <c:if test="${popularProductListSize ge 1}">
                                         <c:forEach var="i" begin="0" end="${popularProductListSize - 1}">
@@ -223,21 +225,23 @@
                             <hr style="width:100%; height:2px; background:#507786">
                         </c:if>
                         <c:if test="${productsBoughtBySomeoneSize ge 1}">
-                            <div class = "popularProduct" style="height:50px;">
-                                <div class="title">
-                                    <div class = "popularProduct-title" style="display:inline; font-size:xx-large">Products Others have purchased</div>
-                                    <form method="post" class="inline">
-                                        <div style="display:none">
-                                            <input class="username" type="text" name="username" value=""/>
-                                            <input class="password" type="text" name="password" value=""/>
-                                            <input class="loginStatus" type="text" name="loginStatus" value=""/>
-                                            <input type="text" name="type" value="redirect"/>
-                                            <input type="text" name="address" value="productList"/>
-                                            <input type="text" name="productCategory" value="boughtBySomeone"/>
-                                        </div>
-                                        <input  class="btn btn-link" type="submit" value="See more >>" style="display:inline; flex:1; float:right; padding-top:20px; font-size:larger"/>            
-                                    </form>
-                                 </div>
+                            <div class = "popularProduct" style="margin-left: 15px;">
+                                <div class="row">
+                                    <div class="title">
+                                        <div class = "popularProduct-title" style="display:inline; font-size:xx-large">Products Others have purchased</div>
+                                        <form method="post" class="inline">
+                                            <div style="display:none">
+                                                <input class="username" type="text" name="username" value=""/>
+                                                <input class="password" type="text" name="password" value=""/>
+                                                <input class="loginStatus" type="text" name="loginStatus" value=""/>
+                                                <input type="text" name="type" value="redirect"/>
+                                                <input type="text" name="address" value="productList"/>
+                                                <input type="text" name="productCategory" value="boughtBySomeone"/>
+                                            </div>
+                                            <input  class="btn btn-link" type="submit" value="See more >>" style="display:inline; flex:1; float:right; padding-top:20px; font-size:larger"/>            
+                                        </form>
+                                    </div>
+                                </div>
                                 <div class="row">
                                     <c:if test="${productsBoughtBySomeoneSize ge 1}">
                                         <c:forEach var="i" begin="0" end="${productsBoughtBySomeoneSize - 1}">
@@ -266,21 +270,24 @@
                             <hr style="width:100%; height:2px; background:#507786">
                         </c:if>
                         <c:if test="${popularElecProductListSize ge 1}">
-                            <div class = "body-typeElectronics">
-                                <div class="title">
-                                    <div class = "typeA-title" style="display:inline; font-size:xx-large">All ELECTRONICS</div>
-                                    <form class="inline" method="post">
-                                        <div style="display:none" class="inline">
-                                            <input class="username" type="text" name="username" value=""/>
-                                            <input class="password" type="text" name="password" value=""/>
-                                            <input class="loginStatus" type="text" name="loginStatus" value=""/>
-                                            <input type="text" name="type" value="redirect"/>
-                                            <input type="text" name="address" value="productList"/>
-                                            <input type="text" name="productCategory" value="electronics"/>
-                                        </div>
-                                        <input  class="btn btn-link" type="submit" value="See more >>" style="display:inline; flex:1; float:right; padding-top:20px; font-size:larger"/>            
-                                    </form>
-                                 </div>
+                            <div class = "body-typeElectronics" style="margin-left: 15px;">
+                                <div class="row">
+                                    <div class="title">
+                                        <div class = "typeA-title" style="display:inline; font-size:xx-large">All ELECTRONICS</div>
+                                        <form class="inline" method="post">
+                                            <div style="display:none" class="inline">
+                                                <input class="username" type="text" name="username" value=""/>
+                                                <input class="password" type="text" name="password" value=""/>
+                                                <input class="loginStatus" type="text" name="loginStatus" value=""/>
+                                                <input type="text" name="type" value="redirect"/>
+                                                <input type="text" name="address" value="productList"/>
+                                                <input type="text" name="productCategory" value="electronics"/>
+                                            </div>
+                                            <input  class="btn btn-link" type="submit" value="See more >>" style="display:inline; flex:1; float:right; padding-top:20px; font-size:larger"/>            
+                                        </form>
+                                    </div>
+                                </div>
+                                
                                 <div class="row">
                                     <c:if test="${popularElecProductListSize ge 1}">
                                         <c:forEach var="i" begin="0" end="${popularElecProductListSize - 1}">
@@ -309,21 +316,24 @@
                         </c:if>
                         <c:if test="${popularFurniProductListSize ge 1}">
                             <hr style="width:100%; height:2px; background:#507786">
-                            <div class = "body-typeFurniture">
-                                <div class="title">
-                                <div class = "typeB-title" style="display:inline; font-size:xx-large">All Furniture</div>
-                                <form method="post" class="inline">
-                                    <div style="display:none">
-                                        <input class="username" type="text" name="username" value=""/>
-                                        <input class="password" type="text" name="password" value=""/>
-                                        <input class="loginStatus" type="text" name="loginStatus" value=""/>
-                                        <input type="text" name="type" value="redirect"/>
-                                        <input type="text" name="address" value="productList"/>
-                                        <input type="text" name="productCategory" value="furniture"/>
+                            <div class = "body-typeFurniture" style="margin-left: 15px;">
+                                <div class="row">
+                                    <div class="title">
+                                        <div class = "typeB-title" style="display:inline; font-size:xx-large">All Furniture</div>
+                                        <form method="post" class="inline">
+                                            <div style="display:none">
+                                                <input class="username" type="text" name="username" value=""/>
+                                                <input class="password" type="text" name="password" value=""/>
+                                                <input class="loginStatus" type="text" name="loginStatus" value=""/>
+                                                <input type="text" name="type" value="redirect"/>
+                                                <input type="text" name="address" value="productList"/>
+                                                <input type="text" name="productCategory" value="furniture"/>
+                                            </div>
+                                            <input  class="btn btn-link" type="submit" value="See more >>" style="display:inline; flex:1; float:right; padding-top:20px; font-size:larger"/>            
+                                        </form>
                                     </div>
-                                    <input  class="btn btn-link" type="submit" value="See more >>" style="display:inline; flex:1; float:right; padding-top:20px; font-size:larger"/>            
-                                </form>
                                 </div>
+                                
                                 <div class="row">
                                     <c:if test="${popularFurniProductListSize ge 1}">
                                         <c:forEach var="i" begin="0" end="${popularFurniProductListSize - 1}">
@@ -352,21 +362,24 @@
                         </c:if>
                         <c:if test="${popularBookProductListSize ge 1}">
                             <hr style="width:100%; height:2px; background:#507786">
-                            <div class = "body-typeBook">
-                                <div class="title">
-                                 <div class = "typeC-title" style="display:inline; font-size:xx-large">All BOOKS</div>
-                                <form method="post" class="inline">
-                                    <div style="display:none">
-                                        <input class="username" type="text" name="username" value=""/>
-                                        <input class="password" type="text" name="password" value=""/>
-                                        <input class="loginStatus" type="text" name="loginStatus" value=""/>
-                                        <input type="text" name="type" value="redirect"/>
-                                        <input type="text" name="address" value="productList"/>
-                                        <input type="text" name="productCategory" value="book"/>
+                            <div class = "body-typeBook" style="margin-left: 15px;">
+                                <div class="row">
+                                    <div class="title">
+                                        <div class = "typeC-title" style="display:inline; font-size:xx-large">All BOOKS</div>
+                                        <form method="post" class="inline">
+                                            <div style="display:none">
+                                                <input class="username" type="text" name="username" value=""/>
+                                                <input class="password" type="text" name="password" value=""/>
+                                                <input class="loginStatus" type="text" name="loginStatus" value=""/>
+                                                <input type="text" name="type" value="redirect"/>
+                                                <input type="text" name="address" value="productList"/>
+                                                <input type="text" name="productCategory" value="book"/>
+                                            </div>
+                                            <input  class="btn btn-link" type="submit" value="See more >>" style="display:inline; flex:1; float:right; padding-top:20px; font-size:larger"/>            
+                                        </form>
                                     </div>
-                                    <input  class="btn btn-link" type="submit" value="See more >>" style="display:inline; flex:1; float:right; padding-top:20px; font-size:larger"/>            
-                                </form>
-                                 </div>
+                                </div>
+                                
                                 <div class="row">
                                     <c:if test="${popularBookProductListSize ge 1}">
                                         <c:forEach var="i" begin="0" end="${popularBookProductListSize - 1}">
