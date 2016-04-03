@@ -118,7 +118,7 @@
             <div class="row">
                 <div class= "col-sm-2"></div>
                 <div class= "col-sm-8">
-                    <div class="purchaseLabel">Your Purchase</div>
+                    <div class="purchaseLabel">Your Selling List</div>
                     <c:if test="${ProductListsSize ge 1}">
                         <div class="productHeader">
                             <table class="table">
