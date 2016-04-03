@@ -148,7 +148,7 @@
                                                         <input type="text" name="address" value="productPage"/>
                                                         <input type="text" name="productID" value="${ProductLists.get(i).getProductId()}"/>
                                                     </div>
-                                                    <input  type="submit" value="${ProductLists.get(i).getTitle()}" style="border:none; background:none; text-decoration: underline;"/>            
+                                                    <input  type="submit" value="${ProductLists.get(i).getTitle()}" style="border:none; background:none; text-decoration: underline; white-space: normal; text-align: left;"/>            
                                                 </form>
                                             </th>
                                             <th class="productColumns" style="width:15%">${ProductLists.get(i).getPrice()}</th>

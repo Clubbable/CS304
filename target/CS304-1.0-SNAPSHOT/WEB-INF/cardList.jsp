@@ -1,45 +1,41 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%-- 
-    Document   : feedbackHistory
-    Created on : 20-Mar-2016, 7:54:37 PM
+    Document   : cardList
+    Created on : 1-April-2016, 6:41:37 PM
     Author     : syltaxue
 --%>
-
+<%@page import="com.mantracker.cs304.models.*" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <html>
     <head>
+        <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+        <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
         <!-- Optional theme -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css" integrity="sha384-aUGj/X2zp5rLCbBxumKTCw2Z50WgIr1vs/PFN4praOTvYXWlVyh2UtNUU0KAUhAX" crossorigin="anonymous">
-        <title>Your Feedbacks</title>
+        <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+        <title>Your Card List</title>
     </head>
     <style>
-        .feedbacksLabel{
+        .productItem {
+            border-width: thick;
+            border-style: ridge;
+            margin: 10px 0;
+        }
+        .productItemWrapper {
+            margin: 10px;
+        }
+        .productItem-title {
+            text-decoration: underline;
+        }
+        .productColumns {
+            font-weight: 500;
+        }
+        .purchaseLabel {
             font-weight: bolder;
             font-size:xx-large;
             margin: 30px 0;
-        }
-        .feedbackAuthorWrapper{
-            margin-left:30px;
-            display: flex;
-        }
-        .feedbackTitleWrapper{
-            display: flex;
-            margin-top: 30px;
-            margin-left:30px;
-        }
-        .feedbackTitle {
-            font-weight:700;
-            font-size:medium;
-            padding-left: 10px;
-        }
-        .feedbackBody{
-            margin: 30px;
-        }
-        .feedbackWrapper{
-            border-style: double;
-            border-width: thin;
-            margin: 20px 0;
         }
     </style>
     <script>
@@ -119,29 +115,73 @@
                     </div>
                 </div>
             </div>
-            <div class="body">
-                <div class= "col-sm-1"></div>
-                <div class= "col-sm-10">
-                    <div class="feedbacks">
-                        <div class="feedbacksLabel">Customer Reviews</div>
-                        <c:if test="${FeedbackListsSize ge 1}">
-                            <c:forEach var="i" begin="0" end="${FeedbackListsSize - 1}">
-                                <div class="feedbackWrapper">
-                                    <div class="feedbackTitleWrapper">
-                                        <div class="feedbackRate">Rate:${FeedbackList.get(i).getRateStar()}</div>
-                                        <div class="feedbackTitle">Feedback Title: ${FeedbackList.get(i).getFeedbackTitle()}</div>
-                                    </div>
-                                    <div class="feedbackAuthorWrapper">
-                                        <div class="feedbackAuthor">Created by ${FeedbackList.get(i).getFirstName()} ${FeedbackList.get(i).getLastName()}</div>
-                                        <div class="feedbackDate">&nbsp;on ${FeedbackList.get(i).getFeedbackDate()}</div>
-                                    </div>
-                                    <div class="feedbackBody"><div>Feedback Comments:</div>${FeedbackList.get(i).getFeedBackComment()}</div>
+            <div class="row">
+                <div class= "col-sm-2"></div>
+                <div class= "col-sm-8">
+                    <div class="purchaseLabel">Your Card</div>
+                    <c:if test="${CardListsSize ge 1}">
+                        <div class="productHeader">
+                            <table class="table">
+                                <thead>
+                                  <tr>
+                                    <th style="width:15%">Card Type.</th>
+                                    <th style="width:20%">Card No.</th>
+                                    <th style="width:30%">Card Property</th>
+                                    <th style="width:18%">Edit</th>
+                                    <th style="width:18%">Delete</th>
+                                  </tr>
+                                </thead>
+                            </table>
+                        </div>
+                        <c:forEach var="i" begin="0" end="${CardListsSize - 1}">
+                            <div class="productItem">
+                                <div class="productItemWrapper">
+                                    <table class="table">
+                                        <tbody>
+                                          <tr>
+                                            <th class="productColumns" style="width:15%">${CardLists.get(i).getCardType()}</th>
+                                            <th class="productColumns" style="width:20%">${CardLists.get(i).getCardNumber()}</th>
+                                            <c:if test="${CardLists.get(i).getCardType() == 'debit'}">
+                                                <th class="productColumns" style="width:30%">Type: ${CardLists.get(i).getAccountType()}</th>
+                                            </c:if>
+                                            <c:if test="${CardLists.get(i).getCardType() == 'credit'}">
+                                                <th class="productColumns" style="width:30%">Expires: ${CardLists.get(i).getExpireDate()}</th>
+                                            </c:if>
+                                            <th class="productColumns" style="width:18%">
+                                                <form method="post">
+                                                    <div style="display:none">
+                                                        <input class="username" type="text" name="username" value=""/>
+                                                        <input class="password" type="text" name="password" value=""/>
+                                                        <input class="loginStatus" type="text" name="loginStatus" value=""/>
+                                                        <input type="text" name="type" value="redirect"/>
+                                                        <input type="text" name="address" value="editCard"/>
+                                                        <input type="text" name="cardNumber" value="${CardLists.get(i).getCardNumber()}"/>
+                                                        <input type="text" name="cardType" value="${CardLists.get(i).getCardType()}"/>
+                                                    </div>
+                                                    <input class="btn btn-primary" type="submit" value="Edit">
+                                                </form>
+                                            </th>
+                                            <th class="productColumns" style="width:18%">
+                                                <form method="post">
+                                                    <div style="display:none">
+                                                        <input class="username" type="text" name="username" value=""/>
+                                                        <input class="password" type="text" name="password" value=""/>
+                                                        <input class="loginStatus" type="text" name="loginStatus" value=""/>
+                                                        <input type="text" name="type" value="deleteCard"/>
+                                                        <input type="text" name="cardNumber" value="${CardLists.get(i).getCardNumber()}"/>
+                                                    </div>
+                                                    <input class="btn btn-primary" type="submit" value="Delete">
+                                                </form>
+                                            </th>
+                                          </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
-                            </c:forEach>
-                        </c:if>
-                    </div>
+                            </div>
+                        </c:forEach>
+                    </c:if>
                 </div>
-                <div class= "col-sm-1"></div>
+                <div class= "col-sm-2"></div>
             </div>
         </div>
     </body>
@@ -169,6 +209,9 @@
         var loginArrays = document.getElementsByClassName("loginStatus");
         for(var i = 0; i < loginArrays.length; i++) {
             loginArrays[i].setAttribute("value", sessionStorage.loginStatus);
+        }
+        if(${operationStatus != ""}) {
+            alert("${operationStatus}");
         }
     </script>
 </html>

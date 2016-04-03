@@ -1,8 +1,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%-- 
-    Document   : feedbackHistory
-    Created on : 20-Mar-2016, 7:54:37 PM
+    Document   : editCard
+    Created on : 01-April-2016, 7:54:37 PM
     Author     : syltaxue
 --%>
 
@@ -11,35 +11,42 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
         <!-- Optional theme -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css" integrity="sha384-aUGj/X2zp5rLCbBxumKTCw2Z50WgIr1vs/PFN4praOTvYXWlVyh2UtNUU0KAUhAX" crossorigin="anonymous">
-        <title>Your Feedbacks</title>
+        <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+        <title>Edit card info</title>
     </head>
     <style>
-        .feedbacksLabel{
-            font-weight: bolder;
-            font-size:xx-large;
-            margin: 30px 0;
+        .createLable {
+            font-weight:bolder;
+            font-size: x-large;
+            margin: 20px 0;
+            text-align:center;
         }
-        .feedbackAuthorWrapper{
-            margin-left:30px;
-            display: flex;
+        .rateWrapper {
+            padding: 0;
         }
-        .feedbackTitleWrapper{
-            display: flex;
-            margin-top: 30px;
-            margin-left:30px;
+        .inputTitle{
+            padding-left: 2px;
+            padding-bottom: 2px;
+            font-weight: 700;
         }
-        .feedbackTitle {
-            font-weight:700;
-            font-size:medium;
-            padding-left: 10px;
+        .description{
+            height: 200px !important;
+            margin-bottom: 20px;
         }
-        .feedbackBody{
-            margin: 30px;
+        .price-wrapper {
+            display:flex;
         }
-        .feedbackWrapper{
+        .body-description {
             border-style: double;
             border-width: thin;
             margin: 20px 0;
+        }
+        .newCardWrapper {
+            padding: 0;
+            margin-bottom: 10px;
+        }
+        .lableTitle {
+            margin-top: 60px;
         }
     </style>
     <script>
@@ -120,28 +127,46 @@
                 </div>
             </div>
             <div class="body">
-                <div class= "col-sm-1"></div>
-                <div class= "col-sm-10">
-                    <div class="feedbacks">
-                        <div class="feedbacksLabel">Customer Reviews</div>
-                        <c:if test="${FeedbackListsSize ge 1}">
-                            <c:forEach var="i" begin="0" end="${FeedbackListsSize - 1}">
-                                <div class="feedbackWrapper">
-                                    <div class="feedbackTitleWrapper">
-                                        <div class="feedbackRate">Rate:${FeedbackList.get(i).getRateStar()}</div>
-                                        <div class="feedbackTitle">Feedback Title: ${FeedbackList.get(i).getFeedbackTitle()}</div>
-                                    </div>
-                                    <div class="feedbackAuthorWrapper">
-                                        <div class="feedbackAuthor">Created by ${FeedbackList.get(i).getFirstName()} ${FeedbackList.get(i).getLastName()}</div>
-                                        <div class="feedbackDate">&nbsp;on ${FeedbackList.get(i).getFeedbackDate()}</div>
-                                    </div>
-                                    <div class="feedbackBody"><div>Feedback Comments:</div>${FeedbackList.get(i).getFeedBackComment()}</div>
+                <div class="row">
+                    <div class= "col-sm-3"></div>
+                    <div class= "col-sm-6">
+                        <div class="createLable">Edit your card</div>
+                        <form method="post">
+                            <div style="display:none">
+                                <input class="username" type="text" name="username" value=""/>
+                                <input class="password" type="text" name="password" value=""/>
+                                <input type="text" name="type" value="editCard"/>
+                                <input class="loginStatus" type="text" name="loginStatus" value=""/>
+                                <input type="text" name="cardType" value="${cardInfo.getCardType()}">
+                                <input type="text" name="oldCardNumber" value="${cardInfo.getCardNumber()}">
+                            </div>
+                            <div>
+                                <div class="col-sm-2 newCardWrapper">
+                                    <div class=" inputTitle">Card Type</div>
+                                    <input type="text" class="form-control" disabled value="${cardInfo.getCardType()}" required>
                                 </div>
-                            </c:forEach>
-                        </c:if>
+                                <div class="col-sm-6 newCardWrapper">
+                                    <div class=" inputTitle">Card number</div>
+                                    <input id="newCardNumber" type="text" minlength="16" maxlength="16" class="form-control" value="${cardInfo.getCardNumber()}" name="cardNumber" placeholder="" required>
+                                </div>
+                                <div class="col-sm-4 newCardWrapper">
+                                    <c:if test="${cardInfo.getCardType() == 'debit'}">
+                                        <div id="newCardPropLable" class=" inputTitle">Account Type</div>
+                                        <input id="newCardProp" type="text" class="form-control" name="cardAccType" placeholder="" value ="${cardInfo.getAccountType()}" required>
+                                    </c:if>
+                                    <c:if test="${cardInfo.getCardType() == 'credit'}">
+                                        <div id="newCardPropLable" class=" inputTitle">Expires Date</div>
+                                        <input id="newCardProp" type="date" class="form-control" name="cardExpire" placeholder="" value ="${cardInfo.getExpireDate()}" required>
+                                    </c:if>
+                                </div>
+                            </div>
+                            <button id="submitBtn" class="btn btn-lg btn-primary btn-block" type="submit">
+                                Edit
+                            </button>
+                        </form>
                     </div>
+                    <div class= "col-sm-3"></div>
                 </div>
-                <div class= "col-sm-1"></div>
             </div>
         </div>
     </body>
@@ -170,5 +195,7 @@
         for(var i = 0; i < loginArrays.length; i++) {
             loginArrays[i].setAttribute("value", sessionStorage.loginStatus);
         }
+    </script>
+    <script>
     </script>
 </html>

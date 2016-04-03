@@ -125,11 +125,11 @@ public class Servlet extends HttpServlet
                 requestDispather = request.getRequestDispatcher("/WEB-INF/createFeedback.jsp");
             } else if (requestRedirAddress.equals("createOrder")) {
                 String loginStatus = (String) request.getParameter("loginStatus");
+                String productID = (String) request.getParameter("productID");
+                request.setAttribute("productID", productID);
                 if(loginStatus.equals("false")) {
                     requestDispather = request.getRequestDispatcher("/WEB-INF/login.jsp");
                 } else {
-                    String productID = (String) request.getParameter("productID");
-                    request.setAttribute("productID", productID);
                     request.setAttribute("customerID", username);
                     List<paymentMethod> paymentMethods = DataStorage.getPaymentMethods(username);
                     request.setAttribute("paymentMethods", paymentMethods);
@@ -150,7 +150,12 @@ public class Servlet extends HttpServlet
                 if (productCategory.equals("boughtBySomeone")) {
                     productList = DataStorage.getProductsBoughtBySomeone();
                 } else {
-                    productList = DataStorage.getPopularProduct(productCategory);
+                    if (productCategory.equals("all")){
+                        productList = DataStorage.getPopularProduct(productCategory);
+                    }
+                    else{
+                        productList = DataStorage.getProductByType(productCategory);
+                    }
                 }
                 request.setAttribute("productCategory", productCategory);
                 request.setAttribute("ProductLists", productList);
@@ -171,6 +176,7 @@ public class Servlet extends HttpServlet
             }
             requestDispather.forward(request, response);
         } else if (requestType.equals("login")) {
+            String productID = (String) request.getParameter("productID");
             try {
                 request.setAttribute("PurchaseCounts", DataStorage.getPurchaseCounts());
                 List<loginInfo> login = DataStorage.verifySignin(username, password);
@@ -185,7 +191,22 @@ public class Servlet extends HttpServlet
             } catch (Exception e){
                 request.setAttribute("loginStatus", false);
             }
-            RequestDispatcher requestDispather = request.getRequestDispatcher("/WEB-INF/index.jsp");
+            
+            RequestDispatcher requestDispather = null;
+            if (productID != null && productID != ""){
+                request.setAttribute("productID", productID);
+                request.setAttribute("customerID", username);
+                List<paymentMethod> paymentMethods = DataStorage.getPaymentMethods(username);
+                request.setAttribute("paymentMethods", paymentMethods);
+                request.setAttribute("paymentMethodSize", paymentMethods.size());
+                Product product = DataStorage.getProduct(productID);
+                request.setAttribute("ProductInfo", product);
+                
+                requestDispather = request.getRequestDispatcher("/WEB-INF/createOrder.jsp");
+            }
+            else{
+                requestDispather = request.getRequestDispatcher("/WEB-INF/index.jsp");
+            }
             requestDispather.forward(request, response);
         } else if (requestType.equals("logout")) {
             request.setAttribute("loginStatus", false);
@@ -203,7 +224,7 @@ public class Servlet extends HttpServlet
                 request.setAttribute("operationStatus", e.getMessage());
                 request.setAttribute("loginStatus", false);
             }
-            RequestDispatcher requestDispather = request.getRequestDispatcher("/WEB-INF/index.jsp");
+            RequestDispatcher requestDispather = request.getRequestDispatcher("/WEB-INF/login.jsp");
             requestDispather.forward(request, response);
         } else if (requestType.equals("createProduct")) {
             String loginStatus = (String) request.getParameter("loginStatus");
@@ -293,6 +314,9 @@ public class Servlet extends HttpServlet
             }
             Product product = DataStorage.getProduct(productID);
             request.setAttribute("ProductInfo", product);
+            List<ProductFeedback> feedbackList = DataStorage.getProductFeedback(productID);
+            request.setAttribute("FeedbackList", feedbackList);
+            request.setAttribute("FeedbackListsSize", feedbackList.size());
             RequestDispatcher requestDispather = request.getRequestDispatcher("/WEB-INF/productPage.jsp");
             requestDispather.forward(request, response);
         }  else if (requestType.equals("deleteCard")) {
