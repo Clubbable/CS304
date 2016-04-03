@@ -8,11 +8,14 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
-        <!-- Latest compiled and minified CSS -->
+        <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+        <!-- Latest compiled and minified CSS and JS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+        
         <!-- Optional theme -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css" integrity="sha384-aUGj/X2zp5rLCbBxumKTCw2Z50WgIr1vs/PFN4praOTvYXWlVyh2UtNUU0KAUhAX" crossorigin="anonymous">
-        <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+        
         <title>Online Shopping System</title>
     </head>
     <style>
@@ -68,7 +71,7 @@
                             </form>
                         </div>
                         <div class = "col-xs-6 col-sm-5">
-                            <form class="navbar-form navbar-left" role="search" method='post'>
+                            <form class="navbar-form navbar-left" role="search" method='post' style="width: 100%;">
                                 <div style="display:none">
                                     <input class="username" type="text" name="username" value=""/>
                                     <input class="password" type="text" name="password" value=""/>
@@ -76,10 +79,11 @@
                                     <input type="text" name="type" value="redirect"/>
                                     <input type="text" name="address" value="searchResult"/>
                                 </div>
-                                <div class="form-group">
-                                  <input type="text" class="form-control" placeholder="Search" name='keyWords'>
+                                <div class="form-group" style="white-space: nowrap; width: 100%;">
+                                  <input type="text" class="form-control" placeholder="Search" name='keyWords' style="display: inline-block; width: 60%;">
+                                  <button type="submit" class="btn btn-default" style="display: inline-block;">Submit</button>
                                 </div>
-                                <button type="submit" class="btn btn-default">Submit</button>
+                                
                             </form>
                         </div>
                         <div class = "col-xs-2 col-sm-3">
@@ -113,65 +117,87 @@
                 </div>
             </div>
             <div class="body">
-                <div class= "row" id="userActivities" style="left-margin:">
-                    <div class= "col-sm-1"></div>
-                    <div class= "col-sm-10">
-                        <div style="display:flex">
-                            <form method="post">
-                                <div style="display:none">
-                                    <input class="username" type="text" name="username" value=""/>
-                                    <input class="password" type="text" name="password" value=""/>
-                                    <input class="loginStatus" type="text" name="loginStatus" value=""/>
-                                    <input type="text" name="type" value="redirect"/>
-                                    <input type="text" name="address" value="createProduct"/>
-                                </div>
-                                <input class="btn btn-default navbar-btn userActBtn" type="submit" value="Create a Sale"></input>
-                            </form>
-                            <form method="post">
-                                <div style="display:none">
-                                    <input class="username" type="text" name="username" value=""/>
-                                    <input class="password" type="text" name="password" value=""/>
-                                    <input class="loginStatus" type="text" name="loginStatus" value=""/>
-                                    <input type="text" name="type" value="redirect"/>
-                                    <input type="text" name="address" value="sellList"/>
-                                </div>
-                                <input class="btn btn-default navbar-btn userActBtn" type="submit" value="Your Selling List"></input>
-                            </form>
-                            <form method="post">
-                                <div style="display:none">
-                                    <input class="username" type="text" name="username" value=""/>
-                                    <input class="password" type="text" name="password" value=""/>
-                                    <input class="loginStatus" type="text" name="loginStatus" value=""/>
-                                    <input type="text" name="type" value="redirect"/>
-                                    <input type="text" name="address" value="orderHistory"/>
-                                </div>
-                                <input class="btn btn-default navbar-btn userActBtn" type="submit" value="Order History"></input>
-                            </form>
-                            <form method="post">
-                                <div style="display:none">
-                                    <input class="username" type="text" name="username" value=""/>
-                                    <input class="password" type="text" name="password" value=""/>
-                                    <input class="loginStatus" type="text" name="loginStatus" value=""/>
-                                    <input type="text" name="type" value="redirect"/>
-                                    <input type="text" name="address" value="feedbackHistory"/>
-                                    <input id="feedbackHistorySupplierID" type="text" name="supplierID" value=""/>
-                                </div>
-                                <input class="btn btn-default navbar-btn userActBtn" type="submit" value="Your Feedbacks"></input>
-                            </form>
-                            <form method="post">
-                                <div style="display:none">
-                                    <input class="username" type="text" name="username" value=""/>
-                                    <input class="password" type="text" name="password" value=""/>
-                                    <input class="loginStatus" type="text" name="loginStatus" value=""/>
-                                    <input type="text" name="type" value="redirect"/>
-                                    <input type="text" name="address" value="cardList"/>
-                                </div>
-                                <input class="btn btn-default navbar-btn userActBtn" type="submit" value="Card List"></input>
-                            </form>
-                        </div>
+                <nav class="navbar" id="userActivities" style="background-color: #E0FFFF;">
+                    <div class="container">
+                      <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar" style="background: aqua;">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar" style="background: black;"></span>
+                            <span class="icon-bar" style="background: black;"></span>
+                            <span class="icon-bar" style="background: black;"></span>
+                        </button>
+                      </div>
+                      <div id="navbar" class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav">
+                            <li>
+                                <form method="post">
+                                    <div style="display:none">
+                                        <input class="username" type="text" name="username" value=""/>
+                                        <input class="password" type="text" name="password" value=""/>
+                                        <input class="loginStatus" type="text" name="loginStatus" value=""/>
+                                        <input type="text" name="type" value="redirect"/>
+                                        <input type="text" name="address" value="createProduct"/>
+                                    </div>
+                                    <input class="btn btn-default navbar-btn userActBtn" type="submit" value="Create a Sale"></input>
+                                </form>
+                            </li>
+                            <li>
+                                <form method="post">
+                                    <div style="display:none">
+                                        <input class="username" type="text" name="username" value=""/>
+                                        <input class="password" type="text" name="password" value=""/>
+                                        <input class="loginStatus" type="text" name="loginStatus" value=""/>
+                                        <input type="text" name="type" value="redirect"/>
+                                        <input type="text" name="address" value="sellList"/>
+                                    </div>
+                                    <input class="btn btn-default navbar-btn userActBtn" type="submit" value="Your Selling List"></input>
+                                </form>
+                            </li>
+                            <li>
+                                <form method="post">
+                                    <div style="display:none">
+                                        <input class="username" type="text" name="username" value=""/>
+                                        <input class="password" type="text" name="password" value=""/>
+                                        <input class="loginStatus" type="text" name="loginStatus" value=""/>
+                                        <input type="text" name="type" value="redirect"/>
+                                        <input type="text" name="address" value="orderHistory"/>
+                                    </div>
+                                    <input class="btn btn-default navbar-btn userActBtn" type="submit" value="Order History"></input>
+                                </form>
+                            </li>
+                            <li>
+                                <form method="post">
+                                    <div style="display:none">
+                                        <input class="username" type="text" name="username" value=""/>
+                                        <input class="password" type="text" name="password" value=""/>
+                                        <input class="loginStatus" type="text" name="loginStatus" value=""/>
+                                        <input type="text" name="type" value="redirect"/>
+                                        <input type="text" name="address" value="feedbackHistory"/>
+                                        <input id="feedbackHistorySupplierID" type="text" name="supplierID" value=""/>
+                                    </div>
+                                    <input class="btn btn-default navbar-btn userActBtn" type="submit" value="Your Feedbacks"></input>
+                                </form>
+                            </li>
+                            <li>
+                                <form method="post">
+                                    <div style="display:none">
+                                        <input class="username" type="text" name="username" value=""/>
+                                        <input class="password" type="text" name="password" value=""/>
+                                        <input class="loginStatus" type="text" name="loginStatus" value=""/>
+                                        <input type="text" name="type" value="redirect"/>
+                                        <input type="text" name="address" value="cardList"/>
+                                    </div>
+                                    <input class="btn btn-default navbar-btn userActBtn" type="submit" value="Card List"></input>
+                                </form>
+                            </li>
+                            </ul>
+                          </li>
+                        </ul>
+                        
+                      </div><!--/.nav-collapse -->
                     </div>
-                    <div class= "col-sm-1"></div>
-                </div>
+                </nav>
+                
                 <div class= "row">
                     <div class= "col-sm-1"></div>
                     <div class= "col-sm-10">
